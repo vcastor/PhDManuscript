@@ -1,0 +1,51 @@
+% Born-Oppenheimer Approximation
+\follow{Born-Oppenheimer Approximation}{
+
+  A full quantum mechanical description of a time-independent system is given by
+  the time-independent Schrödinger equation:
+
+  \begin{equation}
+    \Ha \ket{\psi} = E \ket{\psi},
+  \end{equation}
+
+  where the total energy $E$ can be separated into nuclear and electronic
+  contributions:
+
+  \begin{equation}
+    E = E_n + E_e.
+  \end{equation}
+
+  The total Hamiltonian can then be expressed as:
+
+  \begin{equation}
+    \Ha = \Ha_n + \Ha_e = \Ha_{nn} + \Ha_{ne} + \Ha_{ee}.
+  \end{equation}
+
+  Here, the $n$-$n$ interactions are treated classically. The electronic
+  Schrödinger equation thus takes the form:
+
+  \begin{equation}
+    \Ha_e \ket{\psi_e} = E_e \ket{\psi_e}.
+  \end{equation}
+
+  As a result, the total energy can be written as:
+
+  \begin{equation}
+    E = E_e + E_{nn},
+  \end{equation}
+
+  where $E_{nn}$ corresponds to the classical Coulomb repulsion between nuclei.
+  At this point, we ``\textit{just}'' need to solve the electronic Schrödinger
+  equation. The electronic Hamiltonian includes the kinetic energy of the
+  electrons, the electron-nuclear attractions, and the electron-electron
+  repulsions:
+
+  \begin{equation}
+    \Ha_e = -\sum_i \sfrac{1}{2}\nabla_i^2 - \sum_{i,\alpha}\frac{Z_\alpha}{|\mathbf{R}_\alpha - \mathbf{r}_i|}
+      + \sum_{i>j} \frac1{|\mathbf{r}_i - \mathbf{r}_j|},
+  \end{equation}
+
+  where the $\alpha$ index runs over nuclei, and the $i,j$ indices run over
+  electrons. The Hamiltonian is expressed in atomic units, i.e.\ $\hbar = m_e = e = 1$.
+
+}

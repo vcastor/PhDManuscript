@@ -1,0 +1,144 @@
+% -*- coding: utf-8 -*-
+\newpage
+\section{Electronic Density}\label{densidades}
+
+The electronic density, $\rho(\mathbf{r})$, is a fundamental concept in modern
+theoretical chemistry. It offers a compact yet informative description of a
+system's electronic structure and plays a central role in density-based methods
+such as Density Functional Theory (DFT), as well as in interpretative
+frameworks like QTAIM.
+
+For a system comprising two electrons with spin-spatial coordinates
+$\mathbf{x}_1$ and $\mathbf{x}_2$, the electronic density is given by
+$|\Psi(\mathbf{x}_1, \mathbf{x}_2)|^2$~\cite{RobertG1994}.  To calculate the
+probability of finding electron 1 in the volume element $\dd\mathbf{x}_1$ and
+electron 2 in $\dd\mathbf{x}_2$, the full probability density must be
+integrated over $\dd\omega_1 \dd\mathbf{x}_2$, where $\dd\mathbf{x}_n =
+\dd\tau_n \dd\omega_n$.
+
+\nt{
+
+  Since the electrons are indistinguishable,
+  for a system with $N$ electrons, the electronic density can be
+  generalised as:
+  %
+  \begin{align}
+    \rho(\mathbf{r})=N\int |\Psi (\mathbf{x}_1 ,  \mathbf{x}_2,  \ldots , \mathbf{x}_N)|^2
+    \dd\omega_1 \dd\mathbf{x}_2 \ldots \dd\mathbf{x}_N ,
+    \label{rho_definition}
+  \end{align}
+
+  \noindent such that:
+  \begin{align}
+    \int\rho (\mathbf{r})\dd\tau = N .
+  \end{align}
+
+}
+
+In the case of a Slater Determinant (Hartree-Fock), the electronic density for
+a closed shell with spatial orbitals ${\psi_a}$ can be written as:
+%
+\begin{align}
+  \rho (\mathbf{r}) = 2 \sum_{a=1}^{\sfrac{N}{2}} |\psi_a (\mathbf{r})|^2 .
+\end{align}
+
+\newpage
+For a system with $N$ particles, it is possible to write an operator for the
+density $\hat{\rho}$ and then, get the expected value for the system
+wavefunction,
+%
+\begin{align}
+  \hat{\rho} = \sum_i^N \hat{\delta} (\mathbf{r}_i - \mathbf{r}_0),
+\end{align}
+
+\noindent then $\rho (\mathbf{r})$ is a expected value of a quantum mechanics
+operator, which can be written as:
+%
+\begin{align}
+  \rho (\mathbf{r}_0) &= \int\Psi^{\star} (\mathbf{x}_1, \ldots , \mathbf{x}_N)
+  \sum_i^N \hat{\delta} (\mathbf{r}_i - \mathbf{r}_0) \Psi (\mathbf{x}_1, \ldots , \mathbf{x}_N)
+  \dd\mathbf{x}_1 \ldots \dd\mathbf{x}_N \nonumber \\
+  & = \bra{\Psi} \hat{\rho} \ket{\Psi} 
+\end{align}
+
+The electronic density is not only central to theory but also accessible
+experimentally. Unlike many aspects of the electronic structure,
+$\rho(\mathbf{r})$ can be directly measured using techniques such as X-ray and
+neutron diffraction~\cite{Kasai2018, Coppens1971}. This makes it a valuable
+bridge between theory and experiment, allowing direct comparison between
+computed and observed densities, a stringent test of the accuracy and
+reliability of computational methods.
+
+Going forward, it is also possible to establish a density function for an electron
+couple, also called pair density, such that:
+%
+\begin{align}
+  \rho_2(\mathbf{r}_1,\mathbf{r}_2) = N(N-1)\int |\Psi(\mathbf{x}_1, \mathbf{x}_2, \ldots , \mathbf{x}_N)|^2
+  \dd\omega_1 \dd\omega_2  \dd\mathbf{x}_3 \ldots \dd\mathbf{x}_N ,
+  \label{d_pares}
+\end{align}
+
+\noindent where $\rho_2(\mathbf{r}_1,\mathbf{r}_2)N^{-1}(N-1)^{-1}$ determines
+the normalised probability of simultaneously finding two electrons per volume
+centered at positions $\mathbf{r}_1$ and $\mathbf{r}_2$.  Two normalisation
+conventions are found in the literature: Löwdin~\cite{Lwdin1955} introduced the
+factor $N(N-1)$, corresponding to ordered electron pairs, while
+McWeeny~\cite{mcweeny1969methods} proposed an additional division by two to
+account for unordered pairs. This pair density is commonly expressed as a sum
+of an uncorrelated term and a correlation contribution, $\rho_2(\mathbf{r}_1,
+\mathbf{r}_2) = \rho(\mathbf{r}_1)\rho(\mathbf{r}_2) +
+\rho_2^{xc}(\mathbf{r}_1, \mathbf{r}_2)$.
+
+The importance of the one- and two-electro densities stems from the fact that,
+within the \gls{BOA} and in the absence of external fields, the total
+electronic energy of the system can be expressed entirely in terms of these
+densities.
+%
+\keq{}{
+
+  \begin{align}
+    E = &-\frac12\int\nabla^2\rho_1(\mathbf{r}_1,
+      \mathbf{r}^{\,\prime}_1) \biggr |_{\mathbf{r}^{\,\prime}_1 \rightarrow \mathbf{r}_1}
+      \dd\tau_1 -\sum_A\int\frac{Z_A \rho_1 (\mathbf{r}_1)}{r_{1A}}\dd\tau_1
+      +\sum_{A\neq B}\frac{Z_A Z_B}{r_{AB}} \nonumber \\
+    \phantom{=} & +\frac12\int\int\frac{\rho (\mathbf{r}_1) \rho
+      (\mathbf{r}_2)}{r_{12}} \dd\tau_1 \dd\tau_2
+      +\frac12\int\int\frac{\rho_2^{xc}(\mathbf{r}_1, \mathbf{r}_2)}{r_{12}} \dd\tau_1
+      \dd\tau_2 \nonumber \\
+    =&\ T + V_{ne} + V_{nn} + V_{ee} + V_{xc} ,
+  \label{E_b-o}
+  \end{align}
+
+  the first term represents the kinetic energy of the electrons, while the
+  second and third correspond to the electron-nucleus and nucleus-nucleus
+  interactions, respectively. The fourth term describes the classical
+  electron-electron repulsion, treated as the Coulomb interaction between
+  one-electron densities. The final term introduces exchange-correlation effects
+  through the pair density.
+
+}
+
+The exchange-correlation term, $V_{xc}$, is introduced by subtracting the
+uncorrelated product $\rho(\mathbf{r}_1)\rho(\mathbf{r}_2)$ from the full pair
+density $\rho_2(\mathbf{r}_1, \mathbf{r}_2)$. This isolates the
+exchange-correlation contribution, capturing both the effects of electron
+indistinguishability and the correlated response of the electron distribution
+to the presence of another electron.
+
+In practice, evaluating Equation~\ref{E_b-o} within an electronic structure
+method requires expressing the electron densities in terms of the molecular
+orbital basis functions $\phi_i$,
+%
+\begin{gather}
+  \rho_1 (\mathbf{r}) = \sum_{ij} D_{ij}\phi_{i}(\mathbf{r})\phi_{j}(\mathbf{r}), \\
+  \rho_2 (\mathbf{r}_1, \mathbf{r}_2) = \sum_{ijkl}d_{ijkl}\phi_{i}(\mathbf{r}_1) \phi_{j}(\mathbf{r}_1)
+    \phi_{k}(\mathbf{r}_2)\phi_{l}(\mathbf{r}_2),
+\end{gather}
+
+\noindent where $D_{ij}$ and $d_{ijkl}$ are the elements of the first-
+and second-order density matrices, respectively.
+
+% --------------------------
+% Subsection: Density Matrix
+\input{mat_den}
+

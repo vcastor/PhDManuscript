@@ -1,0 +1,112 @@
+% -*- coding: utf-8 -*-
+\newpage
+\subsection{Density matrix}
+
+The density matrix offers a compact and versatile way to encode information
+about a quantum system, particularly when working with reduced representations
+of many-electron wavefunctions~\cite{Lwdin1955, McWeeny1960}. Rather than
+relying on the full $N$-electron wavefunction $\Psi$, many physical properties
+can be derived from the reduced density matrices, which are central to modern
+electronic structure theory.
+
+In quantum mechanics, the expectation value of an observable associated with an
+operator $\Qop$ for a system described by $\Psi$ is given by:
+
+\begin{align}
+  \langle \Qop \rangle = \int\Psi^{\star}(\mathbf{x}_1,\dots,\mathbf{x}_n) \Qop \Psi(\mathbf{x}_1,\dots,\mathbf{x}_n)
+    \dd\mathbf{x}_1 \dots \dd\mathbf{x}_n.
+\end{align}
+
+When the operator explicitly depends on only $m$ variables ($m \leq n$), the
+expectation value can be simplified to:
+
+\scriptsize
+\begin{align}
+  \langle \Qop \rangle & = \int\Qop\Psi
+    (\mathbf{x}_1,\ldots , \mathbf{x}_m, \mathbf{x}_{m+1}, \ldots , \mathbf{x}_n)
+    \Psi^{\star} (\mathbf{x}_1,\ldots ,\mathbf{x}_m, \mathbf{x}_{m+1}, \ldots , \mathbf{x}_n)
+    \dd\mathbf{x}_1\ldots \dd\mathbf{x}_n \nonumber \\
+	& = \int\left(\int
+    \Psi^{\star}(\mathbf{x}_1,\ldots , \mathbf{x}_m, \mathbf{x}_{m+1}, \ldots , \mathbf{x}_n)
+    \dd \mathbf{x}_{m+1}\ldots \dd \mathbf{x}_n \right)
+    \Qop \Psi(\mathbf{x}_1,\ldots , \mathbf{x}_m, \mathbf{x}_{m+1}, \ldots , \mathbf{x}_n)
+    \dd\mathbf{x}_1\ldots \dd\mathbf{x}_m \nonumber\\
+	& =\int
+    \Qop (\mathbf{x}_1, \ldots , \mathbf{x}_m) F_m
+    (\mathbf{x}_1, \ldots , \mathbf{x}_m)
+    \dd\mathbf{x}_1\ldots\dd\mathbf{x}_m,
+\end{align}
+\normalsize
+
+\noindent where the function $F_m$ is defined as the integral over the remaining variables:
+%
+\footnotesize
+\begin{align}
+  F_m(\mathbf{x}_1, \ldots , \mathbf{x}_m) =
+  \int\Psi(\mathbf{x}_1,\ldots , \mathbf{x}_m, \mathbf{x}_{m+1}, \ldots , \mathbf{x}_n)
+    \Psi^{\star}(\mathbf{x}_1,\ldots , \mathbf{x}_m, \mathbf{x}_{m+1}, \ldots , \mathbf{x}_n)
+    \dd \mathbf{x}_{m+1}\ldots \dd \mathbf{x}_n .
+\end{align}
+\normalsize
+
+% The function $F_m$ is directly related to the $m$-th order density matrix
+% $\Gamma_m$, which provides a systematic approach to capturing correlations
+% between electrons. The $m$-th order density matrix is defined as:
+
+\noindent This object $F_m$ is identified with the $m$-th order reduced density matrix
+$\Gamma_m$:
+
+\footnotesize
+\begin{align}
+  \Gamma_m(\mathbf{x}_{1}, \ldots , \mathbf{x}_m; \mathbf{x}^\prime_1, \ldots , \mathbf{x}^\prime_m)
+  = {n \choose m} \int
+    \Psi^{\star}(\mathbf{x}^\prime_1,\ldots , \mathbf{x}^{\prime}_n)
+    \Psi(\mathbf{x}_1,\ldots ,\mathbf{x}_n)
+    \dd \mathbf{x}_{m+1}\ldots \dd \mathbf{x}_n .
+\end{align}
+\normalsize
+
+\newpage
+Reduced density matrices form a hierarchy, as higher-order matrices can be
+contracted into lower-order ones:
+
+\begin{align}
+  \Gamma_m(\mathbf{x}_1, \ldots , \mathbf{x}_m; \mathbf{x}'_1, \ldots , \mathbf{x}'_m)
+  = \frac{m+1}{n-m} \int \Gamma_{m+1}(\mathbf{1}, \ldots , \mathbf{m+1}; \mathbf{1}', \ldots , \mathbf{m+1}') \dd\mathbf{x}_{m+1}.
+\end{align}
+
+In quantum chemistry, the operators of primary interest are typically mono- or
+bi-electronic, making the first- and second-order density matrices particularly
+relevant:
+
+\begin{gather}
+  \label{m_primer_orden}
+  \Gamma_1 (\mathbf{x}_1;\mathbf{x}_1^{\prime}) =
+    n\int\Psi^\star(\mathbf{1}^\prime, \mathbf{2}^\prime, \ldots ,\mathbf{n}^\prime)
+    \Psi(\mathbf{1}, \mathbf{2}, \ldots , \mathbf{n})
+    \dd \mathbf{x}_2 \ldots \dd \mathbf{x}_n, \\
+  \Gamma_2 (\mathbf{x}_1, \mathbf{x}_2;\mathbf{x}^\prime_1,\mathbf{x}^\prime_2)
+    = n(n-1) \int\Psi^\star(\mathbf{1}^\prime, \mathbf{2}^\prime, \ldots ,\mathbf{n}^\prime)
+    \Psi(\mathbf{1}, \mathbf{2}, \ldots , \mathbf{n}) \dd \mathbf{x}_3 \ldots \dd \mathbf{x}_n.
+\end{gather}
+
+The first-order density matrix (Equation~\ref{m_primer_orden}), often called the
+Fock-Dirac density matrix, becomes especially useful upon integration over spin
+coordinates, yielding the first-order reduced density matrix:
+
+\begin{align}
+  \rho_1(\mathbf{r}_1,\mathbf{r}^\prime_1) =
+    \int\Gamma_1 (\mathbf{x}_1;\mathbf{x}_1^{\prime}) \dd \omega_1.
+  \label{m_r_1}
+\end{align}
+
+Unlike density functions, density matrix elements generally lack direct
+physical interpretation, with the notable exception of the diagonal elements of
+the first-order reduced density matrix, which represent the electronic density
+itself. Integrating these diagonal elements over all space yields the total
+number of electrons in the system, highlighting their importance. Consequently,
+many crucial properties ---particularly energies--- are conveniently expressed
+using the first-order reduced density matrix and the electron pair
+density~\cite{helgaker}.
+
+\vfill

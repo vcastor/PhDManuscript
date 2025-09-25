@@ -1,0 +1,104 @@
+%
+% Termial Window Emulator
+%
+%             ~VCastor ✨
+%
+
+\tcbuselibrary{listings,skins,breakable}
+
+%
+% Classic Terminal (black background, green/white text)
+\lstdefinestyle{terminal}{
+  backgroundcolor=\color{terminalblack},
+  basicstyle=\ttfamily\small\color{terminalgreen},
+  keywordstyle=\color{terminalcyan}\bfseries,
+  commentstyle=\color{gray!60},
+  stringstyle=\color{terminalyellow},
+  showstringspaces=false,
+  breaklines=true,
+  columns=fullflexible,
+  keepspaces=true,
+  language=bash,
+  % frame=single,
+  frameround=tttt,
+  framesep=4pt,
+  rulecolor=\color{gray!30},
+  xleftmargin=5pt,
+  xrightmargin=5pt,
+  % Add prompt symbol
+  literate={~}{{\textcolor{terminalprompt}{>}}}{1}
+           {\$}{{\textcolor{terminalprompt}{\$}}}{1}
+           {>}{{\textcolor{terminalprompt}{ }}}{1},
+  % Line highlighting setup
+  moredelim={[is][\color{yellow}\bfseries]{@@}{@@}},
+  moredelim={[is][\color{red}\itshape]{!!}{!!}},
+  moredelim={[is][\color{cyan}\underline]{__}{__}},
+}
+
+% Terminal style matching your termadv style
+\lstdefinestyle{termadv}{
+  backgroundcolor=\color{black},
+  basicstyle=\ttfamily\small\color{white},
+  % Commands in green
+  moredelim=[l][\color{terminalgreen}\bfseries]{\$},
+  % Output in gray
+  moredelim=[l][\color{gray!70}]{>},
+  % Root prompt in red (adding this for completeness) % From red to green (?)
+  moredelim=[l][\color{terminalprompt}\bfseries]{\#},
+  % moredelim=[l][\color{red}\bfseries]{\#},
+  breaklines=true,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  tabsize=4,
+  escapeinside={(*@}{@*)},
+}
+
+% Custom commands for inline highlighting
+\newcommand{\hlline}[1]{\colorbox{yellow!30}{#1}}
+\newcommand{\hlerror}[1]{\colorbox{red!20}{#1}}
+\newcommand{\hlsuccess}[1]{\colorbox{green!20}{#1}}
+
+% Mac-style terminal window with your color scheme
+% \lstset{style=terminal, escapeinside={(*@}{@*)}}
+\newtcblisting{macterminal}[1][Terminal]{%
+  listing only,
+  listing options={
+    style=termadv,  % Iterate over the style
+    aboveskip=0pt,
+    belowskip=0pt,
+    xleftmargin=0pt,
+    xrightmargin=0pt,
+    framexleftmargin=0pt,
+    framexrightmargin=0pt,
+  },
+  enhanced,
+  colback=black,
+  colframe=framegray,
+  arc=3pt,
+  outer arc=3pt,
+  boxrule=1pt,
+  left=8pt,      % Padding for content from left edge
+  right=8pt,     % Padding for content from right edge
+  top=20pt,      % Space from top of box to content (below title bar)
+  bottom=8pt,    % Padding for content from bottom edge
+  enlarge top initially by=0pt,
+  overlay={
+    % Window title bar with rounded top corners
+    \fill[framegray] 
+      ([yshift=-3pt]frame.north west) 
+      arc (180:90:3pt)
+      -- ([xshift=-3pt]frame.north east)
+      arc (90:0:3pt)
+      -- ([yshift=-20pt]frame.north east)
+      -- ([yshift=-20pt]frame.north west)
+      -- cycle;
+    % Window controls (red, yellow, green dots)
+    \fill[macred] ([xshift=10pt,yshift=-10pt]frame.north west) circle (3pt);
+    \fill[macyellow] ([xshift=25pt,yshift=-10pt]frame.north west) circle (3pt);
+    \fill[macgreen] ([xshift=40pt,yshift=-10pt]frame.north west) circle (3pt);
+    % Window title
+    \node[white,anchor=center] at ([yshift=-10pt]frame.north) {\footnotesize\ttfamily #1};
+  }
+}
+

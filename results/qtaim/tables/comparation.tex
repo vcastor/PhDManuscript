@@ -1,0 +1,88 @@
+% -*- coding: utf-8 -*-
+%makecell
+
+\begingroup
+\setstretch{0.95}
+\begin{tcolorbox}[tab2,
+  tabularx={>{\arraybackslash}m{2.5cm}|>{\arraybackslash}X|
+            >{\arraybackslash}m{4.5cm}|>{\arraybackslash}m{4cm}},
+  title=Comparison of Features in AMS,
+  fontupper=\tiny,
+  fonttitle=\bfseries,
+  boxrule=0.5pt,
+  ]
+
+  & & & \\
+  \textbf{Feature} & \textbf{First Implementation} &
+  \textbf{Current Implementation} & \textbf{Comments} \\ \hline\hline
+
+  & & & \\ [-2mm]
+  \glspl{CP} & All detected &
+  Code refactored and memory optimisation & Same results \\
+  & & & \\ [-2mm] \hline
+
+  & & & \\ [-2mm]
+  \glspl{NNA} & Detected & Detected and analysed &
+  Bonds to NNA allowed; atomic properties are computed \\
+  & & & \\ [-2mm] \hline
+
+  & & & \\ [-2mm]
+  Gradient paths &
+  \makecell[l]{Implemented by\\ Runge-Kutta 2$^\text{nd}$ Order} &
+  \makecell[l]{Adaptive use of Runge-Kutta 2$^\text{nd}$\\
+  or 4$^\text{th}$ Order with dynamic step \\ size
+  }&
+  Improves numerical stability and precision \\
+  & & & \\ [-2mm] \hline
+
+  % Gradient paths &
+  % Implemented by Runge-Kutta 2$^\text{nd}$ Order &
+  % Adaptive use of Runge-Kutta 2$^\text{nd}$
+  % or 4$^\text{th}$ Order with dynamic step size &
+  % Improves numerical stability and precision \\ \hline
+
+  & & & \\ [-2mm]
+  \glspl{RCP} \& \glspl{CCP} & \glspl{CP} detected &
+  Atoms involved in rings/cages identified &
+  Implemented gradient paths and graph theory \\
+  & & & \\ [-2mm] \hline
+
+  & & & \\ [-2mm]
+  \makecell[l]{
+  Atomic properties\\ by the form\\ 
+  $\int_{\Omega}\rho_{A}(\mathbf{r})\dd\tau$
+  } &
+  Implemented &
+  Refactored & Cleaner code structure; easier to read and maintain \\
+  & & & \\ [-2mm] \hline
+
+  % Atomic properties by the form
+  % $\int_{\Omega}\rho_{A}(\mathbf{r})\dd\tau$ &
+  % Implemented &
+  % Refactored & Cleaner code structure; easier to read and maintain \\ \hline
+
+  & & & \\ [-2mm]
+  Dipole moment & Electronic contribution only &
+  Nuclear contribution added; total dipole compared with molecular value &
+  Full dipole moment computed \\
+  & & & \\ [-2mm] \hline
+
+  & & & \\ [-2mm]
+  Polarisability & Not implemented &
+  Available via \plams; new \ams driver task planned & \ams integration ongoing \\
+  & & & \\ [-2mm] \hline
+
+  % \rule{0pt}{6ex} 
+  & & & \\ [-2mm]
+  Excited states & Not implemented &
+  Implemented & Pending final merge to trunk \\ %\hline
+  & & & \\ [-2mm] \hline
+
+  & & & \\ [-2mm]
+  Atomic basins in GUI & Implemented &
+  New GUI implementation & Improved visualisation \\
+  & & & \\
+
+\end{tcolorbox}
+\endgroup
+

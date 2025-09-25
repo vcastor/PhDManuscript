@@ -1,0 +1,37 @@
+%  -*- coding: utf-8 -*-
+\section{Objectifs}
+
+L'objectif principal de cette thèse est de développer une méthodologie
+computationnelle intégrée pour l'analyse et la prédiction de descripteurs
+chimiques en solution. Cette approche vise à concilier la rigueur des
+fondements théoriques (\gls{QTAIM} et \gls{CDFT}) avec des techniques modernes
+de modélisation moléculaire, dans un cadre compatible avec la chimie en phase
+condensée.
+
+Les objectifs spécifiques de ce travail sont les suivants :
+
+\begin{itemize}
+  \item Étendre l'analyse topologique à des éléments complexes de \gls{QTAIM},
+        tels que les anneaux, cages et attracteurs
+        non nucléaires, pour enrichir la description de la structure électronique.
+  \item Développer et intégrer dans \ams des routines permettant
+        le calcul de moments dipolaires et de polarisabilités atomiques dans le
+        cadre de QTAIM à partir de la densité électronique issue de calculs DFT.
+  \item Mettre en place un protocole combinant la vitesse \gls{DFTB} avec la
+        précision \gls{DFT} pour l'échantillonnage conformationnel, et intégrer une
+        moyenne thermodynamique via la distribution de Boltzmann afin de refléter les
+        effets entropiques et statistiques.
+  \item Mettre à profit des modèles d'apprentissage automatique, en utilisant
+        comme variables d'entrée des descripteurs \gls{QTAIM} et \gls{CDFT}, pour
+        prédire des propriétés chimiques telles que la nucléophilie.
+  % \item Fournir des descripteurs localisés, compatibles avec les modèles de
+  %       solvatation explicite et les approches multi-échelles comme le
+  %       Polarisable Embedding, en vue d'une application à des systèmes
+  %       biologiques ou complexes.
+\end{itemize}
+
+L'ensemble de ces objectifs vise à produire des outils numériques robustes,
+interprétables, et transférables, capables de contribuer à la compréhension
+fine de la réactivité chimique en solution et à son intégration dans des
+modèles prédictifs à l'interface entre la théorie et l'expérience.
+

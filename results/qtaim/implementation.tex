@@ -1,0 +1,58 @@
+% -*- coding: utf-8 -*-
+\newpage
+\section{Original Implementation}
+
+\vspace{0.5cm}%
+\begin{wrapfigure}[19]{r}{0.6\textwidth}
+  \centering
+  \resizebox{\linewidth}{!}{\input{flowcharts/rodirgez_flowchart.tex}}
+  \caption{Flowchart of Rodríguez' original \gls{QTAIM} partition
+    algorithm in \ams. The next acronyms are used in the flowchart:
+    ATS, atomic trust sphere; GP, grid point;
+    APP, actual point in the path; NNA, non-nuclear attractor;
+    and ABP, atomic basin property.}
+  \label{rodrigez_flowchart}
+\end{wrapfigure}
+
+The \gls{QTAIM} partition was originally implemented in \ams by
+Rodríguez~\cite{Rodrguez2008}, enabling the computation of atomic properties
+without explicitly solving the zero-flux condition
+(Figure~\ref{rodrigez_flowchart}). This approach is a key reason why the
+\gls{QTAIM} partition in \ams is remarkably fast.
+
+% \vspace{1cm}%
+
+The analysis is performed by partitioning real space into a grid, either
+user-defined or automatically set by \ams with a default spacing of 0.5~bohr. A
+Newton-Raphson method is applied to locate the \glspl{CP} of
+$\rho(\mathbf{r})$. Beyond this, the grid serves also to compute the atomic
+properties, with each point contributing to the numerical integration within
+its assigned atomic basin. Points close to the nuclei are directly assigned to
+the corresponding basin through the atomic trust sphere (ATS) with a radius of
+0.23~bohr~\cite{Rodrguez2008}, accelerating the process.
+
+Conversely, points far from the molecule typically have electron densities too
+low to be clearly assigned to any atom. Since their contribution to properties
+is negligible, they are excluded from the analysis. This screening condition is
+applied when the density and its gradient satisfy the conditions: $i$)
+$w_i\rho(\mathbf{r}_i) < 10^{-8}$ and $ii$)
+$|\boldsymbol{\nabla}\rho(\mathbf{r}_i)|^2 < 10^{-8}$, where $w_i$ is the
+integration weight associated with grid point $\mathbf{r}_i$.
+
+\newpage
+
+\vspace{0.6cm}%
+Although the implementation successfully identified \glspl{CP} and
+atomic basins, it did not provide a complete topological analysis. The
+limitations of the original code are discussed in the following
+subsections, alongside the description of the new implementation. A
+summary of the updates introduced in the current version of the \ams
+code is provided in the next Table.
+
+\vspace{0.3cm}%
+\begin{table}[h]
+  \caption{Summary of updates introduced in the current version of the \ams code.}
+  \input{tables/comparation.tex}
+  \label{newVersion}
+\end{table}
+

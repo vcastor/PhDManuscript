@@ -1,0 +1,75 @@
+digraph mygraph {
+  fontname="Helvetica,Arial,sans-serif"
+  node [fontname="Helvetica,Arial,sans-serif"]
+  edge [fontname="Helvetica,Arial,sans-serif"]
+  splines=curved
+  rankdir=TB
+
+  // Style for main node ADF
+  "ADF" [shape=ellipse, style=filled, fillcolor="#32CD32", fontcolor="#000000", fontsize=18, fontweight=bold]
+
+  // Style for subroutines with bold names and smaller directory text
+  node [shape=box, style=filled, fillcolor="#ADD8E6", fontcolor="#000000"]
+
+  // Main nodes with numbers and paths
+  "DoSinglePoint" [label=<<b>DoSinglePoint</b><br/><font point-size="10">(adf/amol/)</font>>]
+  "DoPostSCF" [label=<<b>DoPostSCF</b><br/><font point-size="10">(adf/amol/)</font>>]
+  "Symaexcit" [label=<<b>Symaexcit</b><br/><font point-size="10">(adf/excitation/)</font>>]
+  
+  "toten" [label=<<b>toten</b><br/><font point-size="10">(adf/toten/)</font>>]
+  
+  // Horizontal alignment for nodes
+  {rank=same; 
+    "atoten" [label=<<b>1- atoten</b><br/><font point-size="10">(adf/toten/)</font>>]
+    "adebye" [label=<<b>2- adebye</b><br/><font point-size="10">(adf/debye/)</font>>]
+    "AIMResults" [label=<<b>3- AIMResults</b><br/><font point-size="10">(adf/bader7/)</font>>]
+  }
+
+  {rank=same; 
+    "ADFAIMCriticalPoints" [label=<<b>ADFAIMCriticalPoints</b><br/><font point-size="10">(adf/bader7/)</font>>]
+    "UpdateAIMTerms" [label=<<b>UpdateAIMTerms</b><br/><font point-size="10">(adf/bader7/)</font>>]
+    "AIMdipole" [label=<<b>AIMdipole</b><br/><font point-size="10">(adf/bader7/)</font>>]
+  }
+
+  "FindAIMCriticalPoints" [label=<<b>FindAIMCriticalPoints</b><br/><font point-size="10">(lib/dft/grid/)</font>>]
+  
+  "Exitations" [label=<<b>Exitations</b><br/><font point-size="10">(adf/excitation/)</font>>]
+  "AllocDavisonso" [label=<<b>AllocDavisonso</b>>]
+  "AllocDavison" [label=<<b>AllocDavison</b>>]
+  "MajorTransition" [label=<<b>MajorTransition</b>>]
+  "AnalizeAOTrans" [label=<<b>AnalizeAOTrans</b>>]
+
+  // Main graph structure with adjusted arrows
+  "ADF" -> "DoSinglePoint" [color="#FF5733", penwidth=2]
+  "DoSinglePoint" -> "DoPostSCF" [color="#FF5733", penwidth=2]
+  "DoSinglePoint" -> "Symaexcit" [color="#FF5733", penwidth=2]
+
+  "DoPostSCF" -> "atoten" [color="#008080", penwidth=1.5]
+  "DoPostSCF" -> "adebye" [color="#008080", penwidth=1.5]
+  "DoPostSCF" -> "AIMResults" [color="#008080", penwidth=1.5]
+
+  "atoten" -> "toten" [color="#0000CD", penwidth=1.2]
+
+  // Connections to horizontally aligned nodes with downward then upward arrows
+  "toten" -> "ADFAIMCriticalPoints" [color="#0000CD", penwidth=1.2]
+  "toten" -> "UpdateAIMTerms" [color="#0000CD", penwidth=1.2]
+  "toten" -> "AIMdipole" [color="#0000CD", penwidth=1.2]
+
+  // Additional connections to AIMResults
+  "adebye" -> "AIMResults" [color="#000000", penwidth=1.2, constraint=false]
+  "toten" -> "AIMResults" [color="#000000", penwidth=1.2, dir=back]
+
+  "ADFAIMCriticalPoints" -> "FindAIMCriticalPoints" [color="#000000", penwidth=1.2]
+
+  // Connections among horizontal nodes
+  "ADFAIMCriticalPoints" -> "AIMdipole" [color="#000000", penwidth=1.2, constraint=false]
+  "UpdateAIMTerms" -> "AIMdipole" [color="#000000", penwidth=1.2, constraint=false, minlen=2]
+
+  "Symaexcit" -> "Exitations" [color="#FF1493", penwidth=1.5]
+  "Exitations" -> "AllocDavisonso" [color="#FF1493", penwidth=1.2]
+  "Exitations" -> "AllocDavison" [color="#FF1493", penwidth=1.2]
+  "AllocDavisonso" -> "MajorTransition" [color="#FF1493", penwidth=1.2]
+  "AllocDavison" -> "MajorTransition" [color="#FF1493", penwidth=1.2]
+  "MajorTransition" -> "AnalizeAOTrans" [color="#FF1493", penwidth=1.2]
+}
+

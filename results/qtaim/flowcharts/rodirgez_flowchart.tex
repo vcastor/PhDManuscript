@@ -1,0 +1,39 @@
+% -*- coding: utf-8 -*-
+\begin{tikzpicture}[node distance=2cm, every node/.style={font=\scriptsize}]
+
+  % Nodes
+  \node (start)    [startstop, align=center]
+    {The ATS for each\\ atom is generated};
+  \node (pickgp)   [process, below of=start]
+    {Pick up a new GP as initial point in the stepest ascent path};
+  \node (satisfy?) [decision, below of=pickgp, yshift=-1.0cm, align=center]
+    {Does the GP satisfy\\ screening conditions?};
+  \node (setapp)   [process, below of=satisfy?, yshift=-0.7cm]
+    {APP = GP};
+  \node (inATS?)   [decision, below of=setapp]
+    {Is the APP inside an ATS?};
+  \node (addABP)   [process, right of=inATS?, xshift=3.8cm]
+    {Add GP to ABP};
+  \node (newNNA?)  [decision, below of=inATS?, yshift=-0.7cm]
+    {Is the APP a new NNA?};
+  \node (addNNA)   [process, right of=newNNA?, xshift=6.1cm, align=center]
+    {Add NNA to the list of attractors with an ATS radius of 0.15};
+  \node (forward)  [process, below of=newNNA?, yshift=-0.7cm]
+    {Go a step forward in the stepest ascent path};
+
+  % Arrows
+  \draw [arrow] (start) -- (pickgp);
+  \draw [arrow] (pickgp) -- (satisfy?);
+  \draw [arrow] (satisfy?) -- node[anchor=south] {yes} ++(4.0,0) |- (pickgp.350);
+  \draw [arrow] (satisfy?) -- node[anchor=east] {no} (setapp);
+  \draw [arrow] (setapp) -- (inATS?);
+  \draw [arrow] (inATS?) -- node[anchor=south] {yes} (addABP);
+  \draw [arrow] (addABP) |- (pickgp);
+  \draw [arrow] (inATS?) -- node[anchor=east] {no} (newNNA?);
+  \draw [arrow] (newNNA?) -- node[anchor=south] {yes} (addNNA);
+  \draw [arrow] (addNNA) |- (pickgp.10);
+  \draw [arrow] (newNNA?) -- node[anchor=east] {no} (forward);
+  \draw [arrow] (forward) -| ++(-3.5,0) |- (inATS?);
+
+\end{tikzpicture}
+

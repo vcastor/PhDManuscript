@@ -1,0 +1,37 @@
+% 
+% main file for the thesis que me hará doctora
+% 
+
+\input{preambulo/preambulo}
+\input{glossary/glossary}
+
+\begin{document}
+\subimport{portada/}{content}
+\subimport{acknowledgements/}{acknowledgements}
+
+\hypersetup{linkcolor=azul!60}
+{\pagestyle{toc}{
+  \tableofcontents
+  \newpage}}
+
+\resetfancystyle
+\hypersetup{linkcolor=smalt(darkpowderblue)}
+
+% \printglossary[type=notation,style=notation]
+\printglossary[type=acronyms,style=acronym]
+
+\subimport{intro/}{introduction}
+\subimport{methodology/}{methodology}
+\subimport{results/}{results}
+\subimport{conclusions/}{conclusions}
+
+\subimport{appendix/}{apendice}
+
+\bibliography{bibl/bibl}
+
+\subimport{contraportada/}{contraportada}
+
+\end{document}
+
+% esta tesis fue escrita con el poder de las plantitas 🌱 ✨
+

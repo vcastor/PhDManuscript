@@ -1,0 +1,281 @@
+% Description: This file contains the code for the boxes used in the document
+% Main idea taken from https://github.com/SeniorMars/dotfiles
+% Edited by: VCastor
+
+% ---------------
+% tcolorbox setup
+\setlength{\parindent}{1cm}
+
+% -----------
+% Theorem box
+
+\tcbuselibrary{theorems,skins,hooks}
+\newtcbtheorem[number within=section]{Theorem}{Theorem}
+{
+	enhanced,
+	breakable,
+	colback = mytheorembg,
+	frame hidden,
+	boxrule = 0sp,
+	borderline west = {2pt}{0pt}{mytheoremfr},
+	sharp corners,
+	detach title,
+	before upper = \tcbtitle\par\smallskip,
+	coltitle = mytheoremfr,
+	fonttitle = \bfseries\sffamily,
+	description font = \mdseries,
+	separator sign none,
+	segmentation style={solid, mytheoremfr},
+}
+{th}
+
+% ---------
+% Corollery
+
+\tcbuselibrary{theorems,skins,hooks}
+\newtcbtheorem[number within=section]{Corollary}{Corollary}
+{
+	enhanced
+	,breakable
+	,colback = myp!10
+	,frame hidden
+	,boxrule = 0sp
+	,borderline west = {2pt}{0pt}{myp!85!black}
+	,sharp corners
+	,detach title
+	,before upper = \tcbtitle\par\smallskip
+	,coltitle = myp!85!black
+	,fonttitle = \bfseries\sffamily
+	,description font = \mdseries
+	,separator sign none
+	,segmentation style={solid, myp!85!black}
+}
+{th}
+
+% -----
+% Lenma
+
+\tcbuselibrary{theorems,skins,hooks}
+\newtcbtheorem[number within=section]{Lenma}{Lenma}
+{
+	enhanced,
+	breakable,
+	colback = mylenmabg,
+	frame hidden,
+	boxrule = 0sp,
+	borderline west = {2pt}{0pt}{mylenmafr},
+	sharp corners,
+	detach title,
+	before upper = \tcbtitle\par\smallskip,
+	coltitle = mylenmafr,
+	fonttitle = \bfseries\sffamily,
+	description font = \mdseries,
+	separator sign none,
+	segmentation style={solid, mylenmafr},
+}
+{th}
+
+% -----------
+% Proposition
+
+\tcbuselibrary{theorems,skins,hooks}
+\newtcbtheorem[number within=section]{Prop}{Proposition}
+{
+	enhanced,
+	breakable,
+	colback = mypropbg,
+	frame hidden,
+	boxrule = 0sp,
+	borderline west = {2pt}{0pt}{mypropfr},
+	sharp corners,
+	detach title,
+	before upper = \tcbtitle\par\smallskip,
+	coltitle = mypropfr,
+	fonttitle = \bfseries\sffamily,
+	description font = \mdseries,
+	separator sign none,
+	segmentation style={solid, mypropfr},
+}
+{th}
+
+% -----
+% Claim
+
+\tcbuselibrary{theorems,skins,hooks}
+\newtcbtheorem[number within=section]{claim}{Claim}
+{
+	enhanced
+	,breakable
+	,colback = myg!10
+	,frame hidden
+	,boxrule = 0sp
+	,borderline west = {2pt}{0pt}{myg}
+	,sharp corners
+	,detach title
+	,before upper = \tcbtitle\par\smallskip
+	,coltitle = myg!85!black
+	,fonttitle = \bfseries\sffamily
+	,description font = \mdseries
+	,separator sign none
+	,segmentation style={solid, myg!85!black}
+}
+{th}
+
+
+% --------------
+% Definition box
+
+\newtcbtheorem[number within=section]{Definition}{Definition}{enhanced,
+  before skip=2mm,after skip=2mm, colback=red!5,colframe=red!80!black,boxrule=0.5mm,
+  attach boxed title to top left={xshift=1cm,yshift*=1mm-\tcboxedtitleheight}, varwidth boxed title*=-3cm,
+  boxed title style={frame code={
+    \path[fill=tcbcolback]
+      ([yshift=-1mm,xshift=-1mm]frame.north west)
+      arc[start angle=0,end angle=180,radius=1mm]
+      ([yshift=-1mm,xshift=1mm]frame.north east)
+      arc[start angle=180,end angle=0,radius=1mm];
+    \path[left color=tcbcolback!60!black,right color=tcbcolback!60!black,
+      middle color=tcbcolback!80!black]
+      ([xshift=-2mm]frame.north west) -- ([xshift=2mm]frame.north east)
+      [rounded corners=1mm]-- ([xshift=1mm,yshift=-1mm]frame.north east)
+      -- (frame.south east) -- (frame.south west)
+      -- ([xshift=-1mm,yshift=-1mm]frame.north west)
+      [sharp corners]-- cycle;
+      },interior engine=empty,
+    },
+  fonttitle=\bfseries,
+  title={#2},#1}{def}
+\newtcbtheorem[number within=chapter]{definition}{Definition}{enhanced,
+  before skip=2mm,after skip=2mm, colback=red!5,colframe=red!80!black,boxrule=0.5mm,
+  attach boxed title to top left={xshift=1cm,yshift*=1mm-\tcboxedtitleheight}, varwidth boxed title*=-3cm,
+  boxed title style={frame code={
+    \path[fill=tcbcolback]
+      ([yshift=-1mm,xshift=-1mm]frame.north west)
+      arc[start angle=0,end angle=180,radius=1mm]
+      ([yshift=-1mm,xshift=1mm]frame.north east)
+      arc[start angle=180,end angle=0,radius=1mm];
+    \path[left color=tcbcolback!60!black,right color=tcbcolback!60!black,
+          middle color=tcbcolback!80!black]
+      ([xshift=-2mm]frame.north west) -- ([xshift=2mm]frame.north east)
+      [rounded corners=1mm]-- ([xshift=1mm,yshift=-1mm]frame.north east)
+      -- (frame.south east) -- (frame.south west)
+      -- ([xshift=-1mm,yshift=-1mm]frame.north west)
+      [sharp corners]-- cycle;
+    },interior engine=empty,
+  },
+  fonttitle=\bfseries,
+  title={#2},#1}{def}
+
+% ------------
+% Question box [Equation]
+
+\makeatletter
+\newtcbtheorem{kequation}{Key Equation}{enhanced,
+	breakable,
+	colback=white,
+	colframe=myb!80!black,
+	attach boxed title to top left={yshift*=-\tcboxedtitleheight},
+	fonttitle=\bfseries,
+	title={#2},
+	boxed title size=title,
+	boxed title style={
+		sharp corners,
+		rounded corners=northwest,
+		colback=tcbcolframe,
+		boxrule=0pt,
+	},
+	underlay boxed title={
+		\path[fill=tcbcolframe] (title.south west)--(title.south east)
+		to[out=0, in=180] ([xshift=5mm]title.east)--
+		(title.center-|frame.east)
+		[rounded corners=\kvtcb@arc] |-
+		(frame.north) -| cycle;
+	},
+	#1
+}{def}
+\makeatother
+
+% --------
+% Note box
+
+\usetikzlibrary{arrows,calc,shadows.blur}
+\tcbuselibrary{skins}
+\newtcolorbox{note}[1][]{
+ 	enhanced jigsaw,
+ 	colback=gray!20!white,
+ 	colframe=gray!80!black,
+ 	size=small,
+ 	boxrule=1pt,
+ 	title=\textbf{Note:},
+ 	halign title=flush center,
+ 	coltitle=black,
+ 	breakable,
+ 	drop shadow=black!50!white,
+ 	attach boxed title to top left={xshift=1cm,yshift=-\tcboxedtitleheight/2,yshifttext=-\tcboxedtitleheight/2},
+ 	minipage boxed title=1.5cm,
+ 	boxed title style={
+    colback=white,
+    size=fbox,
+    boxrule=1pt,
+    boxsep=2pt,
+    underlay={
+      \coordinate (dotA) at ($(interior.west) + (-0.5pt,0)$);
+      \coordinate (dotB) at ($(interior.east) + (0.5pt,0)$);
+      \begin{scope}
+        \clip (interior.north west) rectangle ([xshift=3ex]interior.east);
+        \filldraw[white, blur shadow={shadow opacity=60, shadow yshift=-.75ex},
+                  rounded corners=2pt](interior.north west) rectangle (interior.south east);
+      \end{scope}
+      \begin{scope}[gray!80!black]
+        \fill (dotA) circle (2pt);
+        \fill (dotB) circle (2pt);
+      \end{scope}
+ 				},
+    },
+ 	#1,
+}
+
+% ----------
+% Insight box
+
+\newtcbtheorem[number within=section]{Insight}{Insight}{
+  colback = myexamplebg
+  ,breakable
+  ,colframe = myexamplefr
+  ,coltitle = myexampleti
+  ,boxrule = 1pt 
+  ,sharp corners
+  ,detach title
+  ,before upper=\tcbtitle\par\smallskip
+  ,fonttitle = \bfseries
+  ,description font = \mdseries
+  ,separator sign none
+  ,description delimiters parenthesis
+}
+{ex}
+
+% ------------------
+% Self Made Commands
+
+\newcommand{\thm}[2]{\begingroup\setstretch{1}
+  \begin{Theorem}{#1}{}\sffamily#2\end{Theorem}
+  \endgroup}
+\newcommand{\cor}[2]{\begingroup\setstretch{1}
+  \begin{Corollary}{#1}{}\sffamily#2\end{Corollary}
+  \endgroup}
+\newcommand{\follow}[2]{\begingroup\setstretch{1}
+  \begin{Insight}{#1}{}\sffamily#2\end{Insight}
+  \endgroup}
+\newcommand{\mlenma}[2]{\begin{Lenma}{#1}{}#2\end{Lenma}}
+\newcommand{\mprop}[2]{\begin{Prop}{#1}{}#2\end{Prop}}
+\newcommand{\clm}[3]{\begin{claim}{#1}{#2}#3\end{claim}}
+\newcommand{\dfn}[2]{\begin{Definition}[colbacktitle=red!75!black]{#1}{}#2\end{Definition}}
+\newcommand{\dfnc}[2]{\begin{definition}[colbacktitle=red!75!black]{#1}{}#2\end{definition}}
+\newcommand{\keq}[2]{\begin{kequation}{#1}{}#2\end{kequation}}
+\newcommand{\pf}[2]{\begin{myproof}[#1]#2\end{myproof}}
+\newcommand{\nt}[1]{\begin{note}#1\end{note}}
+
+\newenvironment{myproof}[1][\proofname]{%
+	\proof[\bfseries #1: ]%
+}{\endproof}
+

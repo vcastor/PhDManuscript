@@ -1,0 +1,2 @@
+dot -Tsvg intnto1.gv > visual.svg  # gv -> svg
+rsvg-convert -f pdf -o t.pdf t.svg # svg -> pdf

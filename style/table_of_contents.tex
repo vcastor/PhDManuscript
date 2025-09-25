@@ -1,0 +1,65 @@
+% -----------------
+% Table of Contents
+% The main idea of the code is borrowed from:
+% Modified by VCastor to work with memoir class
+
+% Experimenta:
+\setsecnumdepth{subsection}
+
+% Fixes Undefined control sequence error for \@chapapp@head
+\renewcommand\chapternumberline[1]{\numberline{#1}}
+\contentsmargin{0cm}
+
+\titlecontents{chapter}[3.7pc]
+{\addvspace{30pt}
+  \begin{tikzpicture}[remember picture, overlay]
+    \draw[fill=azul!60,draw=azul!60] (-7,-.1) rectangle (-0.9,.5);
+    \pgftext[left,x=-3.6cm,y=0.2cm]{\color{white} \textbf{Chapter \thecontentslabel}};
+  \end{tikzpicture}\color{azul!60}}
+{}
+{\printchapternonum}
+{\;\titlerule\; Page \thecontentspage
+  \begin{tikzpicture}[remember picture, overlay]
+    \draw[fill=azul!60,draw=azul!60] (2pt,0) rectangle (4,0.1pt);
+  \end{tikzpicture}}
+
+\titlecontents{appendix}[3.7pc]
+{\addvspace{30pt}
+  \begin{tikzpicture}[remember picture, overlay]
+    \draw[fill=azul!60,draw=azul!60] (-7,-.1) rectangle (-0.9,.5);
+    \pgftext[left,x=-3.6cm,y=0.2cm]{\color{white} \textbf{Appendix \thecontentslabel}};
+  \end{tikzpicture}\color{azul!60}}
+{}
+{\bfseries}%{}
+{\;\titlerule\; Page \thecontentspage
+  \begin{tikzpicture}[remember picture, overlay]
+    \draw[fill=azul!60,draw=azul!60] (2pt,0) rectangle (4,0.1pt);
+  \end{tikzpicture}}
+
+\titlecontents{section}[3.7pc]
+{\addvspace{-8pt}}%{\addvspace{-4pt}}
+{}
+{}
+{\hfill\small \thecontentspage}
+
+\titlecontents*{subsection}[3.7pc]
+{\addvspace{-4pt}\small}
+{}
+{}
+{\ --- \small\thecontentspage}
+[ \textbullet\ ][]
+
+\makeatletter
+% Custom Table of Contents title
+\renewcommand{\tableofcontents}{
+  \chapter*{
+    \vspace*{-20pt}% Adjusts the vertical position of the ToC title
+    \begin{tikzpicture}[remember picture, overlay]
+      \pgftext[right,x=15cm,y=0.2cm]{\color{azul!60} \contentsname};
+      \draw[fill=azul!60,draw=azul!60] (13,-.75) rectangle (20,1);
+      \clip (13,-.75) rectangle (20,1);
+      \pgftext[right,x=15cm,y=0.2cm]{\color{white} \contentsname};
+    \end{tikzpicture}}
+  \@starttoc{toc}}
+\makeatother
+

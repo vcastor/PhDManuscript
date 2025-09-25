@@ -1,0 +1,31 @@
+% -*- coding: utf-8 -*-
+
+\begin{algorithm}[h!]
+  \SetNoFillComment
+
+  \tcc{Set the topological connection in a matrix}
+  \tcc{no bond : 0; bond (A-B) : 1; bond (B-A) : -1}
+  qbondmat $\gets$ topologicalConnection
+
+  \tcc{Expand the linear system in case of rings}
+  qbondmat $\gets$ overdetermineSystem(qbondmat, ringsInfo)\;
+
+  \tcc{Solve the linear system A*x = B}
+  chargeBonds $\gets$ lapack(qbondmat, atomicCharges)\;
+  check\_values(chargeBonds) \tcp*{Physically realistic values?}
+
+  \tcc{Nuclear dipole moment contribution}
+  \For {i $\gets 1$ \KwTo nAttractors}{
+    \For {j $\gets 1$ \KwTo nAttractors}{
+      \If {bonded(i,j)}{
+        $\boldsymbol{\mu}_c$(i) += (coord\_attractors(i) - coord\_bcp(i,j))$\times$ chargeBonds(i,j)\;
+      }
+    }
+  }
+  \tcc{Nuclear \& Electronic dipole moment}
+  $\boldsymbol{\mu}_t$ $\gets$ $\boldsymbol{\mu}_c - \boldsymbol{\mu}_p$
+
+  \caption{Atomic properties computed by the integral of the density}
+  \label{adfdipole}
+\end{algorithm}
+

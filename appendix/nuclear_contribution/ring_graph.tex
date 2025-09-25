@@ -1,0 +1,30 @@
+\begingroup
+\setmainfont{DejaVu Sans}
+
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}
+  \tikzset{
+    mynode/.style={
+      circle,
+      draw=black,
+      fill=blue!20,
+      line width=1.2mm,
+      minimum size=18mm,
+      font=\bfseries\fontsize{20}{20}\selectfont,
+      text centered
+    }
+  }
+
+  \node[mynode] (A) at (0pt, 100pt) {A};
+  \node[mynode] (B) at (100pt, 0pt) {B};
+  \node[mynode] (C) at (0pt, -100pt) {C};
+  \node[mynode] (D) at (-100pt, 0pt) {D};
+
+  \draw[line width=1.2mm] (A) -- (B);
+  \draw[line width=1.2mm] (B) -- (C);
+  \draw[line width=1.2mm] (C) -- (D);
+  \draw[line width=1.2mm] (D) -- (A);
+\end{tikzpicture}%
+}
+\endgroup
+

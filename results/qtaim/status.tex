@@ -1,0 +1,173 @@
+% -*- coding: utf-8 -*-
+\newpage
+\section{Current Status of QTAIM in AMS}
+
+To encapsulate the QTAIM code and ensure its accessibility from the various
+engines within the suite, we have documented the interconnection of the main
+\modules. This modular design not only facilitates integration into existing
+workflows but also simplifies future development. Figure~\ref{ams_workflow}
+illustrates how \gls{QTAIM} can be invoked within a typical \ams workflow, from
+user input through to the final output.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.75\textwidth]{diagramas/flux.pdf}
+  \caption{Workflow from \ams input to output for the engines supporting the
+    QTAIM partition.}
+  \label{ams_workflow}
+\end{figure}
+
+Figure~\ref{ams_modules} provides an overview of the principal \subroutines and
+\modules involved in the \gls{QTAIM} implementation. The \ams driver can perform a
+single-point calculation with any of the three engines. In the subsequent
+post-analysis stage, the \gls{QTAIM} partition is executed. In this workflow, the
+\subroutine \texttt{DoSinglePoint} calls \texttt{DoPostSCF}, which first
+executes the total energy \subroutine (\texttt{atoten}), followed by the Debye
+analysis (\texttt{adebye}). The main \subroutine for producing
+\gls{QTAIM} results (\texttt{AIMResults}) requires the outputs of these two
+subroutines to compare the dipole moments obtained from the Debye analysis and
+from the \gls{QTAIM} partition.
+
+The dipole moment calculation depends on both local properties, computed in
+\texttt{ADFAIMCriticalPoints}, and atomic properties, such as the atomic
+charges determined by \texttt{UpdateAIMTerms}. Consequently, the
+\subroutine responsible for the dipole moment
+(\texttt{AIMDipoleMoment}) must be executed only after both
+\texttt{ADFAIMCriticalPoints} and \texttt{UpdateAIMTerms} have completed.
+
+\newpage
+\vspace*{4cm}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\textwidth]{calls/ams.pdf}
+  \caption{The blue arrows indicate the main dependencies; black arrows denote
+           subroutine calls; and brown arrows indicate that the main
+           subroutine of a module must wait for the execution of the targeted
+           subroutines.}
+  \label{ams_modules}
+\end{figure}
+
+\newpage
+\subsection{Descriptors Available in AMS}
+
+The descriptors from the topological analysis (\texttt{AnalysisLevel Normal})
+are listed in Table~\ref{aim_descriptors}. For \band, the analysis is more
+limited, providing only the electron density and Laplacian for each basin.
+
+\begin{table}[h!]
+  \caption{Descriptors available in \adf and \dftb for the Topological Analysis.}
+  \input{tables/local_descriptors}
+  \label{aim_descriptors}
+\end{table}
+
+\newpage
+The atomic descriptors (\texttt{AnalysisLevel Extended}) are summarised in
+Table~\ref{atomic_descriptors}. Finally, for \texttt{AnalysisLevel Full}, the
+localisation and delocalisation indices are computed. An example of the
+corresponding output file is provided in Appendix~\ref{output_adf}.
+
+\begin{table}[h!]
+  \caption{Descriptors available in \adf and for the Atomic Properties.}
+  \input{tables/atomic_descriptors}
+  \label{atomic_descriptors}
+\end{table}
+
+\newpage
+\subsection{Graphical User Interface (\gls{GUI})}
+
+\begin{wrapfigure}[6]{r}{0.55\textwidth}
+\centering
+  \includegraphics[width=0.55\textwidth]{img/gui}
+  \label{gui}
+\end{wrapfigure}
+
+Although the \gls{QTAIM} partition code had already been implemented in the
+\fortran backend, with results written in both human-readable output and binary
+files, the \gls{GUI} offered only limited support for visualising the computed
+properties. In particular, the display of atomic basin shapes was not
+user-friendly.
+
+The main difficulty in rendering atomic basin shapes arises from the
+feature that makes the \gls{QTAIM} partition so fast in \ams: the absence of an
+explicit calculation of the zero-flux condition (as discussed in previous
+sections). The partitioning procedure assigns each grid point to a specific
+attractor (or to none), but the basin boundaries cannot be directly extracted
+from values computed.
+
+In the previous \gls{GUI} version, atomic basins were visualised by colouring
+the corresponding grid points. While functional, this approach often led to
+visual clutter, particularly when zooming in or out, as shown in
+Figure~\ref{gui_anterior}.
+
+\begin{figure}[h]
+  \centering
+  \begin{subfigure}{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{gui_ss/zoomOut2.png}
+    \caption{When zoomed out, the system is obscured by grid points,
+      making it difficult to visualise the underlying molecular structure.}
+    \label{gui_anterior}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{gui_ss/zoomIn2.png}
+    \caption{When zoomed in, the grid points are spaced too far apart,
+      and their association becomes difficult for the user.}
+    \label{gui_atomic_basin}
+  \end{subfigure}
+  \caption{Caffeine molecule.}
+  \label{water_molecule_gui}
+\end{figure}
+
+\newpage
+To address this limitation, we implemented a backwards-compatible
+\gls{GUI} feature that reconstructs approximate basin surfaces using the
+labelled grid points. These shapes are rendered in
+\vtk within the \tcl-based \gls{GUI}. A condensed version of the \tcl code is
+provided below with comments explaining the main steps of the process.
+
+\input{code/gui.tex}
+
+\newpage
+It is worth noting that the implementation could be enhanced by increasing the
+number of polygons used to represent the surfaces. However, for large systems
+this would incur a significant performance cost. Another possible improvement
+is to replace the \vtk-generated normal vectors with those derived from the
+gradient of the electron density. While this would not change the resolution,
+it would enable more realistic lighting calculations, resulting in smoother
+and more visually appealing surfaces. This latter feature has already been
+developed but is not yet included in the trunk \branch. It will only be
+available for future \ams calculations, as the gradient at each grid point is
+not stored in the current binary files.
+
+A comparison of the new and old \gls{GUI} display for atomic basins is shown in
+the next Figures~\ref{gui_atomic_basin}.
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{gui_ss/oldAll2.png}
+    \caption{Standard display for all atoms in the previsous \gls{GUI} version.}
+  \end{subfigure}
+  \begin{subfigure}{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{gui_ss/newAll2.png}
+    \caption{Standard display for all atoms in the new \gls{GUI} version.}
+  \end{subfigure}
+
+  \begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{gui_ss/oldSelected2.png}
+    \caption{Only four atoms selected in the previous \gls{GUI} version.}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{gui_ss/newSelected2.png}
+    \caption{Only four atoms selected in the new \gls{GUI} version.}
+  \end{subfigure}
+  \caption{Comparison of the new and old \gls{GUI} display for atomic basins, for
+    caffeine molecule.}
+  \label{gui_atomic_basin}
+\end{figure}
+

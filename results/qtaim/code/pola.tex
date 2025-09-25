@@ -1,0 +1,41 @@
+% -*- coding: utf-8 -*-
+
+\begin{lstlisting}[language=Python, style=mystyle, basicstyle=\tiny]
+class DipoleMomentJob(MultiJob):
+    """Dipole moment with an electric field in (x,y,z,-x,-y,-z) directions.
+
+    Attributes:
+        molecule:             The molecule to calculate the dipole moment for.
+        common_settings: Common settings for all jobs.
+        directions:            Directions of the electric field.
+        eField:                Electric field values.
+    """
+    def __init__(self, molecule, common_settings, directions, eField, **kwargs):
+        """Initializes the DipoleMomentJob with molecule, settings, directions,
+           and electric field."""
+        MultiJob.__init__(self, children=OrderedDict(), **kwargs)
+        # Code omitted for brevity
+        # self.molecule = molecule; self.eField; self.setup_jobs()
+
+    def setup_jobs(self):
+        # Code omitted for brevity
+
+    def collect_results(self) -> Tuple[np.ndarray, np.ndarray]:
+        """Collects and returns the dipole moments."""
+
+  # Inicialize and run the DipoleMomentJob's in the PLAMS workflow
+
+  dipole_job = DipoleMomentJob(molecule=mol,
+                                              common_settings=adfsettings,
+                                              directions=directions, eField=eField)
+  dipole_job.run()
+
+  # Collect the results
+  dipole, atom_charge = dipole_job.collect_results()
+  # Numerical derivatives
+  pol_tensor = np.zeros((natoms, 3, 3)) 
+  for j in range(natoms):
+      pol_tensor[j,:,:] = (dipole[:3,j,:] - dipole[3:6,j,:])/(2.0*eFieldmag)
+
+\end{lstlisting}
+

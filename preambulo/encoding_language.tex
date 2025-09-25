@@ -1,0 +1,32 @@
+% -----------------------------------------
+% Encoding Language & Bibliography Packages
+\usepackage[utf8]{inputenc}                     % [latin1] [utf8] [ansinew] [applemac]
+% Bibliography                                    [Attention: import firstly natbib than babel]
+\usepackage[sort&compress]{natbib}              % [sort&compress] [sort&compress,numbers]
+\bibliographystyle{unsrtnatnodoi}                    % [unsrtnat] [abbrvnat] [plainnat] [authoryear]
+\setcitestyle{square,numbers,comma}
+\setlength{\bibsep}{0pt plus 0.3ex}
+\renewcommand*{\bibfont}{\small}
+% Language
+\usepackage[main=english, spanish, french,
+            russian, activeacute]{babel}        % activeacute
+\usepackage{polyglossia}                        % Language
+\usepackage[T1]{fontenc}    					          % the use of \usepackage{t1enc} is obsolete
+\usepackage{fontspec}    					              % the use of \usepackage{t1enc} is obsolete
+% Fonts
+\usepackage{droidsans}                          % Droid Sans (Font)
+\usepackage{lmodern}                            % Choix de la police
+\usepackage{calligra}                           % Acknowledgements font
+\usepackage{fontawesome5}                       % logos
+\usepackage{CJKutf8,luatexja-fontspec}          % Chinese Characters
+\setmainjfont{FandolSong}                       % Font for Chinese Characters
+\usepackage{emoji}                              % Emojis
+\setemojifont{Apple Color Emoji}
+% Cyrillic
+\newfontface\crylit[Path=style/]{wncyi10.ttf}
+% Hebrew
+\setotherlanguages{hebrew}
+\newfontfamily{\hebrewfont}[Script=Hebrew]{Hadasim CLM}
+\newfontfamily{\hebrewfontsf}[Script=Hebrew]{Miriam CLM}
+\newfontfamily{\hebrewfonttt}[Script=Hebrew]{Miriam Mono CLM}
+

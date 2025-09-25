@@ -1,0 +1,204 @@
+% -*- coding: utf-8 -*-
+\subsection{Excited States}
+
+The study of electronic excited states plays an essential role to
+understand the spectroscopic and photochemical properties of molecular
+systems. Following the approach adopted in previous sections ---where molecular
+properties such as dipole moments and polarisabilities were decomposed into
+atomic contributions via QTAIM--- this subsection will similarly progress from
+global characterisation of electronic excitations toward an atomic-level
+interpretation facilitated by QTAIM partitioning.
+
+We will restrict our focus here to vertical excitations, defined as electronic
+transitions occurring without nuclear displacement. This approximation aligns
+with the Franck–Condon principle~\cite{Franck1926, Condon1926}, assuming fixed
+nuclear geometry for both ground and excited states, and is widely employed in
+theoretical treatments of electronic excitations.
+
+\newpage
+To characterise the nature of these excitations, it is insightful to examine
+the redistribution of the electron density between the excited
+$\rho_{\mathrm{EX}}(\mathbf{r})$ and ground states
+$\rho_{\mathrm{GS}}(\mathbf{r})$. This redistribution can be described
+quantitatively by the electron density difference:
+
+\begin{align}
+  \Delta\rho (\mathbf{r}) = \rho_{\mathrm{EX}}(\mathbf{r}) - \rho_{\mathrm{GS}}(\mathbf{r}).
+\end{align}
+
+The density difference $\Delta\rho(\mathbf{r})$ provides a spatial map of the
+electron redistribution upon excitation. Regions where $\Delta\rho(\mathbf{r})
+> 0$ correspond to electron accumulation, while regions where
+$\Delta\rho(\mathbf{r}) < 0$ indicate electron depletion. To isolate these
+contributions, it is useful to define the positive and negative components of
+the density difference, denoted $\rho_+$ and $\rho_-$, respectively. These
+functions distinguish between areas where electronic charge has been gained
+(typically interpreted as particle-like) and lost
+(hole-like)~\cite{Gatti2022,Herbert2023}.
+
+\vspace{1em}%
+\dfn{$\rho_+$ \& $\rho_-$}{
+  % The positive and negative parts of the density difference are defined as
+  %
+  \begin{align}
+    \rho_+ (\mathbf{r}) =
+    \begin{cases} 
+      \Delta\rho(\mathbf{r}) & \text{if } \Delta\rho(\mathbf{r}) > 0\\
+      0     & \text{otherwise}
+    \end{cases}
+    \label{rho_plus}
+  \end{align}
+  %
+  \begin{align}
+    \rho_- (\mathbf{r}) =
+    \begin{cases} 
+      \Delta\rho(\mathbf{r}) & \text{if } \Delta\rho(\mathbf{r}) < 0\\
+      0     & \text{otherwise}
+    \end{cases}
+    \label{rho_minus}
+  \end{align}
+
+}
+\vspace{1em}%
+
+A useful measure of charge separation can be obtained by computing the
+centroids of the $\rho_+$ and $\rho_-$ distributions. These centroids,
+denoted $\mathbf{R}_+$ and $\mathbf{R}_-$, correspond to the average positions
+of the regions where electron density is accumulated and depleted,
+respectively.
+
+\begin{align}
+  \mathbf{R}_\pm = \frac
+    {\int \mathbf{r}\rho_{\pm}(\mathbf{r})\dd\tau}
+      {\int\rho_{\pm}(\mathbf{r})\dd\tau} =
+    (x_{\pm}, y_{\pm}, z_{\pm}).
+  \label{centroid}
+\end{align}
+
+\newpage
+The spatial extent of charge transfer upon excitation can be estimated by the
+Euclidean distance between the centroids $\mathbf{R}_+$ and $\mathbf{R}_-$:
+
+\begin{align}
+  D_\mathrm{CT} = \norm{\mathbf{R}_+ - \mathbf{R}_-}.
+  \label{ct_exci}
+\end{align}
+
+This distance characterises how far the electron density is displaced during
+the excitation. To quantify the magnitude of the charge transferred, we define
+$q_{\mathrm{CT}}$ as the integrated value of either $\rho_+$ or $\rho_-$:
+
+\begin{align}
+  q_{\mathrm{CT}} = \int\rho_+(\mathbf{r})\dd\tau = -\int\rho_-(\mathbf{r})\dd\tau.
+\end{align}
+
+Together, $D_\mathrm{CT}$ and $q_\mathrm{CT}$ provide a compact and physically
+meaningful expression for the change in dipole moment associated with the
+charge transfer process:
+
+\begin{align}
+  \norm{\Delta\boldsymbol{\mu}_\mathrm{CT}} = D_\mathrm{CT} \cdot q_{\mathrm{CT}}.
+  \label{mu_ct}
+\end{align}
+
+% \noindent where $\hat{u}$ is the unit vector pointing from the centroid of the
+% hole to the centroid of the electron density. This formulation offers an
+% intuitive interpretation of the excitation in terms of the displacement of
+% charge in space.
+
+A more detailed link between orbital transitions and real-space charge
+redistribution can be established by expressing $\rho_+$ and $\rho_-$ in terms
+of natural transition orbitals (NTOs). Within this framework, $\rho_+$ and
+$\rho_-$ correspond to the particle (electron) and hole densities, respectively,
+each constructed from weighted contributions of individual NTOs. This
+representation connects the orbital nature of the excitation with physically
+observable quantities such as the dipole moment change and the charge-transfer
+distance $D_\mathrm{CT}$.
+
+% Reference to the notation
+\newpage
+\follow{Derivation of $\boldsymbol{\mu}_{\mathrm{CT}}$}{
+
+  knowing $\rho^e = \sum\lambda(\phi^{IO})^2$ and $\rho^h =
+  \sum\lambda(\phi^{OI})^2$, \\
+  where $\phi$ denotes the natural transition molecular orbitals,\\ [-1em]
+  % \textit{IO} = initial occupied, \textit{OI} = final occupied, \\
+  {\tiny
+  \begin{flushright}
+    \textit{all integrals run over $\dd\tau$, the differentials are omitted for readability.\\
+    Jacobi's delta is used to indicate a particular differential
+    within a integral, $\int_{\partial x} f(x,y) = \int f(x,y)\dd x$.\\
+    The sign function returns $-1$, $0$, or $1$ depending on whether $x$ is negative, zero, or positive, respectively.}
+  \end{flushright}}
+  % \vspace{-1em}%
+  \begin{align}
+    \norm{\Delta\boldsymbol{\mu}_\mathrm{CT}} &= D_{\mathrm{CT}} \cdot q_{\mathrm{CT}} =
+      D_{\mathrm{CT}}\int\rho_+ = - D_{\mathrm{CT}}\int\rho_-\\
+      &= \norm{\mathbf{R}_+ - \mathbf{R}_-}\int\rho_+ =
+        \norm{\frac{\int \mathbf{r}\rho_+}{\int\rho_+} - \frac{\int \mathbf{r}\rho_-}{\int\rho_-}} \int\rho_+ =
+        \norm{\frac{\int \mathbf{r}\rho_+}{\int\rho_+} + \frac{\int \mathbf{r}\rho_-}{\int\rho_+}} \int\rho_+ \nonumber\\
+      &= \norm{\int \mathbf{r}\rho_+ + \int \mathbf{r}\rho_-}\frac{\int\rho_+}{\norm{\int\rho_+}} =
+        \norm{\int \mathbf{r}\rho_+ + \int \mathbf{r}\rho_-}\mathrm{sign}\left(\int\rho_+\right)
+  \end{align}
+  
+  with the notation $\rho_+ = \rho^e$ and $\rho_- = \rho^h$, we can write the most explicit form
+  of the dipole moment change as
+
+  \tiny{
+  \begin{align}
+    \norm{\Delta\boldsymbol{\mu}_{\mathrm{CT}}} &= \norm{\int \mathbf{r}\sum\lambda_i^2\abs{\psi_i^e}^2 +
+      \int \mathbf{r}\sum\lambda_i^2\abs{\psi_i^h}^2}
+      \mathrm{sign}\left(\int\sum\lambda_i^2\abs{\psi_i^e}^2\right) \\
+                   &= \norm{\int_{\partial \mathbf{r}^e}\mathbf{r}^e\sum_i\lambda_i\left[\sum_p U_{pi}^e\phi_p(\mathbf{r}^e)\right]^2
+    -\int_{\partial \mathbf{r}^h}\mathbf{r}^h\sum_i\lambda_i\left[\sum_p V_{pi}^h\phi_p(\mathbf{r}^h)\right]^2} \cdots\nonumber\\
+    &\phantom{= }\cdots\times\mathrm{sign}
+    \left(\int_{\partial \mathbf{r}^e}\sum_i\lambda_i^2\left[\sum_p U_{pi}\phi_p(\mathbf{r}^e)\right]^2\right)
+  \end{align}
+  }
+
+}
+
+Various analyses of excited states rely on molecular orbitals and associated
+descriptors, such as the charge-transfer distance ($\Delta\mathbf{r}$) and the
+spatial overlap of a given excitation ($\Lambda$)~\cite{Peach2008,Guido2013}.
+Equations~\ref{ctdistance} and~\ref{overlapes}, where $K_{ia} = X_{ia} +
+Y_{ia}$, account for both excitation ($X_{ia}$) and de-excitation ($Y_{ia}$)
+coefficients.
+
+\begin{align}
+  \Delta r &= \frac{\sum_{ia}K_{ia}^2\abs{\langle\phi_a|r|\phi_a\rangle -
+    \langle\phi_i|r|\phi_i\rangle}}{\sum_{ia}K_{ia}^2} &
+  \Lambda  &= \frac{\sum_{ia}K_{ia}^2\langle\abs{\phi_i}\abs{\phi_a}\rangle}{\sum_{ia}K_{ia}^2} \label{ctdistance}\\
+  \Delta r &= \frac{\sum_{ia}K_{ia}^2\abs{\int r\phi_a^2 -
+    \int r\phi_i^2}}{\sum_{ia}K_{ia}^2} &
+  \Lambda  &= \frac{\sum_{ia}K_{ia}^2\int\abs{\phi_i}\abs{\phi_a}}{\sum_{ia}K_{ia}^2} \label{overlapes}
+\end{align}
+
+\newpage
+Since the integrals involved are defined over the entire spatial domain,
+real-space partitioning schemes ---such as that used in \gls{QTAIM}--- 
+can apply the same expressions by simply restricting the integration to individual atomic basins.
+Consequently, in a code that already supports $\Delta\mathbf{r}$ and $\Lambda$,
+such as \adf,
+extending the analysis to atomic contributions would require only modest additional effort.
+
+By integrating the functions $\rho_+$ and $\rho_-$ over each basin, we obtain
+atomic-level descriptors for electron depletion and accumulation, respectively:
+
+\begin{align}
+  q_\pm^\mathrm{CT}(\Omega) &= \int_{\Omega} \rho_\pm(\mathbf{r})\dd\mathbf{r}.
+\end{align}
+
+\noindent where $\Omega$ denotes the spatial domain associated with an atomic
+basin. These values indicate the amount of electron density gained or lost by
+each atom during the transition, enabling a more detailed interpretation of the
+excitation in chemically meaningful terms.
+
+Conceptually, this atomic decomposition follows the same logic as standard
+population analyses, where global quantities ---such as the total charge or the
+dipole moment--- are partitioned into atomic contributions. The total integrals
+remain unchanged; only their domains are split according to the real-space
+partitioning.
+
+
+

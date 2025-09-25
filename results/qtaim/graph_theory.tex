@@ -1,0 +1,80 @@
+% -*- coding: utf-8 -*-
+\subsubsection{Rings as cycles and cages as convex polyhedra}\label{graph_theory}
+
+For rings, the analysis determines whether the set of bonds forms a closed
+cycle. This is assessed by examining the correspondence between vertices
+(atoms) and edges (bonds): in a valid cycle, the number of vertices must equal
+the number of edges. This condition provides a reliable and computationally
+efficient means of detecting topological inconsistencies, and is therefore used
+as a trigger for recomputing the topology when necessary. The procedure for
+this verification is summarised in Algorithm~\ref{ring_algo}, which also
+illustrates how the algorithm detects the presence of extra atoms bonded to the
+ring, as exemplified in Figure~\ref{extra_atom}.
+
+Cages present a greater challenge, as their topology is inherently more complex
+and cannot be validated by a single criterion. As discussed previously, several
+warning checks have been implemented, one of which adopts a purely geometrical
+perspective: Euler's polyhedron formula. This relation links the number of
+faces ($F$), edges ($E$), and vertices ($V$) of a polyhedron through the
+expression $F - E + V = 2$. Compliance with this formula confirms that the cage
+exhibits at least a topologically consistent convex polyhedral structure.
+However, this condition alone does not guarantee physicochemical validity, and
+additional topological and geometrical criteria may be necessary to achieve a
+complete verification.
+
+\begin{algorithm}
+  \SetNoFillComment
+
+  \tcc{Number of bonds between the atoms}
+  nbonds = 0; found = false\;
+  \For{i $\gets 1$ \KwTo ring size}{
+    atomA $\leftarrow$ atomRing(i)\;
+    \For{j $\gets i+1$ \KwTo ring size}{
+      atomB $\leftarrow$ atomRing(j)\;
+      \uIf{atomA and atomB are bonded}{
+        nbond + 1\;
+      }
+    }
+  }
+
+  \uIf{nbonds = ring size}{
+    info = true\;
+  }
+  \tcc{Any extra atom bonded to the ring?}
+  \uIf{info $\mathbf{and}$ first time called}{
+    delatom(:) $\leftarrow$ false \tcp*{Boolean array}
+    \For{i $\gets 1$ \KwTo ring size}{
+      atomA $\leftarrow$ atomRing(i)\;
+      nbond = 0\;
+      \tcc{All against all}
+      \For{j $\gets 1$ \KwTo ring size}{
+        atomB $\leftarrow$ atomRing(j)\;
+        \If{atomA and atomB are bonded}{
+          nbond + 1\;
+        }
+      }
+      \tcc{Just one bond means the atom is not in the cycle/ring}
+      \If{nbond < 2}{
+        delatom(i) = true\;
+      }
+    }
+
+    \tcc{Delate the extra atom}
+    \uIf{any(delatom)}{
+      j = 0\;
+      \For{i $\gets 1$ \KwTo ring size}{
+        \uIf{not delatom(i)}{
+          j = j + 1\;
+          tmp(j) $\leftarrow$ atomRing(i)\;
+        }
+      }
+      ring size $\leftarrow$ j\;
+      atomRing(:) $\leftarrow$ tmp(:)\;
+    }
+    \textbf{call me recursively}\;
+  }
+
+\caption{Algorithm to check the rings.}
+\label{ring_algo}
+\end{algorithm}
+

@@ -1,0 +1,97 @@
+% -*- coding: utf-8 -*-
+\section{Quantum Mechanics Foundations}
+
+\vspace{0.5cm}%
+\begin{flushright}
+  {\small
+  ``{\em I think I can safely say that nobody
+         understands quantum mechanics}''.
+
+  -Richard Feynman
+  }
+\end{flushright}
+
+\vspace{0.4cm}%
+\noindent In this section, we take as our starting point the well-known
+Schrödinger Equation~\cite{Schrdinger1926}, postulated by Erwin Schrödinger in
+1925. This equation governs the quantum dynamics of a single particle of mass
+$m$ evolving under the influence of a potential $V$.
+
+\vspace{0.3cm}%
+\dfn{Schrödinger Equation}{
+  \begin{equation}
+    \gls{iunit}\gls{hbar}\pdv{}{t}\ket{\gls{Psi}(\mathbf{r},t)} =
+      \left [ \frac{-\hbar^2}{2m}\nabla^2
+      + \widehat{V}(\mathbf{r},t) \right ] \gls{Psiket} =
+    \gls{hamiltoniano}\ket{\Psi(\mathbf{r},t)}
+    \label{sch_eq}
+  \end{equation}
+}
+\vspace{0.3cm}%
+
+In cases where the Hamiltonian does not depend explicitly on time, 
+we may apply the method of separation of
+variables. This allows us to factor the wavefunction as
+$\Psi(\mathbf{r},t) = e^{-\sfrac{iEt}\hbar} \psi(\mathbf{r})$ and
+derive the time-independent Schrödinger equation:
+
+\vspace{0.3cm}%
+\keq{Time-Independent Schrödinger Equation}{
+  \begin{equation}
+    \gls{hamiltoniano} \ket{\psi(\mathbf{r})} = E \ket{\psi(\mathbf{r})},
+    \label{time_indep_sch}
+  \end{equation}
+
+  \noindent where $E$ denotes the energy eigenvalue associated with the
+  stationary state $\ket{\psi}$.
+}
+
+\vspace{0.3cm}%
+While the Schrödinger equation offers a fundamental description of
+non-relativistic quantum systems, a complete treatment must incorporate
+relativistic effects, using the Dirac equation~\cite{Dirac1928}.
+Rather than delving into the complexities of relativistic quantum mechanics, we
+focus on the challenges posed by molecules with many electrons. These systems
+are particularly difficult to solve, as no analytic solutions are available
+using current state-of-the-art mathematical techniques.
+
+% these are captured by the Dirac equation
+% (Equation~\ref{dirac_eq}):
+
+% \nt{
+%   \begin{equation}
+%     i\hbar\gamma^\mu\partial_\mu\psi - mc\psi = 0
+%     \label{dirac_eq}
+%   \end{equation}
+
+%   \noindent where the $\gamma^\mu$ are the Dirac gamma matrices, which ensure
+%   Lorentz covariance. The equation encodes the structure of spacetime via the
+%   four-gradient $\partial_\mu$ and relates energy and momentum through the
+%   invariant relation $E^2 = p^2c^2 + m^2c^4$.
+% }
+
+\newpage
+The complexity and intractability of solving many-electron molecular systems
+necessitate the use of approximations. One of the earliest and most fundamental
+of these is the Born-Oppenheimer Approximation (\gls{BOA}). Although the BOA is
+inherently contradictory to the principles of quantum mechanics, it remains a
+powerful tool due to the significant mass difference between nuclei and
+electrons.
+
+\vspace{0.5cm}%
+\input{boa}
+
+This approximation is generally robust, as discussed by \v{C}urík and
+Sutcliffe in \cite{urk2018} and \cite{Sutcliffe}. It allows us to
+simplify the problem by treating nuclei as stationary, quasi-classical
+particles relative to the much lighter and faster-moving electrons, which are
+the primary particles of interest in our study.
+
+% ------------------------------
+% Include Hartree-Fock Formalism
+\subimport{./}{hartree_fock.tex}
+
+% ------------------------------
+% Include Basis Sets
+\subimport{./}{basis_set.tex}
+

@@ -1,0 +1,134 @@
+% -*- coding: utf-8 -*-
+\subsubsection{Functionals in this work}
+
+This thesis primarily employs three exchange-correlation functionals:
+PBE~\cite{Perdew1996}, PBE0~\cite{Adamo1999}, and M06-2X~\cite{Zhao2007}. These
+were chosen for their proven balance between accuracy and computational
+efficiency, and their suitability for describing geometries, reaction
+energetics, and other electronic properties relevant to the systems studied.
+
+\newpage
+\noindent \textbf{PBE and PBE0}
+
+\begin{sloppypar}
+\noindent The Perdew-Burke-Ernzerhof (PBE) functional is a widely used
+\gls{GGA} in \gls{DFT}~\cite{Perdew1996}. It was developed as a simplified and
+improved alternative to the earlier PW91 functional~\cite{burke1998derivation},
+which, despite its accuracy, exhibited some limietations: excessive complexity,
+non-transparent analytic forms, over-parameterisation, discontinuous parameter
+transitions, and incorrect scaling behaviour in certain density limits.
+\end{sloppypar}
+
+The correlation energy in PBE can be expressed as a sum of the uniform
+electron-gas correlation energy, $\varepsilon_C^{\mathrm{unif}}$, and a
+gradient correction term, $H$:
+%
+\begin{align}
+  E_C^{\mathrm{PBE}}[\rho_{\uparrow}, \rho_{\downarrow}] =
+    \int n(r)\left[\varepsilon_C^{\mathrm{unif}}(r_s,\zeta) + H(r_s,\zeta,t)\right]\dd\tau,
+\end{align}
+
+\vspace{-0.7em}%
+\noindent where $r_s$ is the local Seitz radius, $\zeta$ the spin polarisation,
+and $t$ a reduced density gradient. The gradient correction $H$ is designed
+to satisfy conditions at slowly and rapidly varying density limits, as well as
+to avoid logarithmic singularities:
+%
+\begin{align}
+  H = \sfrac{e^2}{a_0}\gamma\phi^3 \ln
+    \left(1 + \frac\beta\gamma t^2 \frac{1+At^2}{1+At^2+A^2t^4}\right).
+\end{align}
+
+\vspace{-0.7em}%
+The exchange energy functional in PBE, meanwhile, is constructed to fulfil
+conditions such as correct scaling behaviour, exact spin-scaling relations, and
+compliance with the Lieb-Oxford bound~\cite{Lieb1979, Lieb1981}. Its
+enhancement factor $F_X(s)$ is given by:
+%
+\begin{align}
+  F_X(s) = 1 + \kappa - \frac\kappa{1 + \sfrac{\mu s^2}{\kappa}}.
+\end{align}
+
+\vspace{-0.7em}%
+\noindent where $F_X(s)$ is the (dimensionless) exchange enhancement factor
+that multiplies the \gls{LDA} exchange energy density, and $s$ is another
+reduced density gradient,
+%
+\begin{align}
+  s = \frac{|\nnabla\rho|}{2(3\pi^2)^{\sfrac{1}{3}}\rho^{\sfrac{4}{3}}}.
+\end{align}
+
+\vspace{-0.7em}%
+The hybrid variant PBE0 introduces Hartree-Fock exact exchange into the PBE
+formulation, improving predictions of electronic structure properties:
+%
+\begin{align}
+  E_{XC}^{\mathrm{PBE0}} = a_0E_X^{\HF} + (1-a_0)E_X^{\mathrm{PBE}} + E_C^{\mathrm{PBE}},
+\end{align}
+
+\noindent typically setting $a_0 = 0.25$ (25 \% exact exchange).
+
+\newpage
+\noindent \textbf{M06-2X}
+
+\noindent The M06-2X functional~\cite{Zhao2007} is a hybrid meta-GGA designed
+specifically to provide improved accuracy for non-covalent interactions,
+thermochemistry, and barrier heights. It incorporates 54 \% exact
+\gls{HF} exchange and includes additional dependence on the kinetic energy
+density, making it particularly effective in describing systems with pronounced
+electron delocalisation or dispersion interactions.
+
+The meta-GGA formulation of M06-2X involves three primary density-dependent
+variables: the spin densities ($\rho_\sigma$), the reduced density gradients
+($s_\sigma$), and the spin-dependent kinetic energy density ($\tau_\sigma$).
+
+%\begin{align}
+%  x_\sigma = \frac{|\nnabla \rho_\sigma|}{\rho^{\sfrac{4}{3}}_\sigma}.
+%  %, \quad \tau_\sigma = \frac12\sum_{i}|\nabla \psi_{i,\sigma}(r)|^2.
+%\end{align}
+
+The functional construction involves expressions adapted from the VSXC
+functional~\cite{VanVoorhis1998}, using parameters fitted to empirical data.
+M06-2X defines auxiliary variables ($z_\sigma$) and functions ($\gamma$, $h$).
+
+% \begin{align}
+%   \begin{split}
+%     z_\sigma &= \frac{2\tau_\sigma}{\rho_\sigma^{\sfrac53}} - C_F\\
+%     C_F &= \frac35 \left( 6\pi^2 \right)^{\sfrac23}\\
+%     \gamma(x_\sigma, z_\sigma ) &= 1 +\alpha (x_\sigma^2 +z_\sigma)\\
+%     h(x_\sigma, z_\sigma ) &=
+%       \frac{d_0}{\gamma(x_\sigma, z_\sigma )} +
+%       \frac{d_1x\sigma^2 + d_2z_\sigma}{\gamma^2(x_\sigma, z_\sigma )} +
+%       \frac{d_3x_\sigma^4 + d_4x_\sigma^2z_\sigma + d_5z_\sigma^2}{\gamma^3(x_\sigma, z_\sigma )}
+%   \end{split}
+%   \label{h_de_M062X}
+% \end{align}
+
+% \noindent where parameters $\alpha$ and $d_i$ ($i=0,\dots,5$) are empirically
+% determined.
+
+The exchange and correlation contributions to M06-2X are combined from VSXC and
+M05 functional forms. The total exchange-correlation energy is expressed as:
+
+\begin{align}
+  E_{XC}^{\mathrm{M06-2X}} = \frac{54}{100}E_X^{\HF} + \left(1-\frac{54}{100}\right)E_X^{\mathrm{DFT}} + E_C^{\mathrm{DFT}},
+\end{align}
+
+\noindent with the correlation energy split into opposite-spin ($\alpha\beta$)
+and parallel-spin ($\sigma\sigma$) components:
+
+\begin{align}
+  E_C^{\alpha\beta} &= \int \varepsilon^{\mathrm{GEH}}_{\alpha\beta}
+    \left[g_{\alpha\beta}(x_\alpha,x_\beta) + h(x_{\alpha\beta},z_{\alpha\beta})\right]\dd\tau, \\
+  E_C^{\sigma\sigma} &= \int \varepsilon^{\mathrm{GEH}}_{\sigma\sigma}
+    \left[g_{\sigma\sigma}(x_\sigma) + h(x_\sigma,z_\sigma)\right]\dd\tau.
+\end{align}
+
+This detailed construction allows M06-2X to reliably model chemically complex
+systems where accurate treatment of electron correlation is essential.
+
+
+
+
+
+

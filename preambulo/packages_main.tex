@@ -1,0 +1,76 @@
+% --------------------------------
+% Packages separated by categories
+% --------------------------------
+% LuaLaTeX
+\usepackage{luacode}
+
+% Margins and Spacing
+\usepackage{geometry}                           % Also needed xcolor [do NOT remove or move the order]
+\geometry{a4paper,top=2.5cm,bottom=2cm,inner=3cm,outer=2cm,footskip=1cm}
+\renewcommand{\baselinestretch}{1.5}
+\addtolength{\marginparwidth}{1.0cm}
+
+% Colours and Graphics
+\usepackage[dvipsnames]{xcolor}
+\usepackage{color,calc}
+\usepackage{graphicx}
+\usepackage{epsfig}
+\input{style/colours}                           % Custom colour definitions
+
+% Chapter and Appendix Formatting
+\usepackage{appendix}
+
+% Hyperlinks and Glossary
+\input{style/hyperref}                          % BEFORE glossaries
+\input{style/glossary_sty}                      % Custom glossary style
+
+% Chemistry Packages
+\usepackage[version=3]{mhchem}                  % \ce for [H+] and that kind of things
+\usepackage{chemfig}                            % Molecule drawing
+
+% Mathematics Packages
+\usepackage{amsmath,amssymb,amsfonts,amsthm}    % American Mathematical Society
+\usepackage{mathrsfs}                           % Ralph Smith’s Formal Script [fonts in math mode]
+\usepackage{nicefrac,xfrac}                     % Nice fractions
+\usepackage{mathtools}                          % Fixes and improvements to amsmath
+\usepackage{cancel}                             % Cancellation lines in equations
+
+% Physics Packages
+\decimalpoint
+\usepackage{braket}
+\usepackage{siunitx}
+\sisetup{
+  group-minimum-digits = 4
+  % separate-uncertainty
+}
+\DeclareSIUnit{\calorie}{cal}
+\usepackage{physics}                            % Particularly useful for differentials
+
+% Drawing and Graphics
+\usepackage{tikz}
+\usepackage{tikz-cd}                            % Diagrams equivalent to XY-pic [better integrated with luaLaTeX]
+\usepackage{tikz-3dplot}                        % 3D plots with TikZ
+\input{style/tikz_field}                        % Custom TikZ for fields
+\input{style/tikz_flowchart}                    % Custom TikZ flowchart style
+
+% Tables and Multicolumn Layouts
+\usepackage{ctable}
+\usepackage{multicol}
+\usepackage{multirow}
+
+% Subfigures and Wrapping Figures
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{float}                              % For [H] placement
+
+% Custom Commands and Inputs
+\input{insbox}                                  % Insert pictures/boxes into paragraphs
+
+% Page and Header Formatting
+\input{style/page_style}                        % Custom page style
+\pagestyle{fancier}
+
+% Custom lstlisting
+\input{style/lstlisting}                        % Custom lstlisting style
+\usepackage{bold-extra}
+

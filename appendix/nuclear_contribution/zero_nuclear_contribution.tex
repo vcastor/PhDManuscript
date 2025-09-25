@@ -1,0 +1,102 @@
+% -*- coding: utf-8 -*-
+\newpage
+\section{Zero Nuclear Contribution}\label{zero_nuclear_contribution}
+
+The following graphs illustrate all possible subsets that can occur within a
+given system, each of which may be regarded as part of a larger set. In the
+particular cases shown here, all atoms within the subset carry zero charge.  If
+this condition holds, then the inclusion of any additional atom into the subset
+will also yield zero charge, as the added atom will necessarily be bonded to an
+entire subsystem already carrying zero charge. In practice, a nuclear
+contribution of the dipole moment of exactly zero implies all atoms have zero
+charge, a situation that is highly improbable in most chemical systems.
+
+\begin{figure}[ht]
+  \centering
+  \scalebox{0.5}{\input{chain.tex}}
+  \caption{System of atoms bonded in a chain.}
+  \label{first_case}
+\end{figure}
+
+\begin{align}
+\text{trivial case:} \nonumber\\
+  if\: q(\mathrm{A}|\mathrm{B}) &= 0 \nonumber\\
+    & \implies q(\mathrm{A}) = q(\mathrm{B}) = 0
+\end{align}
+
+\newpage
+
+\begin{figure}[ht]
+  \centering
+  \scalebox{.3}{\input{ring_graph.tex}}
+  \caption{System of atoms bonded in a ring.}
+  \label{second_case}
+\end{figure}
+
+\begin{align}
+    if\: q(\mathrm{A}|\mathrm{B}) &= 0 \nonumber\\
+      & \implies q(\mathrm{A}) = q(\mathrm{A}|\mathrm{D}) \nonumber \\
+      & \implies q(\mathrm{B}) = q(\mathrm{B}|\mathrm{C}) \nonumber \\
+      & \implies q(\mathrm{C}) = q(\mathrm{C}|\mathrm{B}) + q(\mathrm{C}|\mathrm{D}) \nonumber \\
+      & \implies q(\mathrm{A}|\mathrm{B}) + q(\mathrm{B}|\mathrm{C}) + q(\mathrm{C}|\mathrm{D}) + q(\mathrm{D}|\mathrm{A}) = 0 \nonumber \\
+      & \implies q(\mathrm{B}) + q(\mathrm{C}) - q(\mathrm{C}|\mathrm{B}) - q(\mathrm{A}) = 0 \nonumber \\
+      & \implies q(\mathrm{D}) = q(\mathrm{D}|\mathrm{A}) + q(\mathrm{D}|\mathrm{C}) \nonumber \\
+      & \implies q(\mathrm{A}) = -q(\mathrm{D}) + q(\mathrm{D}|\mathrm{C}) \nonumber \\
+      & \implies 2q(\mathrm{B}) + q(\mathrm{C}) = q(\mathrm{A}) \nonumber \\
+      & \implies q(\mathrm{A}) = -q(\mathrm{D}) + q(\mathrm{D}|\mathrm{C}) \nonumber \\
+      & \implies q(\mathrm{A}) = q(\mathrm{B}) + q(\mathrm{C}) - q(\mathrm{C}|\mathrm{B}) \nonumber \\
+      &\therefore q(\mathrm{B}) = -q(\mathrm{C}|\mathrm{B}) = -q(\mathrm{B})
+\end{align}
+
+\newpage
+
+\begin{figure}[ht]
+  \centering
+  \scalebox{.4}{\input{tree_graph.tex}}
+  \caption{System of atoms bonded in a branched chain.}
+  \label{third_case}
+\end{figure}
+
+\begin{align}
+  if\, q(\mathrm{A}|\mathrm{B}) &= 0 \nonumber \\
+    & \implies q(\mathrm{B}) = q(\mathrm{E}) \nonumber \\
+    & \implies q(\mathrm{A}) = q(\mathrm{A}|\mathrm{C}) + q(\mathrm{A}|\mathrm{D}) \nonumber \\
+    & \implies q(\mathrm{D}) = q(\mathrm{D}|\mathrm{G}) + q(\mathrm{D}|\mathrm{A}) \nonumber \\
+    & \implies q(\mathrm{G}) = q(\mathrm{G}|\mathrm{D}) \nonumber \\
+    & \implies q(\mathrm{D}) = -q(\mathrm{G}) -q(\mathrm{A}) + q(\mathrm{A}|\mathrm{C}) \nonumber \\
+    & \implies q(\mathrm{A}) = q(\mathrm{A}|\mathrm{C}) + q(\mathrm{A}|\mathrm{D}) + q(\mathrm{A}|\mathrm{B})\nonumber \\
+    & \implies q(\mathrm{A}) = -q(\mathrm{G}) - q(\mathrm{D}) + q(\mathrm{A}|\mathrm{C})\nonumber \\
+    & \implies q(\mathrm{A}|\mathrm{D}) + q(\mathrm{A}|\mathrm{B}) = -q(\mathrm{G}) - q(\mathrm{D}) \nonumber \\
+    & \implies q(\mathrm{A}|\mathrm{D}) = -q(\mathrm{G}) - q(\mathrm{D}) = -q(\mathrm{A}) -q(\mathrm{A}|\mathrm{C})\nonumber \\
+    & \implies q(\mathrm{A}|\mathrm{D}) = -q(\mathrm{A}|\mathrm{C}) - q(\mathrm{A}|\mathrm{B}) -q(\mathrm{A}|\mathrm{C})\nonumber \\
+    & \implies 2q(\mathrm{A}|\mathrm{D}) = -2q(\mathrm{A}|\mathrm{C}) \nonumber \\
+    & \implies q(\mathrm{C}|\mathrm{A} = -q(\mathrm{A}) -q(\mathrm{A}|\mathrm{C}) \nonumber \\
+    & \therefore q(A) = q(\mathrm{A}|\mathrm{C}) -q(\mathrm{A}|\mathrm{C}) = 0
+\end{align}
+
+\newpage
+
+\begin{figure}[ht]
+  \centering
+  \scalebox{.4}{\input{pyramid_graph.tex}}
+  \caption{System of atoms bonded in a cage.}
+\end{figure}
+
+\begin{align}
+    if\, q(\mathrm{A}|\mathrm{B}) &= 0 \nonumber \\
+      & \implies q(\mathrm{A}) = q(\mathrm{A}|\mathrm{C}) + q(\mathrm{A}|\mathrm{D}) \nonumber \\
+      & \implies q(\mathrm{B}) = q(\mathrm{B}|\mathrm{C}) + q(\mathrm{B}|\mathrm{D}) \nonumber \\
+      & \implies q(\mathrm{B}|\mathrm{C}) = -q(\mathrm{C}|\mathrm{D}) \nonumber \\
+      & \implies q(\mathrm{B}|\mathrm{D}) = -q(\mathrm{D}|\mathrm{A}) \nonumber \\
+      & \implies q(\mathrm{B}|\mathrm{C}) + q(\mathrm{C}|\mathrm{D}) + q(\mathrm{D}|\mathrm{B}) = 0 \nonumber \\
+      & \implies q(\mathrm{A}|\mathrm{C}) + q(\mathrm{C}|\mathrm{D}) + q(\mathrm{D}|\mathrm{A}) = 0 \nonumber \\
+      & \implies q(\mathrm{B}) - q(\mathrm{B}|\mathrm{D}) + q(\mathrm{C}|\mathrm{D}) = 0 \nonumber \\
+      & \implies q(\mathrm{B}) - q(\mathrm{B}|\mathrm{C}) + q(\mathrm{D}|\mathrm{A}) = 0 \nonumber \\
+      & \implies q(\mathrm{B}|\mathrm{C}) - q(\mathrm{D}|\mathrm{A}) - q(\mathrm{B}|\mathrm{C}) + q(\mathrm{C}|\mathrm{D}) = 0 \nonumber \\
+      & \implies q(\mathrm{D}|\mathrm{B}) + q(\mathrm{D}|\mathrm{A}) -q(\mathrm{B}|\mathrm{C})= 0 \nonumber \\
+      & \implies q(\mathrm{B}|\mathrm{C}) + q(\mathrm{B}) - 2q(\mathrm{B}|\mathrm{C}) = 0 \nonumber \\
+      & \implies q(\mathrm{B}) = q(\mathrm{B}|\mathrm{C}) \implies q(\mathrm{B}|\mathrm{D}) = 0 \nonumber \\
+      & \implies q(\mathrm{B}|\mathrm{C}) = q(\mathrm{C}|\mathrm{D}) = q(\mathrm{B}) \nonumber \\
+      & \therefore q(\mathrm{B}) = 0
+\end{align}
+

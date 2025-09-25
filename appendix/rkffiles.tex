@@ -1,0 +1,95 @@
+% -*- coding: utf-8 -*-
+\newpage
+\section{KF files}\label{rkf_files}
+
+During the execution of the \ams code, most data is transferred between
+\fortran \subroutines via explicit arguments. In some cases, however, certain
+values must remain available across multiple calls without being permanently
+stored in memory. Retaining such data in large variables over the entire
+runtime can lead to unnecessary memory consumption. To address this, the
+suite employs temporary storage in a standardised binary file format known
+as KF files.
+
+KF files serve two main purposes. First, they act as a temporary storage
+mechanism, allowing intermediate results to be written to disk and later
+retrieved by other \subroutines. Second, they are used as a persistent
+interface: the same files can be read by the \gls{GUI} and by \plams, enabling
+external tools to access calculation data without requiring a direct in-memory
+transfer.
+
+The KF format was developed by \scm and follows a fixed set of conventions.
+Section and key names are limited to $32$ characters; any name exceeding this
+limit is silently truncated, potentially leading to mismatches.  Internally,
+the \fortran code interfaces with a \texttt{C} code, this detail is important
+because \texttt{C} stores two-dimensional arrays in \textit{column-major
+order}, whereas \fortran uses \textit{row-major order}.
+
+The \fortran interface provides dedicated \subroutines for reading and
+writing integers and reals of rank $1$ through $4$. The variable type is
+detected automatically by the \subroutine. If the array size is not given
+explicitly, it assumes the full array length. A typical write call
+follows the syntax:
+
+\begingroup
+\setstretch{0.9}
+\begin{verbatim}
+kfwrite(iu, key, array, len, istride)
+\end{verbatim}
+where:
+\begin{itemize}[itemsep=0.01em]
+  \item \texttt{iu} is the unit name of the KF file [\texttt{TAPE21/TAPE10/...}],
+  \item \texttt{key} is the string identifier under which the data will be
+        stored,
+  \item \texttt{array} is the scalar or array to be written,
+  \item \texttt{len} (optional) specifies how many elements to write (if
+        omitted, the full array is used),
+  \item \texttt{istride} (optional) is the stride, \ie the number of elements skipped
+        between consecutive writes (1 by default, no skipping).
+\end{itemize}
+\endgroup
+
+\newpage
+The next code illustrates how to write to the KF file:
+
+\begin{lstlisting}[language=fortran]
+
+! Write to KF file
+use KF
+! ...
+! Open KF file for writing; iu21 is the TAPE21
+call kfopfl (iu21, filename) 
+! If the section does not exist, it will be created
+if (.not.kfexsc (iu21, 'Properties')) call kfcrsc (iu21, 'Properties')
+! Open the section
+call kfopsc (iu21, 'Properties')
+
+! Write some properties
+call kfwrite (iu21, 'CP number of', nna)
+call kfwrite (iu21, 'CP coordinates', CPpoints(1:nna,1:3))
+call kfwrite (iu21, 'CP density at', CPpoints(1:nna,4))
+call kfwrite (iu21, 'CP density gradient at', CPpoints(1:nna,5:7))
+call kfwrite (iu21, 'CP density Hessian at', CPpoints(1:nna,8:13))
+call kfwrite (iu21, 'CP code (Rank,Signature)', CPpoints(1:nna,14))
+call kfwrite (iu21, 'CP eigenvalues of Hessian', CPpoints(1:nna,15:17))
+call kfwrite (iu21, 'CP eigenvectors of Hessian', CPpoints(1:nna,18:26))
+
+! Close the file
+call kfclfl (iu21)
+\end{lstlisting}
+
+The next code illustrates how to read from the KF file:
+\begin{lstlisting}[language=fortran]
+
+! Read from KF file
+use KF
+! ...
+call kfopfl(iu21, gADFFiles%main) ! Open KF file
+call kfopsc(iu21, 'Properties')   ! Open the section
+call kfread(iu21, 'CP number of', AIMLocalProperties%ncp); ncp = AIMLocalProperties%ncp                                          
+allocate(AIMLocalProperties%CPpoints(1:ncp,26)) ! Allocate the array
+! Read the properties
+call kfread(iu21, 'CP coordinates', AIMLocalProperties%CPpoints(1:ncp,1:3))                                                      
+! ...
+
+\end{lstlisting}
+

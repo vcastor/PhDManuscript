@@ -1,0 +1,129 @@
+digraph scmqtaimgraph {
+  fontname="Helvetica,Arial,sans-serif"
+  node [fontname="Helvetica,Arial,sans-serif"]
+  edge [fontname="Helvetica,Arial,sans-serif"]
+  //splines=curved
+  rankdir=TB
+
+  // Style for main node AMS (ADF, BAND, DFTB)
+  "AMS" [shape=ellipse, style=filled, fillcolor="#ff931e", fontcolor="#000000", fontsize=18, fontweight=bold]
+  "ADF" [shape=ellipse, style=filled, fillcolor="#32CD32", fontcolor="#000000", fontsize=18, fontweight=bold]
+  "BAND" [shape=ellipse, style=filled, fillcolor="#7cb3e1", fontcolor="#000000", fontsize=18, fontweight=bold]
+  "DFTB" [shape=ellipse, style=filled, fillcolor="#f8f552", fontcolor="#000000", fontsize=18, fontweight=bold]
+
+  // Style for subroutines with bold names and smaller directory text
+  node [shape=box, style=filled, fillcolor="#ADD8E6", fontcolor="#000000"]
+
+  // Main nodes [ADF]
+  "DoSinglePoint" [label=<<b>DoSinglePoint</b><br/><font point-size="10">(adf/amol/)</font>>]
+  "DoPostSCF" [label=<<b>DoPostSCF</b><br/><font point-size="10">(adf/amol/)</font>>]
+  "Symaexcit" [label=<<b>Symaexcit</b><br/><font point-size="10">(adf/excitation/)</font>>]
+  
+  // Main nodes [BAND and DFTB]
+  "DoSinglePointCalculation" [label=<<b>DoSinglePointCalculation</b><br/><font point-size="10">(band/)</font>>]
+  "NAOApplication1" [label=<<b>NAOApplication1</b><br/><font point-size="10">(utils/)</font>>]
+
+  // Subroutines [BAND]
+  "bandd" [label=<<b>bandd</b><br/><font point-size="10">(band/band/)</font>>]
+  "CalcGridBasedAIM" [label=<<b>CalcGridBasedAIM</b><br/><font point-size="10">(band/band/)</font>>]
+  "BandAIMCriticalPoints" [label=<<b>BandAIMCriticalPoints</b><br/><font point-size="10">(band/anal/)</font>>]
+
+  // Subroutines [DFTB]
+  "DoAIM" [label=<<b>DoAIM</b><br/><font point-size="10">(utils/)</font>>]
+  "NAOAIMCriticalPoints" [label=<<b>NAOAIMCriticalPoints</b><br/><font point-size="10">(utils/nao/atoms_in_molecules)</font>>]
+
+  // Main AIM Modules used by they three
+  "FindAIMCriticalPoints" [label=<<b>FindAIMCriticalPoints</b><br/><font point-size="10">(lib/dft/grid/)</font>>]
+  "AIMGridAtomMapper" [label=<<b>AIMGridAtomMapper</b><br/><font point-size="10">(lib/dft/grid/)</font>>]
+
+  // Ground state calculations [ADF]
+  "toten" [label=<<b>toten</b><br/><font point-size="10">(adf/toten/)</font>>]
+  "atoten" [label=<<b>atoten</b><br/><font point-size="10">(adf/toten/)</font>>]
+  "adebye" [label=<<b>adebye</b><br/><font point-size="10">(adf/debye/)</font>>]
+  "ADFAIMCriticalPoints" [label=<<b>ADFAIMCriticalPoints</b><br/><font point-size="10">(adf/bader7/)</font>>]
+  "UpdateAIMTerms" [label=<<b>UpdateAIMTerms</b><br/><font point-size="10">(adf/bader7/)</font>>]
+  
+  // Horizontal alignment for nodes
+  //{rank=same; 
+  //  "atoten" [label=<<b>atoten</b><br/><font point-size="10">(adf/toten/)</font>>]
+  //  "adebye" [label=<<b>adebye</b><br/><font point-size="10">(adf/debye/)</font>>]
+  //}
+  //{rank=same; 
+  //  "ADFAIMCriticalPoints" [label=<<b>ADFAIMCriticalPoints</b><br/><font point-size="10">(adf/bader7/)</font>>]
+  //  "UpdateAIMTerms" [label=<<b>UpdateAIMTerms</b><br/><font point-size="10">(adf/bader7/)</font>>]
+  //}
+
+  "AIMdipole" [label=<<b>AIMdipole</b><br/><font point-size="10">(adf/bader7/)</font>>]
+  // End of ADF
+  "AIMResults" [label=<<b>AIMResults</b><br/><font point-size="10">(adf/bader7/)</font>>]
+
+  // Excited state calculations [ADF]
+  "Exitations" [label=<<b>Exitations</b><br/><font point-size="10">(adf/excitation/)</font>>]
+  "AllocDavison" [label=<<b>AllocDavison</b><br/><font point-size="10">
+[or]<br/></font><b>AllocDavisonso</b><br/><font point-size="10">(adf/excitation/)</font>>]
+  "MajorTransition" [label=<<b>MajorTransition</b><br/><font point-size="10">(adf/excitation/)</font>>]
+  "AnalizeAOTrans" [label=<<b>AnalizeAOTrans</b><br/><font point-size="10">(adf/excitation/)</font>>]
+  "AIMChargeTransfer" [label=<<b>AIMChargeTransfer</b><br/><font point-size="10">(adf/excitation/)</font>>]
+
+  //
+
+  // Main AMS structure
+  "AMS" -> "ADF" [color="#32CD32", penwidth=2]
+  "AMS" -> "BAND" [color="#7cb3e1", penwidth=2]
+  "AMS" -> "DFTB" [color="#f8f552", penwidth=2]
+
+  // Graph structure [ADF]
+  "ADF" -> "DoSinglePoint" [color="#000000", penwidth=2]
+  "DoSinglePoint" -> "DoPostSCF" [color="#000000", penwidth=1.5]
+  "DoSinglePoint" -> "Symaexcit" [color="#000000", penwidth=1.5]
+
+  "DoPostSCF" -> "atoten" [color="#000000", penwidth=1.5]
+  "DoPostSCF" -> "adebye" [color="#000000", penwidth=1.5]
+  "DoPostSCF" -> "AIMResults" [color="#000000", penwidth=1.5]
+
+  "atoten" -> "toten" [color="#000000", penwidth=1.5]
+
+  // Connections to horizontally aligned nodes with downward then upward arrows
+  "toten" -> "ADFAIMCriticalPoints" [color="#000000", penwidth=1.2]
+  "toten" -> "UpdateAIMTerms" [color="#000000", penwidth=1.2]
+  "toten" -> "AIMdipole" [color="#000000", penwidth=1.2]
+
+  // Additional connections to AIMResults
+  //"adebye" -> "AIMResults" [color="#800000", penwidth=1.2, constraint=false, dir=back]
+  "adebye" -> "AIMResults" [color="#800000", penwidth=1.2, dir=back]
+  "toten" -> "AIMResults" [color="#800000", penwidth=1.2, dir=back]
+
+  "ADFAIMCriticalPoints" -> "FindAIMCriticalPoints" [color="#0000ff", penwidth=1.2]
+
+  // Connections among horizontal nodes
+  "ADFAIMCriticalPoints" -> "AIMdipole" [color="#800000", penwidth=1.2, constraint=false, dir=back]
+  "UpdateAIMTerms" -> "AIMdipole" [color="#800000", penwidth=1.2, constraint=false, dir=back]
+
+  "Symaexcit" -> "Exitations" [color="#000000", penwidth=1.2]
+  "Exitations" -> "AllocDavison" [color="#000000", penwidth=1.2]
+  "AllocDavison" -> "MajorTransition" [color="#000000", penwidth=1.2]
+  "MajorTransition" -> "AnalizeAOTrans" [color="#000000", penwidth=1.2]
+  "AnalizeAOTrans" -> "AIMChargeTransfer" [color="#000000", penwidth=1.2]
+
+  // Main graph structure with adjusted arrows
+  "BAND" -> "DoSinglePointCalculation" [color="#000000", penwidth=2]
+  "DoSinglePointCalculation" -> "bandd" [color="#000000", penwidth=2]
+
+  "bandd" -> "CalcGridBasedAIM" [color="#000000", penwidth=1.2]
+  "bandd" -> "BandAIMCriticalPoints" [color="#000000", penwidth=1.2]
+
+  "BandAIMCriticalPoints" -> "FindAIMCriticalPoints" [color="#0000ff", penwidth=2]
+
+  // Grid map
+  "CalcGridBasedAIM" -> "AIMGridAtomMapper" [color="#0000ff", penwidth=2]
+  "UpdateAIMTerms" -> "AIMGridAtomMapper" [color="#0000ff", penwidth=2]
+  "AIMChargeTransfer" -> "AIMGridAtomMapper" [color="#0000ff", penwidth=2]
+  
+  // Graph [DFTB]
+  "DFTB" -> "NAOApplication1" [color="#000000", penwidth=2]
+  "NAOApplication1" -> "DoAIM" [color="#000000", penwidth=2]
+
+  "DoAIM" -> "NAOAIMCriticalPoints" [color="#000000", penwidth=2]
+  "NAOAIMCriticalPoints" -> "FindAIMCriticalPoints" [color="#0000ff", penwidth=2]
+
+}

@@ -1,0 +1,83 @@
+% -*- coding: utf-8 -*-
+\newpage
+\section{How this thesis was written}\label{how_written}
+
+This thesis was written using \LaTeX, bibliography management handled by
+\textsc{Bib}\TeX{}. The compilation was done via Lua\LaTeX, using a
+\texttt{Makefile} that automates the compilation process as well
+as some of the imagen generation.
+
+Figures were generated using \python (Matplotlib and Seaborn), and Ti$k$Z. Image
+editing was carried out using GIMP and Inkscape. Various diagrams were created
+with Graphviz and Mermaid, this last one for the README file. For the vector
+graphics, the \href{https://www.svgrepo.com}{svgrepo} was used to obtain some
+starting points, and then modified with Inkscape.
+
+For the Figure~\ref{awaflux}, a modified version of \textsc{qtaim.wl} was used,
+which is a \textsc{Wolfram language} script, to analyse the QTAIM partition
+from \texttt{wfn} files. The original code is available at
+\href{http://www.github.com/ecbrown/QTAIM.wl}{\faGithub/ecbrown/QTAIM.wl}. The
+original code is quite experimantal, and my modificated version is even more
+unestable, no guarantees are made about the generalised version of the code.
+
+Any issue or \bug will be tracked in the repository. However,
+since the code functions as intended for this thesis, no further development is
+currently planned. All warnings i have during \emph{local compilation} were
+analysed and just ignored, as they do not affect the final result.
+
+The project is intended to be used from the command line. Nonetheless, due to
+the widespread use of Overleaf, a dedicated strategy is provided to make it
+compatible. Note that Overleaf does not support all features of the original
+setup, such as \texttt{Makefile} options (compaling just one Chapter or don't compilation for
+bibliography) or multi-branch workflows, typographies
+are limited and the compilation time would be longer since many images/plots
+are complex TikZ figures.
+
+The Overleaf branch should be used mainly for minor text edits. It is
+recommended to treat it as a mirror of the main \texttt{writing}
+branch. To synchronize changes, we suggest using selective cherry-picks of
+\texttt{*.tex} files to avoid merge conflicts.
+
+\noindent\textit{Important:} Overleaf does not allow privileged \git operations
+such as \texttt{git~push~--force}, which prevents proper handling of merges
+with unrelated histories. To initialise the Overleaf branch, i recommend,
+the following steps:
+
+\coffeestainA{0.2}{0.65}{90}{-7cm}{11cm}
+\newpage
+
+\lstset{style=terminal, numbers=none,escapeinside={(*@}{@*)}}
+\begin{macterminal}[vcastor@ada - bash]
+$ # From Overleaf track everything
+$ git pull
+$ # Delete all Overleaf files via Overleaf UI or locally
+$ # Then merge with unrelated histories allowed:
+$ git merge writing –allow-unrelated-histories
+$ git commit -am "My first commit on Overleaf"
+$ git push
+\end{macterminal}
+
+The full source code of this manuscript is available in a public GitHub
+repository:
+\href{http://www.github.com/vcastor/PhDManuscript}{\faGithub/vcastor/PhDManuscript}.
+
+My recommendation is to use the \terminal to compile the manuscript, as this
+project was designed, to compile in local you can follow the next steps:
+
+\lstset{style=terminal, numbers=none,escapeinside={(*@}{@*)}, moredelim=[is][\color{white}]{§}{§}}
+\begin{macterminal}[vcastor@ada - bash]
+$ # Download the repository
+$ git clone https://github.com/vcastor/PhDManuscript.§git§
+$ cd PhDManuscript
+$ # Compile the entire manuscript
+$ make all  # imagenes, plots, bibliography and text
+$ # Or just what you need
+$ make tex  # no imagenes or plots but bibliography
+$ make fast # no imagenes or plots neither bibliography
+$ make chapter # just the chapter [READ THE README.md for that]
+$ make style   # style template
+\end{macterminal}
+\lstset{style=mystyle}
+
+\coffeestainC{0.3}{0.65}{-90}{6.5cm}{-6.5cm}
+

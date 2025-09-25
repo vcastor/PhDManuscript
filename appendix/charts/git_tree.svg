@@ -1,0 +1,896 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   aria-roledescription="gitGraph"
+   role="graphics-document document"
+   viewBox="-118.47656 -34.752247 1379.2207 356.34824"
+   width="1379.2207"
+   id="export-svg"
+   version="1.1"
+   sodipodi:docname="mermaid-diagram-2024-09-19-163042.svg"
+   height="356.34824"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <defs
+     id="defs93" />
+  <sodipodi:namedview
+     id="namedview93"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.41991271"
+     inkscape:cx="682.28466"
+     inkscape:cy="178.60855"
+     inkscape:window-width="1776"
+     inkscape:window-height="761"
+     inkscape:window-x="1981"
+     inkscape:window-y="433"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="export-svg" />
+  <xhtml:style>@import url(&quot;https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css&quot;); p {margin: 0;}</xhtml:style>
+  <style
+     id="style1">#export-svg{font-family:&quot;trebuchet ms&quot;,verdana,arial,sans-serif;font-size:16px;fill:#333;}#export-svg .error-icon{fill:hsl(220.5882352941, 100%, 98.3333333333%);}#export-svg .error-text{fill:rgb(8.5000000002, 5.7500000001, 0);stroke:rgb(8.5000000002, 5.7500000001, 0);}#export-svg .edge-thickness-normal{stroke-width:1px;}#export-svg .edge-thickness-thick{stroke-width:3.5px;}#export-svg .edge-pattern-solid{stroke-dasharray:0;}#export-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#export-svg .edge-pattern-dashed{stroke-dasharray:3;}#export-svg .edge-pattern-dotted{stroke-dasharray:2;}#export-svg .marker{fill:#0b0b0b;stroke:#0b0b0b;}#export-svg .marker.cross{stroke:#0b0b0b;}#export-svg svg{font-family:&quot;trebuchet ms&quot;,verdana,arial,sans-serif;font-size:16px;}#export-svg p{margin:0;}#export-svg .commit-id,#export-svg .commit-msg,#export-svg .branch-label{fill:lightgrey;color:lightgrey;font-family:'trebuchet ms',verdana,arial,sans-serif;font-family:var(--mermaid-font-family);}#export-svg .branch-label0{fill:#333;}#export-svg .commit0{stroke:hsl(40.5882352941, 100%, 68.3333333333%);fill:hsl(40.5882352941, 100%, 68.3333333333%);}#export-svg .commit-highlight0{stroke:rgb(0, 52.2500000001, 161.5000000002);fill:rgb(0, 52.2500000001, 161.5000000002);}#export-svg .label0{fill:hsl(40.5882352941, 100%, 68.3333333333%);}#export-svg .arrow0{stroke:hsl(40.5882352941, 100%, 68.3333333333%);}#export-svg .branch-label1{fill:#333;}#export-svg .commit1{stroke:hsl(-79.4117647059, 100%, 68.3333333333%);fill:hsl(-79.4117647059, 100%, 68.3333333333%);}#export-svg .commit-highlight1{stroke:rgb(52.2500000001, 161.5000000002, 0);fill:rgb(52.2500000001, 161.5000000002, 0);}#export-svg .label1{fill:hsl(-79.4117647059, 100%, 68.3333333333%);}#export-svg .arrow1{stroke:hsl(-79.4117647059, 100%, 68.3333333333%);}#export-svg .branch-label2{fill:#333;}#export-svg .commit2{stroke:hsl(220.5882352941, 100%, 73.3333333333%);fill:hsl(220.5882352941, 100%, 73.3333333333%);}#export-svg .commit-highlight2{stroke:rgb(136.0000000002, 92.0000000001, 0);fill:rgb(136.0000000002, 92.0000000001, 0);}#export-svg .label2{fill:hsl(220.5882352941, 100%, 73.3333333333%);}#export-svg .arrow2{stroke:hsl(220.5882352941, 100%, 73.3333333333%);}#export-svg .branch-label3{fill:#333;}#export-svg .commit3{stroke:hsl(10.5882352941, 100%, 68.3333333333%);fill:hsl(10.5882352941, 100%, 68.3333333333%);}#export-svg .commit-highlight3{stroke:rgb(0, 133.0000000002, 161.5000000002);fill:rgb(0, 133.0000000002, 161.5000000002);}#export-svg .label3{fill:hsl(10.5882352941, 100%, 68.3333333333%);}#export-svg .arrow3{stroke:hsl(10.5882352941, 100%, 68.3333333333%);}#export-svg .branch-label4{fill:#333;}#export-svg .commit4{stroke:hsl(-19.4117647059, 100%, 68.3333333333%);fill:hsl(-19.4117647059, 100%, 68.3333333333%);}#export-svg .commit-highlight4{stroke:rgb(0, 161.5000000002, 109.2500000001);fill:rgb(0, 161.5000000002, 109.2500000001);}#export-svg .label4{fill:hsl(-19.4117647059, 100%, 68.3333333333%);}#export-svg .arrow4{stroke:hsl(-19.4117647059, 100%, 68.3333333333%);}#export-svg .branch-label5{fill:#333;}#export-svg .commit5{stroke:hsl(-49.4117647059, 100%, 68.3333333333%);fill:hsl(-49.4117647059, 100%, 68.3333333333%);}#export-svg .commit-highlight5{stroke:rgb(0, 161.5000000002, 28.5);fill:rgb(0, 161.5000000002, 28.5);}#export-svg .label5{fill:hsl(-49.4117647059, 100%, 68.3333333333%);}#export-svg .arrow5{stroke:hsl(-49.4117647059, 100%, 68.3333333333%);}#export-svg .branch-label6{fill:#333;}#export-svg .commit6{stroke:hsl(100.5882352941, 100%, 68.3333333333%);fill:hsl(100.5882352941, 100%, 68.3333333333%);}#export-svg .commit-highlight6{stroke:rgb(109.2500000001, 0, 161.5000000002);fill:rgb(109.2500000001, 0, 161.5000000002);}#export-svg .label6{fill:hsl(100.5882352941, 100%, 68.3333333333%);}#export-svg .arrow6{stroke:hsl(100.5882352941, 100%, 68.3333333333%);}#export-svg .branch-label7{fill:#333;}#export-svg .commit7{stroke:hsl(160.5882352941, 100%, 68.3333333333%);fill:hsl(160.5882352941, 100%, 68.3333333333%);}#export-svg .commit-highlight7{stroke:rgb(161.5000000002, 0, 52.2500000001);fill:rgb(161.5000000002, 0, 52.2500000001);}#export-svg .label7{fill:hsl(160.5882352941, 100%, 68.3333333333%);}#export-svg .arrow7{stroke:hsl(160.5882352941, 100%, 68.3333333333%);}#export-svg .branch{stroke-width:1;stroke:#0b0b0b;stroke-dasharray:2;}#export-svg .commit-label{font-size:10px;fill:rgb(11.0000000001, 34.0000000002, 0);}#export-svg .commit-label-bkg{font-size:10px;fill:hsl(-79.4117647059, 100%, 93.3333333333%);opacity:0.5;}#export-svg .tag-label{font-size:10px;fill:#333;}#export-svg .tag-label-bkg{fill:#fff4dd;stroke:hsl(40.5882352941, 60%, 83.3333333333%);}#export-svg .tag-hole{fill:#333;}#export-svg .commit-merge{stroke:#fff4dd;fill:#fff4dd;}#export-svg .commit-reverse{stroke:#fff4dd;fill:#fff4dd;stroke-width:3;}#export-svg .commit-highlight-inner{stroke:#fff4dd;fill:#fff4dd;}#export-svg .arrow{stroke-width:8;stroke-linecap:round;fill:none;}#export-svg .gitTitleText{text-anchor:middle;font-size:18px;fill:#333;}#export-svg .node .neo-node{stroke:hsl(40.5882352941, 60%, 83.3333333333%);}#export-svg [data-look=&quot;neo&quot;].node rect,#export-svg [data-look=&quot;neo&quot;].cluster rect,#export-svg [data-look=&quot;neo&quot;].node polygon{stroke:url(#export-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#export-svg [data-look=&quot;neo&quot;].node rect,#export-svg [data-look=&quot;neo&quot;].node polygon,#export-svg [data-look=&quot;neo&quot;].node path{stroke:url(#export-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#export-svg [data-look=&quot;neo&quot;].node .neo-line path{stroke:hsl(40.5882352941, 60%, 83.3333333333%);filter:none;}#export-svg [data-look=&quot;neo&quot;].node circle{stroke:url(#export-svg-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#export-svg [data-look=&quot;neo&quot;].node circle .state-start{fill:#000000;}#export-svg [data-look=&quot;neo&quot;].statediagram-cluster rect{fill:#fff4dd;stroke:url(#export-svg-gradient);stroke-width:1px;}#export-svg :root{--mermaid-font-family:&quot;trebuchet ms&quot;,verdana,arial,sans-serif;}</style>
+  <g
+     id="g1"
+     transform="translate(-7.9999975,-8.000001)" />
+  <g
+     class="commit-bullets"
+     id="g2"
+     transform="translate(-7.9999975,-8.000001)" />
+  <g
+     class="commit-labels"
+     id="g3"
+     transform="translate(-7.9999975,-8.000001)" />
+  <g
+     id="g12"
+     transform="translate(-7.9999975,-8.000001)">
+    <line
+       class="branch branch0"
+       y2="0"
+       x2="1250"
+       y1="0"
+       x1="0"
+       id="line3" />
+    <rect
+       transform="translate(-19,-8.5)"
+       height="21"
+       width="52.6875"
+       y="-0.5"
+       x="-68.6875"
+       ry="4"
+       rx="4"
+       class="branchLabelBkg label0"
+       id="rect3" />
+    <g
+       class="branchLabel"
+       id="g5">
+      <g
+         transform="translate(-78.6875,-9.5)"
+         class="label branch-label0"
+         id="g4">
+        <text
+           id="text3"><tspan
+             class="row"
+             x="0"
+             dy="1em"
+             xml:space="preserve"
+             id="tspan3">main</tspan></text>
+      </g>
+    </g>
+    <line
+       class="branch branch1"
+       y2="90"
+       x2="1250"
+       y1="90"
+       x1="0"
+       id="line5" />
+    <rect
+       transform="translate(-19,81.316406)"
+       height="21.367188"
+       width="50.90625"
+       y="-0.68359375"
+       x="-66.90625"
+       ry="4"
+       rx="4"
+       class="branchLabelBkg label1"
+       id="rect5" />
+    <g
+       class="branchLabel"
+       id="g7">
+      <g
+         transform="translate(-76.90625,80.316406)"
+         class="label branch-label1"
+         id="g6">
+        <text
+           id="text5"><tspan
+             class="row"
+             x="0"
+             dy="1em"
+             xml:space="preserve"
+             id="tspan5">style</tspan></text>
+      </g>
+    </g>
+    <line
+       class="branch branch2"
+       y2="180"
+       x2="1250"
+       y1="180"
+       x1="0"
+       id="line7" />
+    <rect
+       transform="translate(-19,171.31641)"
+       height="21.367188"
+       width="64.234375"
+       y="-0.68359375"
+       x="-80.234375"
+       ry="4"
+       rx="4"
+       class="branchLabelBkg label2"
+       id="rect7" />
+    <g
+       class="branchLabel"
+       id="g9">
+      <g
+         transform="translate(-90.234375,170.31641)"
+         class="label branch-label2"
+         id="g8">
+        <text
+           id="text7"><tspan
+             class="row"
+             x="0"
+             dy="1em"
+             xml:space="preserve"
+             id="tspan7">writing</tspan></text>
+      </g>
+    </g>
+    <line
+       class="branch branch3"
+       y2="270"
+       x2="1250"
+       y1="270"
+       x1="0"
+       id="line9" />
+    <rect
+       transform="translate(-19,261.5)"
+       height="21"
+       width="75.476562"
+       y="-0.5"
+       x="-91.476562"
+       ry="4"
+       rx="4"
+       class="branchLabelBkg label3"
+       id="rect9" />
+    <g
+       class="branchLabel"
+       id="g11">
+      <g
+         transform="translate(-101.47656,260.5)"
+         class="label branch-label3"
+         id="g10">
+        <text
+           id="text9"><tspan
+             class="row"
+             x="0"
+             dy="1em"
+             xml:space="preserve"
+             id="tspan9">overleaf</tspan></text>
+      </g>
+    </g>
+  </g>
+  <g
+     class="commit-arrows"
+     id="g42"
+     transform="translate(-7.9999975,-8.000001)">
+    <path
+       class="arrow arrow1"
+       d="M 10,0 V 70 A 20,20 0 0 0 30,90 H 60"
+       id="path12" />
+    <path
+       class="arrow arrow1"
+       d="m 60,90 h 50"
+       id="path13" />
+    <path
+       class="arrow arrow1"
+       d="m 110,90 h 50"
+       id="path14" />
+    <path
+       class="arrow arrow2"
+       d="m 10,0 v 160 a 20,20 0 0 0 20,20 h 180"
+       id="path15" />
+    <path
+       class="arrow arrow0"
+       d="M 10,0 H 260"
+       id="path16" />
+    <path
+       class="arrow arrow1"
+       d="m 160,90 h 80 A 20,20 0 0 0 260,70 V 0"
+       id="path17" />
+    <path
+       class="arrow arrow0"
+       d="m 260,0 h 50"
+       id="path18" />
+    <path
+       class="arrow arrow2"
+       d="m 210,180 h 80 a 20,20 0 0 0 20,-20 V 0"
+       id="path19" />
+    <path
+       class="arrow arrow0"
+       d="m 310,0 h 50"
+       id="path20" />
+    <path
+       class="arrow arrow2"
+       d="M 210,180 H 410"
+       id="path21" />
+    <path
+       class="arrow arrow2"
+       d="m 410,180 h 50"
+       id="path22" />
+    <path
+       class="arrow arrow2"
+       d="m 460,180 h 50"
+       id="path23" />
+    <path
+       class="arrow arrow1"
+       d="m 160,90 v 35 a 10,10 0 0 0 10,10 h 330 a 10,10 0 0 1 10,10 v 35"
+       id="path24" />
+    <path
+       class="arrow arrow3"
+       d="m 510,180 v 70 a 20,20 0 0 0 20,20 h 30"
+       id="path25" />
+    <path
+       class="arrow arrow2"
+       d="M 510,180 H 610"
+       id="path26" />
+    <path
+       class="arrow arrow2"
+       d="m 610,180 h 50"
+       id="path27" />
+    <path
+       class="arrow arrow3"
+       d="M 560,270 H 710"
+       id="path28" />
+    <path
+       class="arrow arrow3"
+       d="m 710,270 h 50"
+       id="path29" />
+    <path
+       class="arrow arrow3"
+       d="m 660,180 v 35 a 10,10 0 0 0 10,10 h 80 a 10,10 0 0 1 10,10 v 35"
+       id="path30" />
+    <path
+       class="arrow arrow3"
+       d="m 760,270 h 50"
+       id="path31" />
+    <path
+       class="arrow arrow2"
+       d="M 660,180 H 860"
+       id="path32" />
+    <path
+       class="arrow arrow0"
+       d="M 360,0 H 910"
+       id="path33" />
+    <path
+       class="arrow arrow2"
+       d="m 860,180 h 30 a 20,20 0 0 0 20,-20 V 0"
+       id="path34" />
+    <path
+       class="arrow arrow0"
+       d="m 910,0 h 50"
+       id="path35" />
+    <path
+       class="arrow arrow2"
+       d="m 860,180 h 150"
+       id="path36" />
+    <path
+       class="arrow arrow3"
+       d="m 810,270 h 180 a 20,20 0 0 0 20,-20 v -70"
+       id="path37" />
+    <path
+       class="arrow arrow2"
+       d="m 1010,180 h 50"
+       id="path38" />
+    <path
+       class="arrow arrow2"
+       d="m 1060,180 h 50"
+       id="path39" />
+    <path
+       class="arrow arrow0"
+       d="m 960,0 h 200"
+       id="path40" />
+    <path
+       class="arrow arrow2"
+       d="m 1110,180 h 30 a 20,20 0 0 0 20,-20 V 0"
+       id="path41" />
+    <path
+       class="arrow arrow0"
+       d="m 1160,0 h 50"
+       id="path42" />
+  </g>
+  <g
+     class="commit-bullets"
+     id="g72"
+     transform="translate(-7.9999975,-8.000001)">
+    <circle
+       class="commit 1st commit commit0"
+       r="10"
+       cy="0"
+       cx="10"
+       id="circle42" />
+    <circle
+       class="commit Only for style purposes commit1"
+       r="10"
+       cy="90"
+       cx="60"
+       id="circle43" />
+    <circle
+       class="commit Tables and Boxes commit1"
+       r="10"
+       cy="90"
+       cx="110"
+       id="circle44" />
+    <circle
+       class="commit Glossaries and Chapters commit1"
+       r="10"
+       cy="90"
+       cx="160"
+       id="circle45" />
+    <circle
+       class="commit Small paragraphs commit2"
+       r="10"
+       cy="180"
+       cx="210"
+       id="circle46" />
+    <circle
+       class="commit 5-b410060 commit0"
+       r="9"
+       cy="0"
+       cx="260"
+       id="circle47" />
+    <circle
+       class="commit commit-merge 5-b410060 commit0"
+       r="6"
+       cy="0"
+       cx="260"
+       id="circle48" />
+    <circle
+       class="commit 6-3541969 commit0"
+       r="9"
+       cy="0"
+       cx="310"
+       id="circle49" />
+    <circle
+       class="commit commit-merge 6-3541969 commit0"
+       r="6"
+       cy="0"
+       cx="310"
+       id="circle50" />
+    <circle
+       class="commit 7-cd7cc4a commit0"
+       r="10"
+       cy="0"
+       cx="360"
+       id="circle51" />
+    <circle
+       class="commit 8-adce499 commit2"
+       r="10"
+       cy="180"
+       cx="410"
+       id="circle52" />
+    <circle
+       class="commit 9-74fca99 commit2"
+       r="10"
+       cy="180"
+       cx="460"
+       id="circle53" />
+    <circle
+       class="commit 10-5510b4d commit2"
+       r="9"
+       cy="180"
+       cx="510"
+       id="circle54" />
+    <circle
+       class="commit commit-merge 10-5510b4d commit2"
+       r="6"
+       cy="180"
+       cx="510"
+       id="circle55" />
+    <rect
+       class="commit Just tex commit-highlight3 commit-highlight-outer"
+       height="20"
+       width="20"
+       y="260"
+       x="550"
+       id="rect55" />
+    <rect
+       class="commit Just tex commit3 commit-highlight-inner"
+       height="12"
+       width="12"
+       y="264"
+       x="554"
+       id="rect56" />
+    <circle
+       class="commit 12-cb23429 commit2"
+       r="10"
+       cy="180"
+       cx="610"
+       id="circle56" />
+    <circle
+       class="commit Intro commit2"
+       r="10"
+       cy="180"
+       cx="660"
+       id="circle57" />
+    <circle
+       class="commit 14-95bf3a1 commit3"
+       r="10"
+       cy="270"
+       cx="710"
+       id="circle58" />
+    <circle
+       class="commit 15-87d77ed commit-cherry-pick"
+       r="10"
+       cy="270"
+       cx="760"
+       id="circle59" />
+    <circle
+       class="commit 15-87d77ed commit-cherry-pick"
+       fill="#ffffff"
+       r="2.75"
+       cy="272"
+       cx="757"
+       id="circle60" />
+    <circle
+       class="commit 15-87d77ed commit-cherry-pick"
+       fill="#ffffff"
+       r="2.75"
+       cy="272"
+       cx="763"
+       id="circle61" />
+    <line
+       class="commit 15-87d77ed commit-cherry-pick"
+       stroke="#ffffff"
+       y2="265"
+       x2="760"
+       y1="271"
+       x1="763"
+       id="line61" />
+    <line
+       class="commit 15-87d77ed commit-cherry-pick"
+       stroke="#ffffff"
+       y2="265"
+       x2="760"
+       y1="271"
+       x1="757"
+       id="line62" />
+    <circle
+       class="commit 16-5e1e5f4 commit3"
+       r="10"
+       cy="270"
+       cx="810"
+       id="circle62" />
+    <circle
+       class="commit 17-e6199c5 commit2"
+       r="10"
+       cy="180"
+       cx="860"
+       id="circle63" />
+    <circle
+       class="commit 18-1cf5b47 commit0"
+       r="9"
+       cy="0"
+       cx="910"
+       id="circle64" />
+    <circle
+       class="commit commit-merge 18-1cf5b47 commit0"
+       r="6"
+       cy="0"
+       cx="910"
+       id="circle65" />
+    <circle
+       class="commit 19-dd71ce1 commit0"
+       r="10"
+       cy="0"
+       cx="960"
+       id="circle66" />
+    <circle
+       class="commit 20-baf9694 commit2"
+       r="9"
+       cy="180"
+       cx="1010"
+       id="circle67" />
+    <path
+       class="commit commit-reverse 20-baf9694 commit2"
+       d="m 1005,175 10,10 m -10,0 10,-10"
+       id="path67" />
+    <circle
+       class="commit Conflicts Solved commit2"
+       r="10"
+       cy="180"
+       cx="1060"
+       id="circle68" />
+    <circle
+       class="commit Final Version commit2"
+       r="10"
+       cy="180"
+       cx="1110"
+       id="circle69" />
+    <circle
+       class="commit 23-8432789 commit0"
+       r="9"
+       cy="0"
+       cx="1160"
+       id="circle70" />
+    <circle
+       class="commit commit-merge 23-8432789 commit0"
+       r="6"
+       cy="0"
+       cx="1160"
+       id="circle71" />
+    <circle
+       class="commit 24-a52aaa4 commit0"
+       r="10"
+       cy="0"
+       cx="1210"
+       id="circle72" />
+  </g>
+  <g
+     class="commit-labels"
+     id="g93"
+     transform="translate(-7.9999975,-8.000001)">
+    <g
+       transform="rotate(-45,17.076819,49.03405)"
+       id="g73">
+      <rect
+         height="15"
+         width="52.34375"
+         y="13.5"
+         x="-16.171875"
+         class="commit-label-bkg"
+         id="rect72" />
+      <text
+         class="commit-label"
+         y="25"
+         x="-14.171875"
+         id="text72">1st commit</text>
+    </g>
+    <g
+       transform="rotate(-45,78.962079,172.93476)"
+       id="g74">
+      <rect
+         height="15.104492"
+         width="106.26562"
+         y="103.5"
+         x="6.8671875"
+         class="commit-label-bkg"
+         id="rect73" />
+      <text
+         class="commit-label"
+         y="115"
+         x="8.8671875"
+         id="text73">Only for style purposes</text>
+    </g>
+    <g
+       transform="rotate(-45,123.82362,158.27818)"
+       id="g75">
+      <rect
+         height="15"
+         width="82.953125"
+         y="103.5"
+         x="68.523438"
+         class="commit-label-bkg"
+         id="rect74" />
+      <text
+         class="commit-label"
+         y="115"
+         x="70.523438"
+         id="text74">Tables and Boxes</text>
+    </g>
+    <g
+       transform="rotate(-45,180.68064,177.83666)"
+       id="g76">
+      <rect
+         height="15"
+         width="114.0625"
+         y="103.5"
+         x="102.96875"
+         class="commit-label-bkg"
+         id="rect75" />
+      <text
+         class="commit-label"
+         y="115"
+         x="104.96875"
+         id="text75">Glossaries and Chapters</text>
+    </g>
+    <g
+       transform="rotate(-45,223.6962,247.91471)"
+       id="g77">
+      <rect
+         height="15.104492"
+         width="82.375"
+         y="193.5"
+         x="168.8125"
+         class="commit-label-bkg"
+         id="rect76" />
+      <text
+         class="commit-label"
+         y="205"
+         x="170.8125"
+         id="text76">Small paragraphs</text>
+    </g>
+    <g
+       transform="rotate(-45,366.59121,47.648944)"
+       id="g78">
+      <rect
+         height="15"
+         width="50.140625"
+         y="13.5"
+         x="334.92969"
+         class="commit-label-bkg"
+         id="rect77" />
+      <text
+         class="commit-label"
+         y="25"
+         x="336.92969"
+         id="text77">7-cd7cc4a</text>
+    </g>
+    <polygon
+       points="325.6958,-26.7 394.3042,-26.7 394.3042,-11.7 325.6958,-11.7 317.6958,-17.2 317.6958,-21.2 "
+       class="tag-label-bkg"
+       id="polygon78" />
+    <circle
+       class="tag-hole"
+       r="1.5"
+       cx="321.6958"
+       cy="-19.200001"
+       id="circle78" />
+    <text
+       x="329.6958"
+       class="tag-label"
+       y="-16"
+       id="text78">Alpha version</text>
+    <g
+       transform="rotate(-45,416.83918,228.35623)"
+       id="g79">
+      <rect
+         height="15"
+         width="51.265625"
+         y="193.5"
+         x="384.36719"
+         class="commit-label-bkg"
+         id="rect78" />
+      <text
+         class="commit-label"
+         y="205"
+         x="386.36719"
+         id="text79">8-adce499</text>
+    </g>
+    <g
+       transform="rotate(-45,466.22615,226.60766)"
+       id="g80">
+      <rect
+         height="15"
+         width="48.484375"
+         y="193.5"
+         x="435.75781"
+         class="commit-label-bkg"
+         id="rect79" />
+      <text
+         class="commit-label"
+         y="205"
+         x="437.75781"
+         id="text80">9-74fca99</text>
+    </g>
+    <g
+       transform="rotate(-45,564.01854,310.31083)"
+       id="g81">
+      <rect
+         height="15"
+         width="38.46875"
+         y="283.5"
+         x="540.76562"
+         class="commit-label-bkg"
+         id="rect80" />
+      <text
+         class="commit-label"
+         y="295"
+         x="542.76562"
+         id="text81">Just tex</text>
+    </g>
+    <g
+       transform="rotate(-45,618.06525,231.85338)"
+       id="g82">
+      <rect
+         height="15"
+         width="56.828125"
+         y="193.5"
+         x="581.58594"
+         class="commit-label-bkg"
+         id="rect81" />
+      <text
+         class="commit-label"
+         y="205"
+         x="583.58594"
+         id="text82">12-cb23429</text>
+    </g>
+    <g
+       transform="rotate(-45,660.83284,211.22414)"
+       id="g83">
+      <rect
+         height="15"
+         width="24.015625"
+         y="193.5"
+         x="647.99219"
+         class="commit-label-bkg"
+         id="rect82" />
+      <text
+         class="commit-label"
+         y="205"
+         x="649.99219"
+         id="text83">Intro</text>
+    </g>
+    <g
+       transform="rotate(-45,717.5762,320.45845)"
+       id="g84">
+      <rect
+         height="15"
+         width="54.609375"
+         y="283.5"
+         x="682.69531"
+         class="commit-label-bkg"
+         id="rect83" />
+      <text
+         class="commit-label"
+         y="295"
+         x="684.69531"
+         id="text84">14-95bf3a1</text>
+    </g>
+    <polygon
+       points="720.15625,243.24775 799.84375,243.24775 799.84375,258.35225 720.15625,258.35225 712.15625,252.8 712.15625,248.8 "
+       class="tag-label-bkg"
+       id="polygon84" />
+    <circle
+       class="tag-hole"
+       r="1.5"
+       cx="716.15625"
+       cy="250.8"
+       id="circle84" />
+    <text
+       x="724.15625"
+       class="tag-label"
+       y="254"
+       id="text85">cherry-pick:Intro</text>
+    <g
+       transform="rotate(-45,817.5762,320.45845)"
+       id="g86">
+      <rect
+         height="15"
+         width="54.609375"
+         y="283.5"
+         x="782.69531"
+         class="commit-label-bkg"
+         id="rect85" />
+      <text
+         class="commit-label"
+         y="295"
+         x="784.69531"
+         id="text86">16-5e1e5f4</text>
+    </g>
+    <g
+       transform="rotate(-45,868.06525,231.85338)"
+       id="g87">
+      <rect
+         height="15"
+         width="56.828125"
+         y="193.5"
+         x="831.58594"
+         class="commit-label-bkg"
+         id="rect86" />
+      <text
+         class="commit-label"
+         y="205"
+         x="833.58594"
+         id="text87">17-e6199c5</text>
+    </g>
+    <g
+       transform="rotate(-45,968.06525,51.853379)"
+       id="g88">
+      <rect
+         height="15"
+         width="56.828125"
+         y="13.5"
+         x="931.58594"
+         class="commit-label-bkg"
+         id="rect87" />
+      <text
+         class="commit-label"
+         y="25"
+         x="933.58594"
+         id="text88">19-dd71ce1</text>
+    </g>
+    <polygon
+       points="927.64062,-26.7 992.35938,-26.7 992.35938,-11.7 927.64062,-11.7 919.64062,-17.2 919.64062,-21.2 "
+       class="tag-label-bkg"
+       id="polygon88" />
+    <circle
+       class="tag-hole"
+       r="1.5"
+       cx="923.64062"
+       cy="-19.200001"
+       id="circle88" />
+    <text
+       x="931.64062"
+       class="tag-label"
+       y="-16"
+       id="text89">Beta Version</text>
+    <g
+       transform="rotate(-45,1072.2256,243.7201)"
+       id="g90">
+      <rect
+         height="15"
+         width="75.703125"
+         y="193.5"
+         x="1022.1484"
+         class="commit-label-bkg"
+         id="rect89" />
+      <text
+         class="commit-label"
+         y="205"
+         x="1024.1484"
+         id="text90">Conflicts Solved</text>
+    </g>
+    <g
+       transform="rotate(-45,1119.1639,234.98706)"
+       id="g91">
+      <rect
+         height="15"
+         width="61.8125"
+         y="193.5"
+         x="1079.0938"
+         class="commit-label-bkg"
+         id="rect90" />
+      <text
+         class="commit-label"
+         y="205"
+         x="1081.0938"
+         id="text91">Final Version</text>
+    </g>
+    <g
+       transform="rotate(-45,1218.1892,52.207023)"
+       id="g92">
+      <rect
+         height="15"
+         width="57.390625"
+         y="13.5"
+         x="1181.3047"
+         class="commit-label-bkg"
+         id="rect91" />
+      <text
+         class="commit-label"
+         y="25"
+         x="1183.3047"
+         id="text92">24-a52aaa4</text>
+    </g>
+    <polygon
+       points="1171.5391,-26.752246 1248.4609,-26.752246 1248.4609,-11.647754 1171.5391,-11.647754 1163.5391,-17.2 1163.5391,-21.2 "
+       class="tag-label-bkg"
+       id="polygon92" />
+    <circle
+       class="tag-hole"
+       r="1.5"
+       cx="1167.5391"
+       cy="-19.200001"
+       id="circle92" />
+    <text
+       x="1175.5391"
+       class="tag-label"
+       y="-16"
+       id="text93">Printing version</text>
+  </g>
+</svg>

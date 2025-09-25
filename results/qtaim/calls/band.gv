@@ -1,0 +1,33 @@
+digraph mygraph {
+  fontname="Helvetica,Arial,sans-serif"
+  node [fontname="Helvetica,Arial,sans-serif"]
+  edge [fontname="Helvetica,Arial,sans-serif"]
+  splines=curved
+  rankdir=TB
+
+  // Style for main node BAND
+  "BAND" [shape=ellipse, style=filled, fillcolor="#7cb3e1", fontcolor="#000000", fontsize=18, fontweight=bold]
+
+  // Style for subroutines with bold names and smaller directory text
+  node [shape=box, style=filled, fillcolor="#ADD8E6", fontcolor="#000000"]
+
+  // Main nodes with numbers and paths
+  "DoSinglePointCalculation" [label=<<b>DoSinglePointCalculation</b><br/><font point-size="10">(band/)</font>>]
+  
+  "bandd" [label=<<b>bandd</b><br/><font point-size="10">(band/band/)</font>>]
+
+  "CalcGridBasedAIM" [label=<<b>1- CalcGridBasedAIM</b><br/><font point-size="10">(band/band/)</font>>]
+  "BandAIMCriticalPoints" [label=<<b>2- BandAIMCriticalPoints</b><br/><font point-size="10">(band/anal/)</font>>]
+  "FindAIMCriticalPoints" [label=<<b>FindAIMCriticalPoints</b><br/><font point-size="10">(lib/dft/grid/)</font>>]
+  
+  // Main graph structure with adjusted arrows
+  "BAND" -> "DoSinglePointCalculation" [color="#FF5733", penwidth=2]
+  "DoSinglePointCalculation" -> "bandd" [color="#FF5733", penwidth=2]
+
+  "bandd" -> "CalcGridBasedAIM" [color="#FF5733", penwidth=2]
+  "bandd" -> "BandAIMCriticalPoints" [color="#FF5733", penwidth=2]
+
+  "BandAIMCriticalPoints" -> "FindAIMCriticalPoints" [color="#FF5733", penwidth=2]
+
+}
+

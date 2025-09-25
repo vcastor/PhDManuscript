@@ -1,0 +1,44 @@
+\begin{tikzpicture}[
+    var/.style={draw, rounded corners=2pt, minimum width=3.5cm, minimum height=1cm, fill=blue!5},
+    deriv/.style={draw=none, fill=none, font=\footnotesize\itshape},
+    >={Stealth[round]}, thick
+  ]
+
+  % Level 0 - centered
+  \node[var] (E) at (0,0) {$E = E[N, v(\mathbf{r})]$};
+
+  % Level 1 - centered symmetrically under E
+  \node[var] (mu) at (-2.5,-2) {$\mu$};
+  \node[var] (rho) at (2.5,-2) {$\rho(\mathbf{r})$};
+
+  % Level 2 - centered with equal spacing
+  \node[var] (eta) at (-5,-4) {$\eta$};
+  \node[var] (f) at (0,-4) {$f(\mathbf{r})$};
+  \node[var] (chi) at (5,-4) {$\chi(\mathbf{r}, \mathbf{r'})$};
+
+  % Derivative labels level 1
+  \node[deriv] at ($(E)!0.5!(mu)$) [xshift=-1.5em] 
+      {$\partial_N$};
+  \node[deriv] at ($(E)!0.5!(rho)$) [xshift=1.5em] 
+      {$\delta_{v(\mathbf{r})}$};
+    
+  % Derivative labels level 2
+  \node[deriv] at ($(mu)!0.5!(eta)$) [xshift=-1.5em] 
+      {$\partial_N$};
+  \node[deriv] at ($(mu)!0.5!(f)$) [xshift=1.5em] 
+      {$\delta_{v(\mathbf{r})}$};
+  \node[deriv] at ($(rho)!0.5!(f)$) [xshift=-1.5em] 
+      {$\partial_N$};
+  \node[deriv] at ($(rho)!0.5!(chi)$) [xshift=1.5em] 
+      {$\delta_{v(\mathbf{r})}$};
+
+  % Arrows
+  \draw[->] (E) -- (mu);
+  \draw[->] (E) -- (rho);
+  \draw[->] (mu) -- (eta);
+  \draw[->] (mu) -- (f);
+  \draw[->] (rho) -- (f);
+  \draw[->] (rho) -- (chi);
+
+\end{tikzpicture}
+

@@ -1,0 +1,35 @@
+% Glossaries
+
+% if groupskip = true; the interline looks like inconsistent
+% [nopostdot,acronym,toc,section=chapter,style=indexgroup,nomain]
+\usepackage[nonumberlist,nogroupskip,toc=false,hyperfirst=true]{glossaries}
+\renewcommand*{\glstextformat}[1]{\textcolor{black}{#1}}
+
+\renewcommand{\glossarypreamble}{
+  \small
+  \setstretch{1}}
+
+\newglossarystyle{acronym}{
+  \renewenvironment{theglossary}
+    % {\begin{flushleft}\begin{longtable}{ll>{\raggedright}p{.5\linewidth}}}%
+    % {\begin{flushleft}\begin{longtable}{m{3cm}m{9cm}>{\raggedright}p{.5\linewidth}}}%
+    {\begin{flushleft}\begin{longtable}{m{3cm}m{10cm}}}
+    {\end{longtable}\end{flushleft}}
+  \renewcommand*{\glossaryheader}{}
+  \renewcommand*{\glsgroupheading}[1]{}
+  \renewcommand{\glossentry}[2]{
+    % name in bold | description in italic
+    \glsentryitem{##1}\glstarget{##1}{\textbf{\glossentryname{##1}}} &
+    \textit{\glossentrydesc{##1}}\tabularnewline}}
+
+\newglossarystyle{notation}{
+  \renewenvironment{theglossary}
+    {\begin{flushleft}\begin{longtable}{ll}}
+    {\end{longtable}\end{flushleft}}
+  \renewcommand*{\glossaryheader}{}
+  \renewcommand*{\glsgroupheading}[1]{}
+  \renewcommand{\glossentry}[2]{
+    % name in bold | description in italic
+    \glsentryitem{##1}\glstarget{##1}{\textbf{\glossentryname{##1}}} &
+    \textit{\glossentrydesc{##1}}\tabularnewline}}
+

@@ -1,0 +1,29 @@
+# Ignore all specified file types in any directory and subdirectory
+**/.DS_Store
+**/*.aux
+**/*.err
+**/*.png
+**/*.bbl
+**/*.blg
+**/*.glg
+**/*.glo
+**/*.gls
+**/*.ist
+**/*.log
+**/*.not
+**/*.ntt
+**/*.out
+**/*.sbl
+**/*.sym
+**/*.tld
+**/*.toc
+**/*.swp
+**/*.acn
+**/*.acr
+**/*.alg
+**/*.tld1
+**/*.tld2
+# *.pdf
+!*.pdf
+!*.png
+tesis.pdf

@@ -1,0 +1,37 @@
+\usetikzlibrary{trees}
+
+% Define styles for the directory tree
+\tikzset{
+  dirtree/.style={
+    % Reduced horizontal shift for subdirectories
+    grow via three points={one child at (0.25,-0.7) and 
+    two children at (0.25,-0.7) and (0.25,-1.4)},
+    % Lines start from below the parent box (south), with small x offset
+    edge from parent path={([xshift=0.3cm]\tikzparentnode.south west) |- ([xshift=-0.05cm]\tikzchildnode.west)}
+  },
+  directory/.style={
+    font=\ttfamily\bfseries,
+    text=blue!70!black,
+    draw=blue!30,
+    fill=blue!5,
+    rounded corners=2pt,
+    minimum height=1.2em,
+    inner sep=3pt,
+    anchor=west
+  },  
+  file/.style={
+    font=\ttfamily,
+    text=black!80,
+    draw=green!40,
+    fill=green!10,
+    rounded corners=2pt,
+    minimum height=1.2em,
+    inner sep=3pt,
+    anchor=west
+  },  
+  comment/.style={
+    font=\small\itshape,
+    text=gray!70,
+    anchor=west
+  }
+}

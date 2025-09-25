@@ -1,0 +1,32 @@
+% -*- coding: utf-8 -*-
+
+\begin{algorithm}[h!]
+  \SetNoFillComment
+  % \tcc{src/toten/toten.f90}
+
+  \tcc{Local properties}
+  ADFAIMCriticalPoints()\;
+
+  \tcc{The system is divided into blocks for parallelisation}
+  \For {iblock $\gets 1$ \KwTo nblocks}{
+     \If {skip\_block(iblock)}{
+        $\mathbf{nextBlock}$
+     }   
+     \tcc{Atomic properties}
+     \If {gQTAIM.atomic}{
+        AssignAtomicBasinsForBlock() \tcp*{Map grid points to the attractors}
+        UpdateAIMTerms() \tcp*{Properties computed by integrating $\rho$}
+     }   
+  }
+
+  MergeValuesComputedInParallel()\;
+
+  \tcc{When the local and atomic properties are computed, the nuclear and 
+       (electronic + nuclear) dipole can be computed}
+  \If {gQTAIM.atomic}{
+     AIMdipole() \tcp*{nuclear dipole moment}
+  }
+  \caption{Total energy subroutine for the ADF Engine}
+  \label{toten}
+\end{algorithm}
+

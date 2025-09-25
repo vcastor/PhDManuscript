@@ -1,0 +1,62 @@
+%
+% For code listings
+%
+%%Verwendung im Text:
+%%-> \begin{lstlisting}[language=Python,firstnumber=27] ... \end{lstlisting}
+%%-> \begin{lstlisting}[language=Python,numbers=none] ... \end{lstlisting}
+%%-> \lstinline[language=JAVA]{...}
+%
+
+\usepackage{listings}
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\scriptsize,
+    % basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\lstdefinelanguage{tcl}{
+  morekeywords={VTK,for,if,continue,set,incr,lappend},
+  sensitive=true,
+  alsoletter={-},
+  morecomment=[l]{\#},
+  morestring=[b]",
+}
+
+\lstdefinestyle{bashstyle}{
+  backgroundcolor=\color{darkgray!90},
+  basicstyle=\ttfamily\color{gray!10},
+  keywordstyle=\color{cyan},
+  commentstyle=\color{green!60!black},
+  stringstyle=\color{yellow},
+  showstringspaces=false,
+  breaklines=true,
+  columns=fullflexible,
+  language=bash
+}
+
+\lstdefinelanguage{bash}{
+  morekeywords={sudo,exit,echo,cd,ls,mkdir,rm,cp,mv,
+                chmod,chown,grep,find,tar,ssh,scp,rsync,
+                cat,nano,vi,vim,top,htop,kill,ps,df,du,
+                uptime,whoami,git,for,do,done,if,fi,elif,eor,in},
+  sensitive=true,
+  alsoletter={-},
+  morecomment=[l]{\#},
+  morestring=[b]",
+}
+

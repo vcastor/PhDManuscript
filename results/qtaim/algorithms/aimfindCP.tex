@@ -1,0 +1,46 @@
+% -*- coding: utf-8 -*-
+\begin{algorithm}[h]
+  \SetNoFillComment
+
+  \tcc{total energy subroutine calls AIMCriticalPoints}
+
+  \tcc{AIMCriticalPoints looks like this:}
+  gridRefinements $\gets$ [1.0, 0.5, 0.66] \tcp*{Grid refinement factors}
+  gross $\gets$ 1.0 \tcp*{Inflation factor in case of overflow}
+  poincaréHopfTarget $\gets$ [0 or 1] \tcp*{Periodic or Molecular system}
+
+  gridSpacing $\gets$ user-defined or default (0.5)\;  
+  igrid $\gets$ 1\;
+  belowOverflow $\gets$ true; everythingTried $\gets$ false; success $\gets$ false\;
+  \While {belowOverflow \textbf{and} \textbf{not} success \textbf{and} igrid $\leq$ length(gridRefinements)}{
+
+    \tcc{Update grid spacing using gridRefinements[igrid] and gross}
+    gridSpacing $\gets$ gridSpacing*gridRefinements[igrid]*gross\;
+
+    \If{igrid $>$ 1}{
+      Notify(`Refining grid...')
+    }
+
+    \If{grid causes overflow}{
+      Notify(`Grid too small; trying gross grid')\;
+      gross $\gets$ 2.0\;
+    }
+
+    FindCriticalPoints()\;
+    ClassifyCriticalPoints()\;
+
+    \If{periodic}{
+      Generate equivalent CPs\tcp*{BAND}
+    }
+
+    success $\gets$ CheckPoincaréHopf()\;
+    \uIf {success}{
+      \textbf{break}\;
+    }
+    igrid $\gets$ igrid + 1\;
+  }
+
+  \caption{AIMCriticalPoints Subroutine}
+  \label{grid_refinement}
+\end{algorithm}
+

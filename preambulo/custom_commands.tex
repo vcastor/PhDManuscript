@@ -1,0 +1,80 @@
+% ---------------
+% Custom Commands
+\newcommand{\HF}{\mathrm{HF}}
+\newcommand{\Ha}{\widehat{H}}
+\newcommand{\T}{\widehat{T}}
+\newcommand{\SD}{\mathrm{SD}}
+\newcommand{\CC}{\mathrm{CC}}
+\newcommand{\DFT}{\mathrm{DFT}}
+\newcommand{\Qop}{\widehat{Q}}
+\newcommand{\homo}{\textsc{homo}\xspace}
+\newcommand{\lumo}{\textsc{lumo}\xspace}
+\newcommand{\nnabla}{\boldsymbol{\nabla}}
+
+\newcommand{\lapack}{\textsc{Lapack}\xspace}
+\newcommand{\subroutine}{\textsc{subroutine}\xspace}
+\newcommand{\module}{\textsc{module}\xspace}
+\newcommand{\subroutines}{\textsc{subroutines}\xspace}
+\newcommand{\modules}{\textsc{modules}\xspace}
+
+% Computation
+\newcommand{\gneuf}{\textsc{Gaussian09}\xspace}
+\newcommand{\gseize}{\textsc{Gaussian16}\xspace}
+\newcommand{\gv}{\textsc{\mbox{GaussView}}\xspace}
+\newcommand{\scm}{\textsc{SCM}\xspace}
+\newcommand{\ams}{\textsc{AMS}\xspace}
+\newcommand{\adf}{\textsc{ADF}\xspace}
+\newcommand{\band}{\textsc{BAND}\xspace}
+\newcommand{\dftb}{\textsc{DFTB}\xspace}
+\newcommand{\gui}{\textsc{GUI}\xspace}
+\newcommand{\plams}{\textsc{Plams}\xspace}
+\newcommand{\aimall}{AIMAll\xspace}
+\newcommand{\fortran}{\textsc{Fortran}\xspace}
+\newcommand{\python}{\textsc{Python}~\faPython\xspace}
+\newcommand{\tcl}{\textsc{tcl}\xspace}
+\newcommand{\vtk}{\textsc{vtk}\xspace}
+\newcommand{\ie}{\textit{i.~e.}\xspace}
+\newcommand{\eg}{\textit{e.~g.}\xspace}
+\newcommand{\git}{git~\faGit*\xspace}
+\newcommand{\Linux}{Linux~\faLinux\xspace}
+\newcommand{\macOS}{macOS~\faApple\xspace}
+\newcommand{\bug}{bug~\faBug\xspace}
+\newcommand{\branch}{branch~\faCodeBranch\xspace}
+\newcommand{\database}{database~\faDatabase\xspace}
+\newcommand{\chemistry}{chemistry~\faFlask\xspace}
+\newcommand{\terminal}{\faTerminal~terminal\xspace}
+\newcommand{\stackoverflow}{StackOverflow~\faStackOverflow\xspace}
+\newcommand{\overflow}{overflow~\faStackOverflow\xspace}
+
+% number sets
+\newcommand{\ccomplex}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{C}}{\mathbb{C}^{#1}}}}
+\newcommand{\rreal}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{R}}{\mathbb{R}^{#1}}}}
+\newcommand{\iirrational}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{I}}{\mathbb{I}^{#1}}}}
+\newcommand{\rrational}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{Q}}{\mathbb{Q}^{#1}}}}
+\newcommand{\nnatural}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{N}}{\mathbb{N}^{#1}}}}
+\newcommand{\iintegers}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{Z}}{\mathbb{Z}^{#1}}}}
+
+% Maths
+\newcommand{\eps}{\varepsilon}
+\DeclareMathOperator{\Lap}{\mathcal{L}}
+
+% Hilbert spaces
+\newcommand{\mHa}[1][]{\ensuremath{\ifstrempty{#1}{\mathbf{H}}{\mathbf{H}^{#1}}}}
+\newcommand{\mFock}[1][]{\ensuremath{\ifstrempty{#1}{\mathbf{F}}{\mathbf{F}^{#1}}}}
+\newcommand{\mOverlap}[1][]{\ensuremath{\ifstrempty{#1}{\mathbf{S}}{\mathbf{S}^{#1}}}}
+\newcommand{\mX}[1][]{\ensuremath{\ifstrempty{#1}{\mathbf{X}}{\mathbf{X}^{#1}}}}
+\newcommand{\mC}[1][]{\ensuremath{\ifstrempty{#1}{\mathbf{C}}{\mathbf{C}^{#1}}}}
+
+% Experimental fractions
+\newcommand{\bigslfrac}[2]{\raisebox{0.5ex}{\scriptsize #1}\kern-0.2em/\kern-0.15em\raisebox{-0.4ex}{\scriptsize #2}}
+
+% Signature
+\newcommand{\vic}{{\setmainfont{QTBoulevard}\LARGE V}}
+\newcommand{\cas}{{\setmainfont{QTCoronation}\Large Castor}}
+\newcommand{\casc}{{\setmainfont{QTCoronation}\Large Castor,}}
+\newcommand{\vcastor}[1][]{
+  \ifstrempty{#1}
+    {\textasciitilde\,\vic\cas}
+    {\textasciitilde\,\vic\casc~{\setmainfont{QTBoulevard}\Large{#1}}}
+}
+

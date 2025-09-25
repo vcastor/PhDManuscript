@@ -1,0 +1,69 @@
+% -*- coding: utf-8 -*-
+
+\begin{tcolorbox}[tab2,% Integrals
+  tabularx={>{\arraybackslash}m{3.5cm}|>{\arraybackslash}X|>{\arraybackslash}m{1.5cm}},
+  title=Descriptors Available in ADF for Atomic Basins,
+  fontupper=\tiny,
+  fonttitle=\bfseries,
+  boxrule=0.5pt]
+
+  & & \\
+  \textbf{Descriptor} & \textbf{Equation} & \textbf{Reference} \\ \hline\hline
+
+  & & \\ [-2mm]
+  Population &
+  $\int\rho(\Omega)\dd\tau$ & \cite{bader} \\
+  & & \\ [-2mm] \hline
+
+  & & \\ [-2mm]
+  Charge &
+  $q(\Omega) = Z_\Omega - \int\rho(\Omega)\dd\tau$ & \cite{bader} \\
+  & & \\ [-2mm] \hline
+
+  & & \\ [-2mm]
+  Spin density &
+  $\rho(\uparrow) - \rho(\downarrow)$ & \cite{bader} \\
+  & & \\ [-2mm] \hline
+
+  & & \\ [-2mm]
+  Laplacian &
+  $\int\nabla^2(\rho(\Omega))$ & \cite{bader} \\
+  & & \\ [-2mm] \hline
+
+  & & \\ [-2mm]
+  Volumen &
+  $\int_\text{t}\rho(\Omega)\dd\tau \qquad \text{t} \in \{0.002, 0.001, 0.0004\} \text{a.u.}$ & \cite{bader} \\
+  & & \\ [-2mm] \hline
+
+  & & \\ [-2mm]
+  Shanon Entropy &
+  $H = \int\sigma\ln\sigma\dd\tau$ & \cite{PinedaUrbina2013} \\
+  & & \\ [-2mm] \hline
+
+  & & \\ [-2mm]
+  Shanon Shape &
+  $\frac{H}{\int\rho\dd\tau} + \frac{\ln\int\rho\dd\tau}{\int\rho\dd\tau}\int_\Omega\rho\dd\tau$ & \\
+  & & \\ [-2mm] \hline
+
+  & & \\ [-2mm]
+  Reyi Shape &
+  $-\ln\int_\Omega\rho^2\dd\tau + \ln\int\rho^2\dd\tau$ & \\
+  & & \\ [-2mm] \hline
+
+  & & \\ [-2mm]
+  Dipole moment &
+  $\boldsymbol{\mu}_c = q_\alpha R_\alpha \; ; \; \boldsymbol{\mu}_p = -\int(r-R_\alpha)\rho\dd\tau$ & \cite{Keith} \\
+  & & \\ [-2mm] \hline
+
+  & & \\ [-2mm]
+  Quadrupole moment &
+  $Q_{ij} = \int \rho(\Omega)(3r_ir_j - r^2\delta_{ij})\dd\tau$ & \\
+  & & \\ [-2mm] \hline
+
+  & & \\ [-2mm]
+  population decomposition over occupied orbitals &
+  $\frac{\psi^2_{MO}}{\rho(\Omega)}$ & \\
+  & & \\
+
+\end{tcolorbox}
+

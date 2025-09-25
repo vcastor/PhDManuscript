@@ -1,0 +1,33 @@
+\tdplotsetmaincoords{70}{165}
+
+\usetikzlibrary{
+  shadings, patterns, angles, quotes, arrows.meta, 
+  decorations.pathmorphing, decorations.pathreplacing, 
+  fadings, 3d, perspective, intersections, 
+  decorations.markings, bending
+}
+
+\tikzset{
+  arrow/.style={-stealth,thick},
+  node/.style={draw,thick,minimum size=6mm},
+  label/.style={font=\small,inner sep=2pt},
+  grid/.style={help lines,g},
+  axis/.style={arrow,every node/.style={font=\small}},
+  technical/.style={
+    font=\small,
+    tdplot_main_coords,
+    anchor=center,
+    inner sep=3pt
+  },
+  process/.style={
+    scale=0.6,
+    yscale=0.8,
+    every node/.style={font=\small}
+  },
+  factor/.style={
+    xscale=0.6,
+    yscale=0.35,
+    every node/.style={font=\small}
+  }
+}
+

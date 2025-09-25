@@ -1,0 +1,41 @@
+% -*- coding: utf-8 -*-
+\documentclass[12pt,a4paper,twoside]{memoir}
+\let\printglossary\relax                        % Avoid conflict between memoir and glossaries
+
+% -----------------------------------------
+% Encoding Language & Bibliography Packages
+\input{preambulo/encoding_language}
+
+% -------------------
+% Caption and Spacing
+\OnehalfSpacing
+\usepackage[font=footnotesize,labelfont=bf]{caption}
+\captiondelim{. }
+\setlength{\abovecaptionskip}{5pt}              % Space above captions
+\setlength{\belowcaptionskip}{0pt}              % Space below captions
+% Widow and Orphan Penalty
+\widowpenalty=500
+\clubpenalty=500
+% Compitibility with memoir class
+\DisemulatePackage{setspace}
+\usepackage{setspace}
+
+% --------------------------------
+% Packages separated by categories
+\input{preambulo/packages_main}
+\input{preambulo/packages_extra}
+% Customization
+\input{preambulo/custom_commands}               % Custom commands
+\input{style/fancy_tables}                      % Fancy tables
+\input{style/boxes}                             % Fancy boxes
+\input{style/chapter_style}                     % Chapter style
+\input{style/table_of_contents}                 % Table of contents
+\input{style/vertial_writing}                   % Vertical writing
+\input{style/tikz_trees}                        % Directory trees
+\input{style/window_manage}                     % Terminal window
+\input{preambulo/hyphenation}                   % Hyphenation
+
+% --------------------------------
+% Data for the title page
+\input{portada/data}
+

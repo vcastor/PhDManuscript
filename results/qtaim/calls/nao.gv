@@ -1,0 +1,28 @@
+digraph mygraph {
+  fontname="Helvetica,Arial,sans-serif"
+  node [fontname="Helvetica,Arial,sans-serif"]
+  edge [fontname="Helvetica,Arial,sans-serif"]
+  splines=curved
+  rankdir=TB
+
+  // Style for main node BAND
+  "DFTB" [shape=ellipse, style=filled, fillcolor="#f8f552", fontcolor="#000000", fontsize=18, fontweight=bold]
+
+  // Style for subroutines with bold names and smaller directory text
+  node [shape=box, style=filled, fillcolor="#ADD8E6", fontcolor="#000000"]
+
+  // Main nodes with numbers and paths
+  "NAOApplication1" [label=<<b>NAOApplication1</b><br/><font point-size="10">(utils/)</font>>]
+  "DoAIM" [label=<<b>DoAIM</b><br/><font point-size="10">(utils/)</font>>]
+  "NAOAIMCriticalPoints" [label=<<b>NAOAIMCriticalPoints</b><br/><font point-size="10">(utils/nao/atoms_in_molecules)</font>>]
+  "FindAIMCriticalPoints" [label=<<b>FindAIMCriticalPoints</b><br/><font point-size="10">(lib/dft/grid/)</font>>]
+  
+  // Main graph structure with adjusted arrows
+  "DFTB" -> "NAOApplication1" [color="#FF5733", penwidth=2]
+  "NAOApplication1" -> "DoAIM" [color="#FF5733", penwidth=2]
+
+  "DoAIM" -> "NAOAIMCriticalPoints" [color="#FF5733", penwidth=2]
+  "NAOAIMCriticalPoints" -> "FindAIMCriticalPoints" [color="#FF5733", penwidth=2]
+
+}
+

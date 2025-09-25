@@ -1,0 +1,88 @@
+% -*- coding: utf-8 -*-
+\chapter{Introduction}
+
+Comprendre et prédire la réactivité chimique en solution constitue un défi
+majeur en chimie théorique. Cette réactivité dépend fondamentalement de deux
+composantes : la contribution électronique, gouvernée par la structure
+électronique des molécules, et la faisabilité thermodynamique, déterminée par
+l'énergie de Gibbs $G = E_{\mathrm{electronic}} + \Delta H - TS$, qui combine
+l'énergie électronique, les corrections thermiques et
+l'entropie~\cite{scmGibbs2025}.
+
+Dans ce contexte, l'analyse et l'interprétation des descripteurs quantiques
+s'avèrent indispensables pour la compréhension des systèmes chimiques.  La
+densité électronique, les orbitales moléculaires, les descripteurs issus de la
+DFT conceptuelle (\gls{CDFT})~\cite{Parr1995}, ainsi que les topologies
+dérivées de la théorie quantique des atomes dans les molécules
+(\gls{QTAIM})~\cite{bader}, constituent autant d'outils complémentaires
+permettant de décrypter la réactivité chimique.  Toutefois, la synergie entre
+ces approches, et en particulier l'intégration des informations topologiques et
+conceptuelles, reste encore peu explorée à ce jour.
+
+Ce travail propose une approche intégrée, alliant QTAIM et CDFT, afin d'accéder
+à une représentation multiscalaire de la réactivité. La QTAIM permet une
+partition rigoureuse de l'espace moléculaire en régions atomiques, à partir
+desquelles peuvent être définis des descripteurs localisés ou condensés tels
+que les charges, les moments dipolaires ou les polarisabilités. Ces grandeurs
+sont directement liées à la topologie de la densité électronique, et offrent
+une lecture spatialisée du comportement chimique.
+
+\newpage
+La DFT conceptuelle, de son côté, propose un cadre théorique puissant pour
+l'analyse de la réactivité chimique à travers des descripteurs variés. Elle
+permet de définir, au moyen de la densité électronique, des indices globaux,
+locaux et non-locaux de réactivité, tels que le potentiel chimique electronique,
+entre autres. L'intégration de ces descripteurs au sein d'un cadre
+\gls{QTAIM} offre la possibilité de concilier une analyse énergétique et structurelle,
+tout en conservant une interprétabilité chimique forte. Cette approche hybride
+a été implémentée dans le software Amsterdam Modeling Suite
+(\ams)~\cite{ADF2001}, avec de nouveaux modules développés au cours de cette
+thèse.
+
+La dimension thermodynamique est également prise en compte via une modélisation
+conformationnelle explicite. En effet, les propriétés mesurées
+expérimentalement correspondent souvent à une moyenne sur plusieurs
+conformères, particulièrement en phase condensée. Pour en rendre compte, notre
+méthodologie combine un échantillonnage rapide basé sur le
+DFTB~\cite{ElstnerSeifert2014} à une réoptimisation DFT~\cite{Hohenberg1964} de
+haute précision, suivie d'une moyenne pondérée par la distribution de
+Boltzmann~\cite{Rowlinson2005}. Ce protocole permet d'obtenir des descripteurs
+réalistes, intégrant les effets entropiques et conformationnels.
+
+Dans certains cas, notamment pour l'étude de systèmes biologiques ou de
+réactions en milieu hétérogène, il est nécessaire d'avoir recours à des
+approches multi-échelles. Le formalisme mécanique quantique/mécanique
+moléculaire et en particulier le schéma de Polarisable
+Embedding~\cite{Beerepoot2016}, permet de tenir compte de la polarisation
+mutuelle entre une région traitée en mécanique quantique et un environnement
+classique.  Ces méthodes nécessitent des descripteurs électrostatiques précis,
+comme les charges et les polarisabilités atomiques, pour lesquels la QTAIM
+constitue une base naturelle. Toutefois, les bases de données disponibles,
+notamment via la bibliothèque PyFrame~\cite{zenodo}, sont encore limitées en
+couverture chimique et en compatibilité avec les modèles avancés de
+solvatation.
+
+% \newpage
+
+% Afin de surmonter ces limites, ce travail explore également l'utilisation de
+% modèles d'apprentissage automatique. À partir de bases de données enrichies
+% avec des agrégats de solvant, nous évaluons la capacité d'un modèle existant,
+% NNAIMQ~\cite{Gallegos2022}, à prédire les charges QTAIM, et nous étendons cette
+% approche à la prédiction de nouveaux descripteurs, comme les dipôles atomiques.
+% Bien que le développement complet de modèles ML ne constitue pas l'objectif
+% principal de ce travail, les outils mis en place jettent les bases pour une
+% généralisation future, à la croisée de la chimie computationnelle et de la
+% science des données.
+
+En résumé, cette thèse s'inscrit dans une démarche de modélisation intégrée de
+la réactivité chimique en solution, en développant des outils robustes pour
+l'analyse électronique, la prise en compte des effets entropiques et
+conformationnels, et l'exploitation des méthodes de solvatation. En conjuguant
+la rigueur de \gls{QTAIM}, la pertinence des descripteurs \gls{CDFT}, et le potentiel de
+l'apprentissage automatique, nous proposons une boîte à outils numérique
+polyvalente, extensible, et physiquement interprétable, à même d'améliorer
+l'analyse et la prédiction de la réactivité dans des milieux complexes.
+
+% \newpage
+\input{objetives}
+

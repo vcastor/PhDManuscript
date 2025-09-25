@@ -1,0 +1,112 @@
+% Main idea taken from:
+% https://www.overleaf.com/latex/templates/page-couverture-these-normandie-universite/cbpwdwzrhfkn
+% Edited by: VCastor
+
+{\fontsize{9}{10}\selectfont
+\begin{titlingpage}
+
+  \droidsans
+  \newgeometry{top=1.5cm,bottom=1.2cm,left=1.3cm,right=1.2cm,footskip=1cm}
+
+  \begin{center}
+
+    \includegraphics[scale=1.2]{img/logoNU}\\
+    \vspace{0.8cm}%
+
+    % THÈSE header section
+    {\renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{>{\centering\arraybackslash}m{17.6cm}}
+      \Large\vspace{0.3ex}\textcolor{white}{\textbf{THÈSE}}\cellcolor{VioletNU}\\
+      \\ [-0.5cm]
+      \normalsize\textbf{Pour obtenir le diplôme de doctorat}\\
+      \normalsize\textbf{Spécialité \thesisSpeciality}\\
+      \normalsize\textbf{Préparée au sein de \thesisUniversity}
+    \end{tabular}
+    \vspace{0.5cm}}
+
+    % Title and author section
+    {\renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|m{5.7cm}|m{6.3cm}|m{5.6cm}|}
+      \multicolumn{3}{m{17.6cm}}{\centering\fontsize{15}{14}\selectfont\cellcolor{gray!60}\textbf{\thesisTitle}}\\
+      \multicolumn{3}{m{17.6cm}}{}\\ [-0.5cm]
+      \multicolumn{3}{c}{\normalsize\textbf{Présentée et soutenue par}}\\
+      \multicolumn{3}{c}{\normalsize\textbf{\thesisAuthor}}\\
+    \end{tabular}
+    \vspace{0.5cm}}
+
+    % Defense date and jury section
+    {\renewcommand{\arraystretch}{1.5}
+    \arrayrulecolor{OrangeNU}
+    \begin{tabular}{|m{4.8cm}|m{9.2cm}|m{3.1cm}|}
+      \multicolumn{3}{|m{18cm}|}{\centering\cellcolor{OrangeNU}
+                                 \footnotesize\textbf{Thèse soutenue publiquement le \thesisDate\\ [-0.4em]
+                                 devant le jury composé de}}\\
+      % Jury members
+      \ifnum 0<\juryCount
+        \juryPrefixOne\ \juryNameOne & \makecell[l]{\juryTitleOne} & \juryRoleOne\\
+        \hline
+      \fi
+      \ifnum 1<\juryCount
+        \juryPrefixTwo\ \juryNameTwo & \makecell[l]{\juryTitleTwo} & \juryRoleTwo\\
+        \hline
+      \fi
+      \ifnum 2<\juryCount
+        \juryPrefixThree\ \juryNameThree & \makecell[l]{\juryTitleThree} & \juryRoleThree\\
+        \hline
+      \fi
+      \ifnum 3<\juryCount
+        \juryPrefixFour\ \juryNameFour & \makecell[l]{\juryTitleFour} & \juryRoleFour\\
+        \hline
+      \fi
+      \ifnum 4<\juryCount
+        \juryPrefixFive\ \juryNameFive & \makecell[l]{\juryTitleFive} & \juryRoleFive\\
+        \hline
+      \fi
+      \ifnum 5<\juryCount
+        \juryPrefixSix\ \juryNameSix & \makecell[l]{\juryTitleSix} & \juryRoleSix\\
+        \hline
+      \fi
+      \ifnum 6<\juryCount
+        \juryPrefixSeven\ \juryNameSeven & \makecell[l]{\juryTitleSeven} & \juryRoleSeven\\
+        \hline
+      \fi
+      \ifnum 7<\juryCount
+        \juryPrefixEight\ \juryNameEight & \makecell[l]{\juryTitleEight} & \juryRoleEight\\
+        \hline
+      \fi
+    \end{tabular}
+
+    % Directors section
+    \setlength{\arrayrulewidth}{2mm}{
+    \begin{tabular}{|m{17.9cm}}
+      \arrayrulecolor{OrangeNU}
+      \normalsize Thèse dirigée par
+      \ifnum \directorCount=1
+        \MakeUppercase{\directorOne}
+      \fi
+      \ifnum \directorCount=2
+        \MakeUppercase{\directorOne} et \MakeUppercase{\directorTwo}
+      \fi
+      \ifnum \directorCount=3
+        \MakeUppercase{\directorOne}, \MakeUppercase{\directorTwo} et \MakeUppercase{\directorThree}
+      \fi, \thesisLab
+    \end{tabular}} % end of directors section
+
+    } % end of orange section
+
+    \vfill % Bottom logos
+    \begin{tabular}{ccc}
+      \includegraphics[width=0.20\textwidth]{img/logoUni} & \hspace{0.15\textwidth}
+      \includegraphics[width=0.20\textwidth]{img/logoED} & \hspace{0.15\textwidth}
+      \includegraphics[width=0.17\textwidth]{img/logoCarmen}
+    \end{tabular}
+
+  \end{center}
+
+\end{titlingpage} % End of title page
+
+\normalfont % Return to default font
+}
+
+\arrayrulecolor{black}
+

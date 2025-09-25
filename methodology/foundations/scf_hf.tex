@@ -1,0 +1,30 @@
+% SCF algorithm for Hartree-Fock
+
+\begin{tikzpicture}[node distance=2cm]
+
+  \node (start) [startstop] {Start};
+  \node (in1) [io, below of=start] {xyz coordinates and basis set};
+  \node (pro1) [process, below of=in1] {Compute \\ $\mHa^{\mathrm{core}}$,
+      $\mOverlap$, $(\mu\nu|\lambda\sigma)$};
+  \node (pro2) [process, below of=pro1, yshift=-0.5cm]
+    {$\mFock\mOverlap = \mOverlap\mC\varepsilon$};
+  \node (dec1) [decision, below of=pro2, yshift=-0.1cm] {Converged?};
+
+  \node (out1) [io, below of=dec1, yshift=-0.4cm] {$E_{\HF}$};
+
+  \node (pro3b) [process, right of=dec1, xshift=3.5cm]
+    {Recompute $\mFock$};
+
+  \node (stop) [startstop, below of=out1] {Stop};
+
+  \draw [arrow] (start) -- (in1);
+  \draw [arrow] (in1) -- (pro1);
+  \draw [arrow] (pro1) -- (pro2);
+  \draw [arrow] (pro2) -- (dec1);
+  \draw [arrow] (dec1) -- node[anchor=south] {no} (pro3b);
+  \draw [arrow] (dec1) -- node[anchor=east] {yes} (out1);
+  \draw [arrow] (pro3b) |- (pro2);
+  \draw [arrow] (out1) -- (stop);
+
+\end{tikzpicture}
+

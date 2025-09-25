@@ -1,0 +1,88 @@
+% Cube with E field applied in x and z directions
+% Dependecies in the file style/tikz_field.tex
+
+\begin{tikzpicture}[
+  font = \tiny \boldmath,
+  tdplot_main_coords,
+  anchor=center,
+  inner sep = 3pt,
+  axis/.style={->,blue,line width=0.8pt},
+  cube/.style={draw=b,line width=0.6pt,line join=round,line cap=round},
+  scale=1.8,
+  face/.style={cube,line width=0.6pt,draw=b},
+  filled face/.style={face,fill=w,opacity=0.8},
+  arrow style/.style={-stealth,line width=0.5pt},
+  ]
+
+  \def\gridrange{1.7,2.07,2.43,2.8}
+  \def\zrange{0.2,0.57,0.93,1.3}
+
+  % Axes
+  \begin{scope}[shift={(-0.2,0,-1.5)}, scale=0.8]
+    \draw[-stealth] (0,0,0) -- (0.5,0,0) node[scale=0.9, anchor=east] {x};
+    \draw[-stealth] (0,0,0) -- (0,0.7,0) node[scale=0.9, anchor=north east] {y};
+    \draw[-stealth] (0,0,0) -- (0,0,0.4) node[scale=0.9, anchor=south] {z};
+  \end{scope}
+
+  % Blue plane
+  \draw[cube, fill=sky, opacity=.5] (1.5,1.5,-0.3) -- (3,1.5,-0.3) -- (3,3,-0.3) -- (1.5,3,-0.3) -- cycle;
+  \draw[cube,thick,draw=sky] (1.5,1.5,-0.3) -- (3,1.5,-0.3) -- (3,3,-0.3) -- (1.5,3,-0.3) -- cycle;
+
+  % Pink plane
+  \draw[cube, fill=pink!90, opacity=.4] (1.1,1.5,0) -- (1.1,3,0) -- (1.1,3,1.5) -- (1.1,1.5,1.5) -- cycle;
+  \draw[cube,thick,draw=pink] (1.1,1.5,0) -- (1.1,3,0) -- (1.1,3,1.5) -- (1.1,1.5,1.5) -- cycle;
+
+  % Cube Faces
+  \foreach \face in {
+    {(1.5,1.5,0) -- (3,1.5,0) -- (3,1.5,1.5) -- (1.5,1.5,1.5) -- cycle},
+    {(1.5,3,0) -- (3,3,0) -- (3,1.5,0) -- (1.5,1.5,0) -- cycle},
+    {(1.5,1.5,0) -- (1.5,1.5,1.5) -- (1.5,3,1.5) -- (1.5,3,0) --cycle}
+  } {
+    \draw[cube,thick, fill=b!20] \face;
+  }
+
+  % z component of E [Arrows]
+  \foreach \x in \gridrange {
+    \foreach \y in \gridrange {
+      \pgfmathsetmacro{\op}{min(1, 0.7*((\y-1.4)/1.5 + (\x+0.5)/1.5)/2)}
+      \draw[arrow style, sky, opacity=\op]
+      (\x,\y,-0.7) -- (\x,\y,2);
+    }
+  }
+
+  % Cube edge [Above the blue arrows but below the pink arrows]
+  \foreach \face in {
+    {(3,1.5,0) -- (3,3,0) -- (3,3,1.5) -- (3,1.5,1.5) -- cycle},
+  } {
+    \draw[face, thick] \face;
+  }
+
+  % x component of E [Arrows]
+  \foreach \y in \gridrange {
+    \foreach \z in \zrange {
+      \pgfmathsetmacro{\op}{min(1, 1.4*((\y-1.4)/1.5 + (\z+0.5)/1.5)/2)}
+      \draw[arrow style, pink, opacity=\op]
+        (0.6,\y,\z) -- (3.6,\y,\z);
+    }
+  }
+
+  % Cube edges [Above everything]
+  \foreach \face in {
+    {(1.5,3,0) -- (3,3,0) -- (3,3,1.5) -- (1.5,3,1.5)},
+    {(1.5,1.5,1.5) -- (1.5,3,1.5) -- (3,3,1.5) -- (3,1.5,1.5)},
+    {(1.5,3,0) -- (1.5,3,1.5)}
+  } {
+    \draw[face, thick] \face;
+  }
+
+  % Labels
+  \begin{scope}[canvas is xz plane at y=2.25]
+    \node[scale=1.1, text=pink, inner sep=2pt, xscale=-1, transform shape] at (0.1,0.6) {$F_x$};
+  \end{scope}
+
+  \begin{scope}[canvas is xz plane at y=3]
+    \node[scale=1.1, text=sky, inner sep=2pt, xscale=-1, transform shape] at (2.27,-0.5) {$F_z$};
+  \end{scope}
+
+\end{tikzpicture}
+

@@ -1,0 +1,38 @@
+---
+config:
+  theme: base
+  logLevel: debug
+  themeVariables: {}
+---
+gitGraph
+    commit id: "AMS 2024"
+    branch dipmoment
+    commit id: "dipole and rings/cages"
+    commit id: "Rings and Cages finished"
+    commit id: "dipmoment finished"
+    checkout main
+    branch EStates
+    commit id: "Reading Grid/Screen"
+    checkout main
+    merge dipmoment
+    commit id: "Local" tag: "Version 2025"
+    checkout EStates
+    commit
+    commit
+    merge dipmoment
+    branch rewriteQTAIM
+    commit id: "As Version 2025" type: HIGHLIGHT
+    checkout EStates
+    commit
+    commit id: "Charge Transfer"
+    checkout rewriteQTAIM
+    commit
+    cherry-pick id: "Charge Transfer"
+    commit
+    checkout EStates
+    merge rewriteQTAIM type: REVERSE
+    commit id: "Solve Conflict"
+    commit id: "Final QTAIM Version"
+    checkout main
+    merge EStates
+    commit id: "Ok" tag: "Send to Review"

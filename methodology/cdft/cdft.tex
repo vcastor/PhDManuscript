@@ -1,0 +1,374 @@
+% -*- coding: utf-8 -*-
+\newpage
+\section{Conceptual DFT}
+
+The topological analysis of the electron density in QTAIM represents just one 
+facet of density-based approaches to chemical reactivity. A complementary 
+perspective is offered by Conceptual Density Functional Theory (\gls{CDFT}), 
+which focuses on how variations in global and local electronic descriptors 
+govern chemical behaviour. The foundations of \gls{CDFT} can be traced to the 
+work of Parr and co-workers, who identified the Lagrange multiplier 
+in density functional theory ---traditionally associated with the chemical 
+potential--- as the negative of electronegativity~\cite{Parr1978}.
+
+\vspace{1em}%
+This idea was further developed by Parr and Pearson in 1983, who related the
+second derivative of the energy with respect to the number of electrons to the
+concept of chemical hardness~\cite{Parr1983}. The formal introduction of the
+Fukui function in 1984 extended the framework to local reactivity indices,
+enabling site-specific analyses of chemical reactivity~\cite{Parr1984}. These
+developments laid the groundwork for a density-based interpretation of chemical
+concepts, with the term ``Conceptual DFT'' formally introduced in
+1995~\cite{Parr1995}.
+
+\vspace{1em}%
+Conceptual DFT offers a hierarchy of global and local descriptors ---such as
+the chemical potential, chemical hardness, softness, Fukui functions, dual
+descriptors, and electrophilicity index--- which allow us to predict and
+rationalise patterns of chemical reactivity.
+
+\newpage
+\subsection{Global Descriptors}
+
+The cornerstone of this approach is the identification of the chemical
+potential $\mu$ as the Lagrange multiplier associated with the constraint on
+electron number in the Euler-Lagrange variational formalism:
+
+\follow{Chemical Potential as Lagrange Multiplier}{
+
+  The existence of the energy as a functional of the electron density,
+  the constraint on the number of electrons, and the variational principle let
+  us write the Euler-Lagrange equation as:
+%
+  \begin{align}
+    \fdv{}{\rho(\mathbf{r})} \left( E[\rho] - \mu \left[
+      \int \rho(\mathbf{r})\dd\mathbf{r} - N \right] \right) = 0
+  \end{align}
+
+  implying $\mu = \fdv{E[\rho]}{\rho(\mathbf{r})}$ as the Lagrange multiplier
+  to enforce the electron-number constraint.
+
+  % \begin{align}
+  %   \left(\pdv{E}{N}\right)_{v(\mathbf{r})} & =
+  %     \int \left(\fdv{E}{\rho}\right)_{v(\mathbf{r})}
+  %       \left(\pdv{\rho}{N}\right)_{v(\mathbf{r})} \dd\mathbf{r} \\
+  %     & =\mu \pdv{N} \left[\int \rho\dd\mathbf{r}\right] = \mu
+  % \end{align}
+
+}
+
+Solving it for the exact density, the chemical potential can be expressed as
+the partial derivative of the energy with respect to the number of electrons,
+quantifing the change in ground-state energy upon an infinitesimal change in
+electron number at constant external potential $v(\mathbf{r})$:
+%
+\begin{align}
+  \mu = v(\mathbf{r}) + \fdv{F[\rho]}{\rho(\mathbf{r})}
+  = \left(\pdv{E}{N}\right)_{v(\mathbf{r})}.
+\end{align}
+
+\nt{
+  Using the chain rule, we can show that:
+%
+  \begin{align}
+    \left(\pdv{E}{N}\right)_{v(\mathbf{r})} & =
+      \int \left(\fdv{E}{\rho}\right)_{v(\mathbf{r})}
+        \left(\pdv{\rho}{N}\right)_{v(\mathbf{r})} \dd\mathbf{r} \\
+      & =\mu \pdv{N} \left[\int \rho\dd\mathbf{r}\right] = \mu.
+  \end{align}
+
+}
+
+Accordingly, its sign and magnitude measure the system's propensity to exchange
+electrons with its surroundings: a more negative $\mu$ indicates a stronger
+tendency to accept electronic charge and vice versa.
+
+% The Lagrange multiplier $\mu$ arises in the constrained minimisation of 
+% the energy functional with a fixed number of electrons, is identified as the 
+% chemical potential. This quantity describes the system's tendency to 
+% gain or lose electrons, and can thus be interpreted as the escaping tendency 
+% of an electron from the system.
+
+\newpage
+From a thermodynamic perspective, the chemical potential governs the direction
+of charge transfer, favouring flow from regions of high $\mu$ to low $\mu$.
+Importantly, $\mu$ can be connected to experimentally accessible quantities
+such as the vertical ionisation potential $I$ and the vertical electron
+affinity $A$.
+
+\vspace{1em}%
+Using a finite difference approximation under the assumption of piecewise
+linearity of the energy with respect to electron number, we obtain:
+%
+\begin{align}
+  \mu = \left(\pdv{E}{N}\right)_{v(\mathbf{r})}
+    \approx -\chi = \frac{I + A}2,
+\end{align}
+
+% \newpage
+\noindent where $\chi$ is the electronegativity, traditionally defined as the
+tendency of an atom or molecule to attract electrons. In this formulation,
+electronegativity and chemical potential are essentially two sides of the same
+coin, differing only by a sign.
+
+\vspace{1em}%
+Within the Koopmans' theorem, the chemical potential can be
+approximated using frontier molecular orbital energies. Specifically, the
+ionisation potential $I$ and electron affinity $A$ are associated with the
+negative of the \homo and \lumo energies,
+respectively~\cite{Pearson1986}.
+
+\nt{
+  Consequently, the chemical potential can be expressed as:
+  \begin{align}
+    \mu \approx -\chi = \nicefrac12 (\epsilon_\mathrm{HOMO} + \epsilon_\mathrm{LUMO}).
+  \end{align}
+}
+
+\newpage
+Building on the Hard and Soft Acids and Bases principle, Pearson introduced the
+concept of chemical hardness $\eta$~\cite{Pearson1997}, which measures a
+system's resistance to change in electron number. Formally, it corresponds to
+the second derivative of the energy with respect to the number of
+electrons~\cite{Parr1983}, and the inverse of the hardness
+defines the softness $S$~\cite{Yang1985}, a measure of
+the system's reactivity or its ability to adapt its electron density in
+response to external perturbations:
+
+\vspace{1em}%
+\dfn{Softness and Hardness}{
+  \begin{align}
+    \eta & = \left(\pdv[2]{E}{N}\right)_{v(\mathbf{r})}
+      = \left(\pdv{\mu}{N}\right)_{v(\mathbf{r})} \\
+    & = I - A 
+      \approx -(\epsilon_\mathrm{HOMO} - \epsilon_\mathrm{LUMO}),
+  \end{align}
+  \begin{align}
+    S = \frac1\eta = \left(\pdv{N}{\mu}\right)_{v(\mathbf{r})}
+  \end{align}
+}
+
+\vspace{1em}%
+This global descriptor balances the stabilizing energy a system gains upon 
+acquiring charge (via $\mu$) with its resistance to such charge transfer 
+(via $\eta$), offering a compact measure of electrophilic power.
+
+\vspace{1em}%
+Hardness is generally associated with a system's resistance to deformation of
+its electron density under external perturbations. As such, hard systems tend
+to exhibit low polarisability and magnetisability, while soft systems respond
+more readily to changes in their environment. To further quantify a system's
+reactivity, Parr introduced the electrophilicity
+index~\cite{Parr1999}, which combines the tendency of a system to acquire
+electrons (through the chemical potential) with its resistance to charge
+transfer (through the hardness):
+%
+\begin{align}
+  \omega = \frac{\mu^2}{2\eta} = \frac{\chi^2}{2\eta}.
+\end{align}
+
+\newpage
+\subsection{Local Descriptors}
+
+Many methods have been developed to predict if a chemical reaction will happen
+or not, and in case it happens, how it will proceed. One of the most popular
+method of prediction is frontier molecular orbital (\gls{FMO})
+theory~\cite{Albright2013}, which relies on the shapes and symmetries of the
+highest occupied and lowest unoccupied molecular orbitals (\homo and
+\lumo).
+
+\vspace{1em}%
+However, a major limitation of \gls{FMO} theory is its reliance on a fixed
+orbital picture, which does not account for electron correlation or orbital
+relaxation. This limitation motivated the development of the Fukui
+function~\cite{Ayers2000, Yang1984, Parr1984} within the context of DFT a
+reactivity descriptor that preserves the conceptual foundation of \gls{FMO}
+while, in principle, incorporating both electron correlation~\cite{Melin2005}
+and orbital relaxation effects~\cite{Yang1984, Bartolotti2005, Anderson2007}.
+
+\vspace{1em}%
+\dfn{Fukui Function}{
+  \begin{equation}
+    f(\mathbf{r}) = \left[\fdv{\mu}{v(\mathbf{r})}\right]_N
+      = \left[\pdv{\rho(\mathbf{r})}{N}\right]_{v(\mathbf{r})}
+  \end{equation}
+  where $\mu$ is the electronic chemical potential, the negative of the electronegativity,
+  $v(\mathbf{r})$ is the external potential due to the atomic nuclei, $\rho (\mathbf{r})$ is the
+  electron density, and $N$ is the number of electrons.
+}
+
+\vspace{1em}%
+Because the electron density $\rho(\mathbf{r})$ exhibits discontinuities as a
+function of the number of electrons $N$~\cite{Perdew1982, Zhang2000}, its
+derivative with respect to $N$ must be evaluated from the left and from the
+right.
+
+\newpage
+This yields two distinct Fukui functions, each appropriate for describing
+different types of reactivity: one for nucleophilic attack (electron addition)
+and another for electrophilic attack (electron removal).
+
+\follow{Fukui functions $f^\pm(\mathbf{r})$}{
+
+  \begin{align}
+    f^\pm(\mathbf{r}) = \left[\pdv{\rho(\mathbf{r})}{N}\right]^\pm_{v(\mathbf{r})} =
+    \begin{cases}
+      f^+(\mathbf{r}) &= \rho(N+1) - \rho(N) \\
+      f^-(\mathbf{r}) &= \rho(N) - \rho(N-1)
+    \end{cases}
+  \end{align}
+
+  If we consider the density as a function of the \gls{KS} orbitals and the
+  occupation numbers,
+
+  \begin{align}
+    \rho(\mathbf{r}) = \sum_{i=1}^{\infty} n_i | \phi_i(\mathbf{r}) |^2 \quad \text{with} \quad
+    n_i =
+    \begin{cases}
+        1 & i \leq HOMO \\
+        0 & i \geq LUMO
+    \end{cases}
+  \end{align}
+
+  \noindent then, the Fukui functions became:
+
+  \begin{align}
+    f^+ (\mathbf{r}) &= |\phi_{\mathrm{LUMO}}(\mathbf{r})|^2 + \sum_\mathrm{LUMO}^\infty
+    \left( \pdv{|\phi_i (\mathbf{r})|^2}{N} \right) ^+_{v(\mathbf{r})} \\
+    f^- (\mathbf{r}) &= |\phi_{\mathrm{HOMO}}(\mathbf{r})|^2 + \sum^\mathrm{HOMO}_1
+    \left( \pdv{|\phi_i (r)|^2}{N} \right) ^-_{v(\mathbf{r})}
+  \end{align}
+
+  And therefore, neglecting the orbital relaxation terms, from linking
+  to frontier molecular orbital theory,
+
+  \begin{align}
+    f^+ (\mathbf{r}) \approx | \phi_{\mathrm{LUMO}} |^2 \\
+    f^- (\mathbf{r}) \approx | \phi_{\mathrm{HOMO}} |^2
+  \end{align}
+
+}
+
+Additionally, the dual descriptor, proposed by Morell~\cite{Morell2004}, is
+defined as the mixed second derivative of the energy with respect to the
+external potential and the number of electrons, and equivalently, as the second
+derivative of the electron density with respect to the number of electrons:
+%
+\begin{align}
+  f^{(2)}(\mathbf{r}) = \frac{\delta^3E}{\partial N^2\delta v(\mathbf{r})} =
+    \left(\pdv[2]{\rho(\mathbf{r})}{N}\right)_{v(\mathbf{r})} =
+    \left(\pdv{f(\mathbf{r})}{N}\right)_{v(\mathbf{r})} =
+    \left(\fdv{\eta}{v(\mathbf{r})}\right)_N
+\end{align}
+
+\newpage
+In practice, the dual descriptor is computed as the difference between the
+electrophilic and nucleophilic Fukui functions at a given point $\mathbf{r}$. Its
+sign provides insight into local reactivity: if $f^{(2)}(\mathbf{r}) > 0$, the
+site is more electrophilic than nucleophilic; conversely, if $f^{(2)}(\mathbf{r})
+< 0$, the site is more nucleophilic than electrophilic.
+
+The linear response function $\chi(\mathbf{r}, \mathbf{r}')$, ---sometimes
+denoted as $\omega(\mathbf{r}, \mathbf{r}')$ and named polarisability
+kernel---~\cite{Langenaeker2001} has been employed to probe local and non-local
+features of chemical reactivity. This function quantifies how the electron
+density at a point $\mathbf{r}$ responds to an external perturbation applied at
+another point $\mathbf{r}'$. Formally, it is defined as~\cite{Gzquez2021}:
+
+\begin{align}
+  \chi(\mathbf{r},\mathbf{r}') &=
+    \left(\fdv{\rho(\mathbf{r})}{v(\mathbf{r}')}\right)_{N}
+    % = \sum_{k,l}^K q_{kl} \beta_k (\mathbf{r})\beta_l (\mathbf{r}')
+    = \sum_{k}^\infty q_{j} \beta_k (\mathbf{r})\beta_k (\mathbf{r}').
+  % \chi_{\mathrm{AB}} &= \int{V_{\mathrm{A}}}\int{V_{\mathrm{B}}} \dd\mathbf{r} \dd\mathbf{r}' \chi(\mathbf{r},\mathbf{r}') \\
+  % &=\sum_{k\in \mathrm{A}} \sum_{l\in \mathrm{B}} q_{kl} \int \dd\mathbf{r}\beta_k(\mathbf{r}) \int \dd\mathbf{r}'\beta_l(\mathbf{r}')
+\end{align}
+
+This descriptor provides insight into a variety of chemically meaningful
+phenomena, including electron delocalisation, inductive and mesomeric effects,
+as well as aromaticity, thereby offering a more fundamental basis for
+understanding chemical reactivity~\cite{Geerlings2003}.
+% And can be
+% sumarised in the~\Figure{fig_canonical}.
+
+The work of Langenaeker and Liu~\cite{Langenaeker2001} was instrumental in this context, as
+they analysed the response of the electron density to perturbations in the
+external potential for atomic systems. Their study highlighted the potential of
+the linear response function to reveal the intrinsic reactivity patterns of
+atoms and molecules, going beyond orbital-based or purely local descriptors.
+
+In the same way that global hardness provides insight into which species is
+more likely to undergo a chemical reaction, local hardness~\cite{Yang1985}
+indicates the most reactive site within a molecule. It is defined as the
+functional derivative of the chemical potential with respect to the electron
+density:
+
+\begin{align}
+  \eta(\mathbf{r}) =
+    \left(\fdv{\mu}{\rho(\mathbf{r})}\right)_{v(\mathbf{r})}.
+\end{align}
+
+\pagebreak
+Several definitions for local hardness have been proposed. Notably, the
+expressions introduced by Meneses~\cite{Meneses2004}
+($\eta_\mathrm{M}(\mathbf{r})$) and by Gál~\cite{Gal2011}
+($\eta_\mathrm{G}(\mathbf{r})$) are among the most widely used:
+
+\begin{gather}
+  \eta_\mathrm{M}(\mathbf{r}) =
+    \left(\frac{f^+(\mathbf{r}) - f^-(\mathbf{r})}{2}\right) +
+      \mu f^{(2)}(\mathbf{r}) \\
+  \eta_\mathrm{G}(\mathbf{r}) =
+    If^-(\mathbf{r}) + Af^+(\mathbf{r})
+\end{gather}
+
+Similarly, a local softness can be defined, though it is not merely the inverse
+of local hardness. It is more appropriately expressed as the product of the
+global softness and the Fukui functions:
+
+\begin{align}
+  s^\pm(\mathbf{r}) = Sf^\pm(\mathbf{r}).
+\end{align}
+
+By integrating the local softness over the entire space, one recovers the global
+softness, since the Fukui functions integrate to unity. At the scale of a single
+molecule, local softness conveys information similar to that provided by the
+Fukui functions. However, its principal advantage lies in the possibility of
+comparing reactive sites across different molecules, something the Fukui function
+alone cannot achieve.
+
+It is important to remark that the previous discussion is based on the
+canonical ensemble, however, in a context of a finite temperature, the
+functional $\Omega$, the grand potetial, is defined $\Omega = E - N\mu$ or
+$\Omega = E - \mu (N - N_0)$, where $N_0$ is the number of electrons in the
+reference state. At given temperature $T$, the following hierarchy of response
+functions was done~\cite{Chermette1999}. In the Figure~\ref{canetgrand} we can
+see the energy derivatives and the comparison between the canonical and grand
+canonical ensembles.
+
+\newpage
+\vspace*{8em}%
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[t]{1\textwidth}
+    \centering
+    \input{canonical}
+    \caption{Energy derivatives and response functions in the Canonical Ensamble.}
+    \label{fig_canonical}
+  \end{subfigure}
+
+  \vspace{4em}%
+
+  \begin{subfigure}[t]{1\textwidth}
+    \centering
+    \input{gran_canonical}
+    \caption{Energy derivatives and response functions in the Grand Canonical Ensemble.}
+    \label{fig_grandcanonical}
+  \end{subfigure}
+  \caption{Comparison of energy derivatives n the
+    Canonical and Grand Canonical ensembles. The arrows indicate with
+    respect variable the derivative is taken.}
+  \label{canetgrand}
+\end{figure}
+\vfill%
+

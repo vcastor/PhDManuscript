@@ -1,0 +1,40 @@
+% -*- coding: utf-8 -*-
+
+% cartoon of *.run
+\begin{tikzpicture}
+  % Main box
+  % \fontfamily{phv}\selectfont
+  {\scriptsize\sffamily
+  \node[rectangle, draw=strongGreen, thick,
+        fill=pastelGreen, fill opacity=0.3,
+        text width=5.5cm, align=left, inner sep=4pt,
+        rounded corners=5pt, text=black,
+        text opacity=1] (mainbox2) at (0,0) {
+    \baselineskip=7pt
+    \#!/bin/sh\\
+    Task GeometryOptimization\\ [0.3cm]
+
+    Properties\\
+    \hspace{0.5cm}NormalModes true\\
+    End\\ [0.3cm]
+
+    System\\
+    \hspace{0.5cm}Atoms\\
+    \hspace{1cm} H 0.0 0.0 0.0\\
+    \hspace{1cm} H 0.8 0.0 0.0\\
+    \hspace{0.5cm}End\\
+    End\\ [0.3cm]
+    
+    Engine DFTB\\
+    \hspace{0.5cm}\tikz[
+      baseline=(modelline.base)]{\node[rectangle,
+      draw=strongBlue, fill=pastelBlue,
+      fill opacity=0.7, inner sep=2pt,
+      rounded corners=3pt, text=black,
+      text opacity=1]
+    (modelline) {Model GFN1-xTB}}\\ [-0.2cm]
+    EndEngine
+  };}
+
+\end{tikzpicture}
+

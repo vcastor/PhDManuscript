@@ -1,0 +1,27 @@
+% -----------
+% Fancy table
+% dependency with the packages {tcolorbox, tabularx, array, colortbl}
+% do NOT move to another file [it has dependencies with the preamble]
+\usepackage{booktabs}                    % Enhances quality of tables
+\tcbuselibrary{skins}
+\newcolumntype{Z}{>{\raggedleft\arraybackslash}X}
+\tcbset{tab1/.style={fonttitle=\bfseries\large,
+  fontupper=\normalsize\sffamily,
+  colback=yellow!10!white,
+  colframe=red!75!black,
+  colbacktitle=Salmon!40!white,
+  coltitle=black,
+  center title,
+  freelance,
+  frame code={
+    \foreach \n in {north east,north west,south east,south west}
+{\path [fill=red!75!black] (interior.\n) circle (3mm); };},}}
+\tcbset{tab2/.style={enhanced,
+  fonttitle=\bfseries,
+  fontupper=\normalsize\sffamily,
+  colback=yellow!10!white,
+  colframe=red!50!black,
+  colbacktitle=Salmon!40!white,
+  coltitle=black,
+  center title}}
+

@@ -1,0 +1,87 @@
+% -*- coding: utf-8 -*-
+
+\begin{tcolorbox}[tab2,
+  tabularx={>{\arraybackslash}m{3.5cm}|>{\arraybackslash}X|>{\arraybackslash}m{1.5cm}},
+  title=Descriptors Available in ADF and DFTB for CPs,
+  fontupper=\tiny,
+  fonttitle=\bfseries,
+  boxrule=0.5pt]
+
+  & & \\
+  \textbf{Descriptor} & \textbf{Equation} & \textbf{Reference} \\ \hline\hline
+
+  & & \\ [-2mm]
+  General Descriptors &
+  $\rho, \nabla\rho, \mathbf{H}_\rho, \nabla^2\rho, \diamondsuit \rho, ellepticity $ &
+  \\
+  & & \\ [-2mm] \hline
+
+  & & \\ [-2mm]
+  Metallicity &
+  $\xi_m(\mathbf{r}_\mathrm{cp}) = \frac{36(3\pi^2)^{\sfrac{2}{3}}}5\frac{\rho^{\sfrac{5}{3}}}{\nabla^2\rho}$ &
+  \cite{Ayers2015} \\
+  & & \\ [-2mm] \hline
+
+  %$\wp$
+
+  & & \\ [-2mm]
+  Variation Rates & 
+  \makecell[l]{
+  $\delta u = \frac1{4\pi}\int_\tau\sin\phi\sqrt{\lambda_1^2\sin^2\phi\cos^2\theta + \lambda_2^2\sin^2\phi\sin^2\theta + \lambda_3^2\cos^2\phi}\dd\phi\dd\theta$ \\
+  $\delta s = \frac{A_s}{4\pi\rho^{\sfrac{4}{3}}}\int_\tau\sin\phi\sqrt{\lambda_1^2\sin^2\phi\cos^2\theta + \lambda_2^2\sin^2\phi\sin^2\theta + \lambda_3^2\cos^2\phi}\dd\phi\dd\theta$ \\
+  $\delta t = \frac{A_t}{4\pi\rho^{\sfrac{7}{6}}}\int_\tau\sin\phi\sqrt{\lambda_1^2\sin^2\phi\cos^2\theta + \lambda_2^2\sin^2\phi\sin^2\theta + \lambda_3^2\cos^2\phi}\dd\phi\dd\theta$
+  } &
+  \cite{Tognetti2009, Tognetti2014} \\
+  & & \\ [-2mm] \hline
+
+  & & \\ [-2mm]
+  Inhomogeneites &
+  \makecell[l]{
+  $l_{s(\mathbf{r}_c)} = \frac1{\langle s' \rangle (\mathbf{r}_c)}$\\
+  $l_{e_x(\mathbf{r}_c)} = \sqrt{\sfrac{e_{x(\mathbf{r}_c)}}{\langle \delta e_x \rangle _{\mathbf{r}_c}}}$
+  } &
+  \cite{Tognetti2013} \\
+  & & \\ [-2mm] \hline
+
+  & & \\ [-2mm]
+  Abramov's descriptors &
+  \makecell[l]{
+  $G(\mathbf{r}_\mathrm{cp}) = \sfrac{3}{10}(3\pi^2)^{\sfrac{2}{3}}\rho^{\sfrac{5}{3}} + \sfrac{1}{6}\nabla^2\rho$ \\ 
+  $V(\mathbf{r}_\mathrm{cp}) = \sfrac{1}{4}\nabla^2\rho -2G(\mathbf{r}_\mathrm{cp})$ \\
+  $H = G(\mathbf{r}_\mathrm{cp}) + V(\mathbf{r}_\mathrm{cp})$
+  } & 
+  \cite{Abramov1997, Espinosa1998} \\
+  & & \\ [-2mm] \hline
+
+  & & \\ [-2mm]
+  Uniform Electron Gas &
+  \makecell[l]{
+  $e^\text{UEG}_x(\mathbf{r}_\mathrm{cp}) = -\frac34\left(\frac3\pi\right)^{\sfrac{1}{3}}\rho^{\sfrac{4}{3}}$ \\
+  $e_c^\text{UEG}(\mathbf{r}_\mathrm{cp}) = \frac{a_0 + a_1\rho + a_2\rho^2}{b_0 + b_1\rho + b_2\rho^2}$
+  } &
+  \cite{Tognetti2014} \\
+  & & \\ [-2mm] \hline
+
+  & & \\ [-2mm]
+  Variation Rates &
+  \makecell[l]{
+  $\langle \delta e_x \rangle ^{(2)} = \frac{1}{2\sqrt[3]{(9\pi)}}\rho^{\sfrac{1}{3}}\nabla^2\rho 
+  - \frac{\mu\diamondsuit \rho}{16(3\pi^5)^{\sfrac{1}{3}}\rho^{\sfrac{4}{3}}}$\\
+  $\langle \delta e_c \rangle ^{(2)} = \frac{a_1b_0 - a_0b_1 + 2(a_2b_0 -a_0b_2)\rho +(a_2b_1 - a_1b_2)\rho^2}{6(b_0 + b_1\rho + b_2\rho^2)^2}
+  \times\nabla^2\rho$\\ $\qquad\qquad + \frac{\pi^{\sfrac{1}{3}}\beta_c\diamondsuit \rho}{3^{\sfrac{4}{3}} 16\rho^{\sfrac{4}{3}}}$ \\
+  $\langle \delta e_T\rangle^{(2)} = \frac{\pi^{\sfrac{4}{3}}}{4\sqrt[3]{3}}\rho^{\sfrac{2}{3}}\nabla^2\rho + \frac{\diamondsuit \rho}{24\rho}$
+  } &
+  \cite{Tognetti2014} \\
+  & & \\ [-2mm] \hline
+
+  & & \\ [-2mm]
+  Locally Compare Ratios &
+  \makecell[l]{
+  $Q_{xc}(\mathbf{r}_c) = \frac{\langle e_x \rangle ^{(2)}_{\mathbf{r}_c}}{\langle e_c \rangle ^{(2)}_{\mathbf{r}_c}}$\\
+  $P_{xc}(\mathbf{r}_c) = \frac{e_x(\mathbf{r}_c)}{e_c(\mathbf{r}_c)}$
+  } &
+  \cite{Tognetti2014} \\ 
+  & &  \\
+
+\end{tcolorbox}
+

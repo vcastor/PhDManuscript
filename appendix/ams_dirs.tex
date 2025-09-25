@@ -1,0 +1,94 @@
+% -*- coding: utf-8 -*-
+\newpage
+\section{AMS Directory Structure}
+
+The \ams driver is a large project composed of many interdependent
+components, and its directory structure reflects this complexity. For the
+benefit of any future developer reading this document, this section provides a
+concise overview of the organisation of the \ams directory tree, outlining
+the purpose of its main folders.
+
+\begin{figure}[h]
+\centering
+  \begin{tikzpicture}[
+    dirtree,
+    % Even less indentation
+    level 1/.style={sibling distance=0.7cm, level distance=1.5cm},
+    level 2/.style={sibling distance=0.7cm, level distance=1.3cm},
+    level 3/.style={sibling distance=0.7cm, level distance=1.1cm},
+  ]
+    % Define a vertical line for comment alignment (optional visual guide)
+    % \draw[gray!20, dashed] (7,-1) -- (7,-20);
+    
+    \node[directory] (root) {\$AMSHOME/}
+      child { node[directory] (atomicdata) {atomicdata/} }
+      child { node[directory] (data) {data/} }
+      child { node[directory] (examples) {examples/} }
+      child { node[directory] (ext) {ext/}
+        child { node[directory] (ftl) {ftl/} }
+      }
+      child[missing] {}
+      child { node[directory] (gui) {gui/} }
+      child { node[directory] (install) {Install/} }
+      child { node[directory] (scripting) {scripting/}
+        child { node[directory] (scm) {scm/}
+          child { node[directory] (plams) {plams/} }
+          child { node[directory] (dots1) {...} }
+        }
+      }
+      child[missing] {}
+      child[missing] {}
+      child[missing] {}
+      child { node[directory] (src) {src/}
+        child { node[directory] (ams) {ams/}
+          child { node[directory] (applications) {applications/} }
+          child { node[directory] (engines) {engines/} }
+        }
+        child[missing] {}
+        child[missing] {}
+        child { node[directory] (adf) {adf/} }
+        child { node[directory] (band) {band/} }
+        child { node[directory] (lib) {lib/}
+          child { node[directory] (base) {base/} }
+          child { node[directory] (core) {core/} }
+          child { node[directory] (dft) {dft/} }
+        }
+        child[missing] {}
+        child[missing] {}
+        child[missing] {}
+      }
+      child[missing] {}
+      child[missing] {}
+      child[missing] {}
+      child[missing] {}
+      child[missing] {}
+      child[missing] {}
+      child[missing] {}
+      child[missing] {}
+      child[missing] {}
+      child { node[directory] (userdoc) {userdoc/} };
+      
+    % Add all comments aligned at x=7
+    \node[comment] at (7,0 |- atomicdata) {things like basis sets};
+    \node[comment] at (7,0 |- data) {JSON files for input definition};
+    \node[comment] at (7,0 |- examples) {test};
+    \node[comment] at (7,0 |- ext) {external dependencies for AMS};
+    \node[comment] at (7,0 |- gui) {All the GUI code};
+    \node[comment] at (7,0 |- install) {build system and precompiled things};
+    \node[comment] at (7,0 |- scripting) {all Python code};
+    \node[comment] at (7,0 |- plams) {our main Python package};
+    \node[comment] at (7,0 |- src) {Fortran and C++ code};
+    \node[comment] at (7,0 |- ams) {the AMS driver};
+    \node[comment] at (7,0 |- applications) {applications for the AMS driver};
+    \node[comment] at (7,0 |- engines) {small engines};
+    \node[comment] at (7,0 |- adf) {big engines like ADF ...};
+    \node[comment] at (7,0 |- band) {... and BAND get their own directory};
+    \node[comment] at (7,0 |- lib) {library code};
+    \node[comment] at (7,0 |- base) {basic things in shared lib};
+    \node[comment] at (7,0 |- core) {more advanced things in static lib};
+    \node[comment] at (7,0 |- dft) {shared code for ADF and BAND};
+    \node[comment] at (7,0 |- userdoc) {documentation for end-users};
+  \end{tikzpicture}
+  \caption{AMS directory structure with perfectly aligned comments.}
+\end{figure}
+

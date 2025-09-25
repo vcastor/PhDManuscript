@@ -1,0 +1,25 @@
+% -*- coding: utf-8 -*-
+
+\begin{algorithm}[h!]
+  \SetNoFillComment
+
+  % \tcc{src/adf/bader7/ADFBaderAnalysis.f90}
+  \tcc{Symmetry}
+  \For {no $\gets 1$ \KwTo nogr}{
+    \tcc{For each gridpoint in the block}
+    \For {i $\gets 1$ nblocksize}{
+      \tcc{-1 means that the point is not a part of an attractor basin}
+      \If {attLabel(i) > 0}{
+        \tcc{Weight from the gridpoint}
+        $\rho$ += $\rho$(i)$\times$weight(i)\;
+        $\boldsymbol{\mu}_p$ += (coord\_block(i) - coord\_attractor(i))$\times\rho$(i)$\times$weight(i)\;
+        \tcc{The rest of the properties computed by integration of $\rho$}
+        \tcc{Quadrupole, laplacian, spin density, volume, Ts, Tsl, Tc}
+      }   
+    }   
+  }
+
+  \caption{Atomic properties computed by the integral of the density}
+  \label{updateaimterms}
+\end{algorithm}
+

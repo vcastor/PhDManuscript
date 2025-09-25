@@ -1,0 +1,55 @@
+% -*- coding: utf-8 -*-
+
+\begin{algorithm}[h]
+  \SetNoFillComment
+
+  \tcc{Global variables for Bonds, Rings, and Cages}
+  global.RunegeKuttaOrder = 2\;
+  stepSize = 0.1 \tcp*{(borh) step size for gradient following}
+
+  \tcc{Atoms in bonds}
+  \For{cp $\gets 1$ \KwTo bondCPs}{
+    firstPoints $\gets$ [cp.3$^\mathrm{rd}$EigenVector(), -cp.3$^\mathrm{rd}$EigenVector()]\;
+    followGradient(firstPoints, RungeKuttaOrder, stepSize)\;
+    \uIf{atoms $\mathbf{in}$ bond are the same $\mathbf{or}$ no atom(s) found}{
+      global.RunegeKuttaOrder = 4\;
+      stepSize = 0.7*stepSize\;
+      followGradient(firstPoints, RungeKuttaOrder, stepSize)\;
+    }
+  }
+
+  \tcc{Atoms in rings}
+  \For{cp $\gets 1$ \KwTo ringCPs}{
+
+    icosphereSize $\gets$ [0.2, 0.6, 2.8]\;
+    \For{icoSize $\mathbf{in}$ icosphereSize}{
+      firstPoints $\gets$ createIcosphere(centred=cp, radius=icoSize)\;
+      followGradient(firstPoints, global.RungeKuttaOrder, stepSize=0.2)\;
+      graphTheoryCheck(atomsInRing)\;
+      \uIf{atomsInRing $\mathbf{is}$ a cycled path}{
+        $\mathbf{next cp}$\;
+      }
+      \uIf{extraAtom $\mathbf{in}$ ring}{
+        removeExtraAtom(atomsInRing)\;
+        $\mathbf{next cp}$\;
+      }
+    }
+
+  }
+
+  \tcc{Atoms in cages}
+  \For{cp $\gets 1$ \KwTo cageCPs}{
+
+    icosphereSize $\gets$ [0.2, 0.6, 2.8]\;
+    \For{icoSize $\mathbf{in}$ icosphereSize}{
+      firstPoints $\gets$ createIcosphere(centred=cp, radius=icoSize)\;
+      followGradient(firstPoints, global.RungeKuttaOrder, stepSize=0.2)\;
+      graphTheoryCheck(atomsInCage) \tcp*{Only Warning}
+    }
+
+  }
+
+  \caption{Secuential Gradient Following for Bonds, Rings, and Cages}
+  \label{brc_cpAlgo}
+\end{algorithm}
+

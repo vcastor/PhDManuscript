@@ -1,0 +1,51 @@
+% -*- coding: utf-8 -*-
+\begin{algorithm}[h!]
+  \SetNoFillComment
+
+  ncp $\gets$ natoms \tcp*{Initialise number of critical points}
+  nattractors $\gets$ natoms \tcp*{Initialise number of attractors}
+
+  \tcc{cpResults is an array to store the Results of every CP}
+  % \For{iAtom \textbf{in} natoms}{
+  \For{$iAtom \gets 1$ \KwTo $natoms$}{
+     shiftedCoord = xyznuc(iAtom) + smallShift \tcp*{10\^{}-8}
+     CalcDensity(shiftedCoord, rho, gradRho, secDerRho)\;
+     cpResult(iAtom, coords) $\gets$ xyznuc(iAtom)\;
+     cpResult(iAtom, density) $\gets$ rho\;
+     cpResult(iAtom, gradeent) $\gets$ gradRho\;
+     cpResult(iAtom, hessian) $\gets$ secDerRho\;
+     cpResult(iAtom, sisnature) $\gets$ 1.0 \tcp*{Nuclear critical point}
+  }
+
+  FindAllCriticalPoints()\;
+
+  \tcc{CharacterizeCriticalPoints}
+  \tcc{ncp is the number of critical points found}
+  \For{ipoint $\gets 1$ \KwTo ncp}{
+    hessian $\gets$ symmetricMatrix(cpResult(ipoint, idxHessian:idxHessian+5))\;
+    \tcc{LAPACK subroutine for eigenvalues of symmetric matrices}
+    eigenvalues $\gets$ dsyev(hessian)\;
+    signature $\gets$ DetermineCPSignature(eigenvalues)\;
+
+    \uIf{signature == $2$}{
+      ncages $\gets$ ncages + 1 \tcp*{Cage CP; All eigenvalues negative}
+    }
+    \uIf{signature == $3$}{
+      nbonds $\gets$ nbonds + 1 \tcp*{Bond CP; Two eigenvalues negative}
+    }
+    \uIf{signature == $4$}{
+      nrings $\gets$ nrings + 1 \tcp*{Ring CP; One eigenvalue negative}
+    }
+    \uIf{signature == $1$}{
+      nattractors $\gets$ nattractors + 1 \tcp*{Attractor CP; All egienvalues positive}
+    }
+  }
+
+  \uIf{nattractors > natoms}{
+    UpdateGlobalVariablesForQTAIM()\;
+  }
+
+  \caption{\gls{NNA} treatment.}
+  \label{algonna}
+\end{algorithm}
+

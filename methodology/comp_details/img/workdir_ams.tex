@@ -1,0 +1,36 @@
+% -*- coding: utf-8 -*-
+
+\begin{tikzpicture}[
+  dirtree,
+  % Even less indentation
+  level 1/.style={sibling distance=0.7cm, level distance=1.5cm},
+  level 2/.style={sibling distance=0.7cm, level distance=1.3cm},
+  level 3/.style={sibling distance=0.7cm, level distance=1.1cm},
+]
+
+  \node[directory] (root) {work\_dir/}
+    child { node[file] (run) {azulene.run} }
+    child { node[file] (out) {azulene.out} }
+    child { node[directory] (results) {results/}
+      child { node[file] (log) {ams.log} }
+      child { node[file] (amsrkf) {ams.rkf} }
+      child { node[file] (adfrkf) {adf.rkf} }
+      child { node[file] (create) {CreateAtoms.out} }
+      child { node[file] (t21H) {t21.\emph{number}.H} }
+      child { node[file] (dots1) {...} }
+      child { node[file] (t21C) {t21.\emph{number}.C} }
+    };
+
+  % Add all comments aligned at x=6.5
+  \node[comment] at (6.5,0 |- root) {directory where the calculation ran};
+  \node[comment] at (6.5,0 |- run) {run script};
+  \node[comment] at (6.5,0 |- out) {human readable output};
+  \node[comment] at (6.5,0 |- log) {log file from the \ams driver};
+  \node[comment] at (6.5,0 |- amsrkf) {binary file of the \ams driver};
+  \node[comment] at (6.5,0 |- adfrkf) {binary file of the \adf engine};
+  \node[comment] at (6.5,0 |- create) {summary by atom type};
+  \node[comment] at (6.5,0 |- t21H) {TAPE21 for H atoms};
+  \node[comment] at (6.5,0 |- dots1) {TAPE21 for every atom type};
+  \node[comment] at (6.5,0 |- t21C) {TAPE21 for C atoms};
+
+\end{tikzpicture}

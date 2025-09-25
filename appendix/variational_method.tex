@@ -1,0 +1,70 @@
+% -*- coding: utf-8 -*-
+\newpage
+\section{Variational Method}\label{variational_method}
+
+It is essential to highlight the importance of the
+Variational Method, particularly in the context of the Schrödinger Equation,
+which is fundamentally an eigenvalue problem. Given this, it is possible to
+apply techniques developed for eigenvalue problems, such as the variational
+method, to obtain approximate solutions. Specifically, this method can be used
+to approximate eigenvalues in the general form: $\widehat{O}\varphi =
+\omega\varphi$. This approach is commonly employed to compute the energy of
+atomic and molecular systems with $N$ electrons, providing a practical way to
+address complex quantum mechanical problems.
+
+The minimization of the electronic energy from a wavefunction serves as the
+foundation of the variational method. By optimizing the coefficients of the
+expansion, we can obtain the ground state wavefunction.
+
+\newpage
+
+\follow{Variational Method}{
+
+  Let $\widehat{A}$ be a Hermitian operator, and suppose there exists a finite
+  set of exact solutions to the eigenvalue equation such that:
+
+  \begin{align}
+    \widehat{A}|\phi_{\alpha} \rangle =
+    \epsilon_{\alpha}|\phi_{\alpha} \rangle \qquad with:\ \epsilon_{0} \le
+    \epsilon_{1} \le \ldots \le \epsilon_{\alpha} \le \ldots
+    \label{val_schr}
+  \end{align}
+
+  If we assume that the set $\epsilon_{\alpha}$ consists of discrete values,
+  and that the eigenfunctions are orthonormal, then by applying
+  $\langle\phi_{\beta}|$ on the left-hand side of Equation \ref{val_schr}, we
+  obtain:
+
+  \begin{align}
+    \langle\phi_{\beta} |\widehat{A} | \phi_{\alpha}\rangle =
+    \epsilon_{\alpha}\delta_{\alpha\beta}
+  \end{align}
+
+  Since the eigenfunctions of $\widehat{A}$ form a complete set, any function
+  $\varphi$ can be expressed as a linear combination of $\phi_{\alpha}$,
+  provided that $\varphi$ satisfies the boundary conditions of the
+  system~\cite{szabo}.
+
+  \begin{align}
+    |\varphi\rangle = \sum_{\alpha}|\phi_{\alpha}\rangle c_{\alpha} = 
+    \sum_{\alpha}|\phi_{\alpha}\rangle\langle\phi_{\alpha} |\varphi\rangle,
+  \end{align}
+  and
+  \begin{align}
+    \langle\varphi| = \sum_{\alpha}c^{\star}_{\alpha} \langle\phi_{\alpha}|= 
+    \sum_{\alpha} \langle\varphi | \phi_{\alpha} \rangle \langle\phi_{\alpha}
+  \end{align}
+
+  The variational theorem states that for a system where $i$) the Hamiltonian is
+  time-independent, $ii$) the ground state eigenvalue is $\varepsilon_0$ and
+  $iii$) the normalized function $\varphi$ satisfies the boundary conditions,
+  then:
+
+  \begin{align}
+    \langle \varphi |\Ha | \varphi \rangle \ge \varepsilon_{0}
+  \end{align}
+
+}
+
+\newpage
+

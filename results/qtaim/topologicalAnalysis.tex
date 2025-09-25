@@ -1,0 +1,243 @@
+% -*- coding: utf-8 -*-
+\newpage
+\section{Topological Analysis}
+
+The topological analysis, involving the identification of \glspl{CP} and the
+evaluation of their properties, constitutes the first step in any \gls{QTAIM}
+analysis. This procedure is carried out whenever the \gls{QTAIM} block is
+included in the run script, and is essential for subsequent analyses.  It is
+therefore mandatory for all \texttt{AnalysisLevel} settings, which may enclose
+atomic as well as non-local properties, with each stage computed only after the
+previous level, from topological to atomic to non-local properties.
+
+\begin{lstlisting}[language=bash]
+  QTAIM
+    # [topological analysis / atomic properties / non-local properties]
+    AnalysisLevel [Normal/Extended/Full]
+  End
+\end{lstlisting}
+
+\subsection{Non-Nuclear Attractors (\glspl{NNA})}
+
+Nuclear attractors are added to the array of \glspl{CP} before initiating the
+search for other \glspl{CP}. Their properties are evaluated after applying a
+small displacement to the nuclear coordinates ($10^{-8}$~bohr) to prevent
+numerical instabilities in the evaluation of the electron density at the
+nuclear positions.
+
+A Newton-Raphson algorithm is then used to locate the remaining \glspl{CP} of
+$\rho(\mathbf{r})$, which are classified according to their eigenvalue
+signatures. In earlier versions of the code, \glspl{NNA} could be identified
+from this signature, but no dedicated treatment was implemented; such points
+were simply ignored in subsequent property calculations.
+
+In the current implementation, \glspl{NNA} are explicitly recognised, labelled,
+and fully incorporated into the analysis. All available properties are computed
+for them, and they are considered on the same footing as nuclear attractors,
+including their possible participation in bonds, rings, and cages.
+
+Whenever one or more \glspl{NNA} are detected, the global variable storing the
+\texttt{xyz} coordinates of the attractors is extended to include them, and the
+global counter for the number of attractors is updated accordingly. These
+variables are used throughout \ams code for the \gls{QTAIM} partition,
+whereas in other parts of \ams the atom count continues to exclude
+\glspl{NNA}.
+
+\newpage
+\vspace*{1.5cm}%
+\input{algorithms/initialiseNCP}
+\newpage
+
+\subsection{Poincaré-Hopf relation}
+
+The original implementation already included an evaluation of the
+Poincar´-Hopf relation. In the current version of the code, its role has been
+extended beyond a simple check, serving as a robust criterion for verifying
+whether all \glspl{CP} in the system have been correctly identified. The
+Poincaré-Hopf relation states that the sum of the indices of all \glspl{CP}
+must be equal to either~0 or~1, depending on the topological nature of the
+system (as discussed in Section~\ref{phsection}). This property arises from the
+topology of vector fields and provides an elegant and efficient global
+consistency check.
+
+For closed systems, the expected sum is~1, whereas for
+periodic systems it is~0. Since \ams is capable of treating both classes of
+systems ---\adf and \dftb for molecular calculations, and \band for periodic
+ones--- the implementation must account for both possibilities, as
+written in the Equation~\ref{phCriterion}.
+
+% coarser
+In practice, this criterion is used to determine whether the search for
+\glspl{CP} should be repeated with a finer spatial grid. When the
+relation is not satisfied, the grid spacing can be reduced by factors of~2 or~3
+to increase resolution, improving the likelihood of detecting missing
+\glspl{CP}. Conversely, if the initial spacing is unnecessarily fine, it may be
+enlarged by a factor of~2 to decrease memory requirements and avoid potential
+\overflow\ errors. This adaptive refinement strategy provides a balance between
+numerical accuracy and computational efficiency, ensuring reliable results
+across a wide range of systems.
+
+\begin{align}
+  \chi(M) =
+  \begin{cases}
+    (n_{\text{NNACP}} + n_{\text{NCP}}) - n_{\text{BCP}} + n_{\text{RCP}} - n_{\text{CCP}} &= 1 \quad molecular\\
+    (n_{\text{NNACP}} + n_{\text{NCP}}) - n_{\text{BCP}} + n_{\text{RCP}} - n_{\text{CCP}} &= 0 \quad periodic
+  \end{cases}
+  \label{phCriterion}
+\end{align}
+
+\newpage
+\vspace*{1.5cm}%
+\input{algorithms/aimfindCP}
+
+\newpage
+\subsection{Bonds, Rings and Cages}
+
+Once all \glspl{CP} have been successfully identified, the next step is
+to determine the atoms involved in bonds, rings, and cages. In earlier
+versions of the code, only atoms in bonds could be identified, with no
+support for detecting ring or cage structures.
+
+The identification of atoms involved in bonds, rings and cages is performed by
+following the gradient path with the corresponding \gls{CP} as starting point. For bonds, the
+number of atoms and the directions to follow the gradient path are already known, two
+atoms and the directios are given the third eigenvector in both the positive
+and negative directions. In contrast, for rings and cages, neither the number
+of atoms nor the optimal directions for following the gradient path are known
+in advance.
+
+To address this, we construct a spherical shell (icosphere) of points around
+the \gls{RCP} or \gls{CCP} and follow the gradient path from each point. The
+choice of the shell radius is critical: if it is too small, many points follow
+nearly identical paths and fail to reach all atoms; if too large, the
+integration path may overshoot the ring or cage. Further details on the
+generation of the icosphere are provided in Appendix~\ref{icosphereGeo}.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.85\textwidth]{img/c10_cartoon.png}
+  \caption{The \gls{RCP} (green sphere) is enclosed by two icospheres: a red
+    one (0.2~bohr) and a blue one (0.6~bohr). Gradient paths originating from the
+    red icosphere reach only the atoms highlighted in red, whereas those from the
+    blue icosphere connect to all atoms in the ring. For each case, one
+    representative gradient path is shown.}
+  \label{c10}
+\end{figure}
+
+\newpage
+The radius must be sufficiently small to capture compact structures such
+as cyclopropene. A value of 0.2~bohr has been found to work reliably in
+such cases. For more distorted rings, or those closed by non-covalent
+interactions, larger radii are required. We have therefore implemented
+three radii (0.2, 0.6, and 2.8~bohr) to accommodate a range of
+geometries. As illustrated in Figure~\ref{c10}, a radius of 0.2~bohr may
+fail to detect all atoms in very flat density regions, where gradient
+paths initiated from similar directions converge. A larger radius allows
+paths to explore the full structure more effectively.
+
+The accuracy of the differential equation solver plays a decisive role in
+correctly following the gradient paths. By default, a second-order Runge-Kutta
+method is used. If the initial search fails to identify valid paths, the solver
+is automatically upgraded to a fourth-order Runge-Kutta method.
+
+Finally, for each bond, ring, and cage \gls{CP}, the set of atoms assigned to
+the corresponding structure is verified to contain only unique entries. In
+systems characterised by extremely flat electron densities, it is possible for
+multiple gradient paths to converge on the same attractor, \eg a bond cannot be
+formed by the same atom twice.
+
+\vspace{0.7cm}%
+\subsection{Graph theory}
+
+In the previous section, we described the attempts to follow gradient
+paths from \glspl{RCP} and \glspl{CCP}. Here, we explain how the program
+determines whether recomputation of these paths is necessary. This is
+achieved through a graph theory analysis, it is used to validate if the
+topological features have been correctly identified.
+
+For rings, we require that the number of atoms equals the number of
+bonds, and that each atom forms exactly two bonds with the other ring
+atoms. These simple criteria allow us to confirm the topology. If either
+condition is not met, the gradient paths are recomputed using a smaller
+step size and a higher-order Runge-Kutta method.
+
+\newpage
+
+\begin{wrapfigure}[12]{o}{0.47\textwidth}% Add about AIMAll
+  \centering
+  \vspace*{-0.5cm}%
+  \includegraphics[width=0.47\textwidth]{img/extra_atom.png}
+  \caption{Extra H atom highlighted in pink detected in a ring. Parts
+    of the molecule are
+    ommited for clarity. The \texttt{xyz} coordinates
+    are available in the Appendix~\ref{xyzfiles}.}
+  \label{extra_atom}
+\end{wrapfigure}
+
+\vspace*{0.1cm}%
+In one particular case the recomputation can be avoided. If exactly one extra
+atom is detected in a ring, it is likely an artefact. As shown in
+Figure~\ref{extra_atom}, a hydrogen atom close to the ring plane may be
+erroneously assigned to the ring when following the gradient path. Computing
+the system's topology with \aimall, we observe the misassignment of the H atom
+to the ring as an artefact of following the gradient path. Such atoms can be
+excluded from the final ring definition to prevent unnecessary recomputation.
+
+\vspace*{0.8cm}%
+If, after all tries, the topology remains inconsistent, a warning is issued in
+the output file. In the case of cages, even exotic topologies can be valid
+topologies. We therefore avoid rigid definitions, choosing instead to alert the
+user to atypical situations.
+
+For rings, in case that the atoms does not form a valid cycle, we issue the
+warning:
+$i$) not all atoms in a ring have been successfully identified.
+%
+% \begin{itemize}[itemsep=0.01em]
+% \item[$i$)] not all atoms in a ring have been successfully identified.
+% \end{itemize}
+While for cages, we issue the following warnings for potentially non-standard
+topologies:
+%
+\begin{itemize}[itemsep=0.0em]
+  \item[$i$)] a bond associated with a cage does not belong to at least two rings,
+  \item[$ii$)] not all atoms in a cage have at least three bonds,
+  \item[$iii$)] a cage is not a convex polyhedron,
+  \item[$iv$)] a cage and at least one ring are composed of the same atoms,
+  \item[$v$)] all atoms in a cage are also in a ring that contains additional atoms.
+\end{itemize}
+
+\newpage
+\begin{wrapfigure}[10]{o}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.5\textwidth]{img/ring_cage}
+  \caption{Cage formed by two rings. The two \glspl{RCP} (green spheres) share
+    the same atoms (highlighted in khaki), creating the \gls{CCP} (blue sphere).
+    Parts of the molecule are omitted for clarity. The atomic coordinates are
+    available in the Appendix~\ref{xyzfiles}.}
+  \label{cage_extra}
+\end{wrapfigure}
+
+% \vspace{0.1cm}%
+Case $v$ is particularly common in highly deformed rings. In such
+situations, two \glspl{RCP} may appear with a \gls{CCP} between them,
+producing a cage that is essentially a distorted ring.
+Depending on the basis set or functional, these
+two \glspl{RCP} may even collapse into a single \gls{RCP}. This does not
+represent a failure of the topological analysis, but a warning is
+nonetheless issued to indicate that the topology is unusual.
+
+\vspace{0.5cm}%
+\input{graph_theory} % Rings as cycles
+\newpage
+\subsection{Path-Following Strategy}
+
+The identification of atoms participating in bonds, rings, and cages is carried
+out in a sequential manner. First, the atoms forming bonds are determined;
+second, those involved in rings are identified; and finally, the atoms defining
+cages are established. This ordering is essential for the application of graph
+theory as a validation tool, since higher-order topological features rely on
+the accurate detection of lower-order ones.
+
+\input{algorithms/brc_cp}
+
