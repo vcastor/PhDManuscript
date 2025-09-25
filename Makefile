@@ -82,6 +82,17 @@ plots:
 	done
 
 #
+# XCF to PNG conversion (BE SURE WHAT YOU DO)
+# I never use this, tbh
+png:
+	@$(call log_echo,">>> Converting XCF files to PNG... 🖼️")
+	@for f in $(wildcard appendix/img/*xcf); do \
+		if [ -f "$$f" ]; then \
+			gimp -i -b '(let* ((image (car (gimp-file-load RUN-NONINTERACTIVE "$$f" "$$f"))) (drawable (car (gimp-image-get-active-layer image)))) (file-png-save RUN-NONINTERACTIVE image drawable "$${f%.xcf}.png" "$${f%.xcf}.png" 0 9 0 0 0 0 0) (gimp-image-delete image))' -b '(gimp-quit 0)'; \
+		fi; \
+	done
+
+#
 # SVG to PDF conversion
 svg:
 	@$(call log_echo,">>> Converting SVG files to PDF... 📄")
