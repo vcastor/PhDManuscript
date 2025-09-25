@@ -23,7 +23,5 @@
 **/*.alg
 **/*.tld1
 **/*.tld2
-# *.pdf
-!*.pdf
-!*.png
 tesis.pdf
+

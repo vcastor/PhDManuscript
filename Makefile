@@ -23,8 +23,8 @@ MAKEGLOSS = makeglossaries
 PYTHON    = /usr/bin/python3
 LOGFILE   = make.log
 FLAGS     = -interaction=nonstopmode -halt-on-error
-PYPLOT    = $(wildcard intro/plots/*py methodology/plots/*py results/plots/*py)
-SVGFIG    = $(wildcard *.svg)
+PYPLOT    = $(wildcard methodology/mlearning/img/*py methodology/foundations/plt/*py results/qtaim/img/memory.py)
+SVGFIG    = $(wildcard appendix/img/*svg methodology/dft/img/*svg methodology/comp_details/img/*svg methodology/solvation/img/*svg methodology/solvation/img/*svg results/nucleophilicity/diagramas/*svg)
 TEX       = $(wildcard *.tex */*.tex bibl/*.bib)
 
 # Prints info to the console and log file
@@ -55,32 +55,31 @@ help:
 	@echo " Available targets:"
 	@echo "  all       - Full compilation (runs plots and LaTeX)"
 	@echo "  plots     - Generate plots"
+	@echo "  svg       - Convert the svg figures to pdf"
+	@echo "  png       - From xcf GIMP files to png (BE SURE WHAT YOU DO)"
+	@echo "  img       - svg + plots [NO xcf]"
 	@echo "  tex       - Compile full thesis (with bib and glossaries)"
 	@echo "  fast      - Fast compile (no bib or glossaries)"
 	@echo "  style     - Compile style templated"
 	@echo "  bib       - Compile bibliography only"
-	@echo "  gloss     - Generate glossaries only"
 	@echo "  clean     - Remove auxiliary files"
-	@echo "  test      - Compile an individual chapter"
 	@echo "  "
+	@echo "  test      - Compile an individual chapter"
 	@echo "  test chapter=<name> [bib=true] - Compile a specific chapter"
 	@echo "==================================================================="
 
 ################################################################################
 # Main targets
-all: python sgv tex
+all: img tex
+img: svg plots
 
 #
 # python plots
-python:
+plots:
 	@$(call log_echo,">>> Generating plots... 🐍")
 	@for f in $(PYPLOT); do \
 		$(PYTHON) $$f || exit 1; \
 	done
-
-#
-# Auxiliar command [TEMPORARY or for debugging]
-# convert input.png -gravity Center -crop 4:3 +repage output.png
 
 #
 # SVG to PDF conversion
@@ -162,7 +161,7 @@ style:
 clean:
 	@echo ">>> Cleaning up... 🧹"
 	@rm -rf */*.aux *.aux *.bbl *.blg *.glg *.glo *.gls *.ist *.log *.not \
-		*.ntt *.out *.sbl *.sym *.tld *.toc *.alg *.acn *.acr *.err
+		*.ntt *.out *.sbl *.sym *.tld *.toc *.alg *.acn *.acr *.err *.listing
 
 ################################################################################
 .PHONY: all plots tex fast style bib gloss clean test help clean-log
