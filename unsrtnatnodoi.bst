@@ -1,3 +1,5 @@
+%% Edited by VCastor to remove DOI field output
+%
 %% File: `unsrtnat.bst'
 %% A modification of `unsrt.bst' for use with natbib package 
 %%

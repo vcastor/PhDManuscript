@@ -78,7 +78,9 @@ img: svg plots
 plots:
 	@$(call log_echo,">>> Generating plots... 🐍")
 	@for f in $(PYPLOT); do \
-		$(PYTHON) $$f || exit 1; \
+		d=$$(dirname $$f); \
+		b=$$(basename $$f); \
+		( cd $$d && $(PYTHON) $$b ) || exit 1; \
 	done
 
 #
