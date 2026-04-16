@@ -36,10 +36,10 @@ bib        ?= false
 
 AUX_EXTS   := aux bbl blg glg glo gls ist not ntt out sbl sym tld toc alg acn acr err listing log
 
-# Auxiliary files are kept by default so that cross-refs, bbl, gls, and
-# random-state-dependent packages (e.g. coffeestains) can settle across runs.
-# To force a clean rebuild use:  make clean tex
-# To wipe aux files after the build use:  make tex KEEP_LOGS=false
+# Aux files are kept by default so successive builds can skip a LaTeX pass.
+#   make clean         → just clean
+#   make clean tex     → clean, then a fresh (cold) full build
+#   make tex KEEP_LOGS=false → clean aux after build
 ifneq ($(filter keep-logs,$(MAKECMDGOALS)),)
 KEEP_LOGS := true
 endif
@@ -99,9 +99,9 @@ help:
 	@echo "  config-install - Check and install missing Python packages"
 	@echo "  "
 	@echo " Flags:"
-	@echo "  make tex                  - Keeps auxiliary files (default)"
+	@echo "  make tex                  - Keep aux files (default, enables incremental builds)"
 	@echo "  make tex KEEP_LOGS=false  - Wipe aux files after build"
-	@echo "  make clean tex            - Force fresh build (clean before)"
+	@echo "  make clean tex            - Force a fresh full build"
 	@echo ""
 	@echo "                                                  ~ Happy writing! "
 	@echo "==================================================================="
@@ -143,12 +143,24 @@ svg:
 
 tex: $(TEX) clean-log
 	$(call log_echo,">>> Full compilation of $(MAIN)...")
-	$(call spin_tex,First LaTeX pass,$(LATEX) $(FLAGS) $(MAIN),$(MAINBASE).log)
-	$(call spin_cmd,BibTeX,$(BIBTEX) $(MAINBASE).aux)
-	$(call spin_cmd_soft,Make glossaries,$(MAKEGLOSS) $(MAINBASE))
-	$(call spin_tex,Second LaTeX pass,$(LATEX) $(MAIN),$(MAINBASE).log)
-	$(call spin_tex,Final LaTeX pass,$(LATEX) $(MAIN),$(MAINBASE).log)
+	@if [ -f $(MAINBASE).aux ] && [ -f $(MAINBASE).gls ]; then \
+		echo ">>> Warm build — aux files present (1 + bib/gls + 2 LaTeX passes)." | tee -a $(LOGFILE) && \
+		$(SPIN) "First LaTeX pass"  "$(LOGFILE)" "$(LATEX) $(FLAGS) $(MAIN)"       "$(MAINBASE).log" && \
+		$(SPIN) "BibTeX"            "$(LOGFILE)" "$(BIBTEX) $(MAINBASE).aux"                         && \
+		$(SPIN) "Make glossaries"   "$(LOGFILE)" "($(MAKEGLOSS) $(MAINBASE)) || true"                && \
+		$(SPIN) "Second LaTeX pass" "$(LOGFILE)" "$(LATEX) $(MAIN)"                "$(MAINBASE).log" && \
+		$(SPIN) "Final LaTeX pass"  "$(LOGFILE)" "$(LATEX) $(MAIN)"                "$(MAINBASE).log"; \
+	else \
+		echo ">>> Cold build — no aux files (1 + bib/gls + 3 LaTeX passes)." | tee -a $(LOGFILE) && \
+		$(SPIN) "First LaTeX pass"  "$(LOGFILE)" "$(LATEX) $(FLAGS) $(MAIN)"       "$(MAINBASE).log" && \
+		$(SPIN) "BibTeX"            "$(LOGFILE)" "$(BIBTEX) $(MAINBASE).aux"                         && \
+		$(SPIN) "Make glossaries"   "$(LOGFILE)" "($(MAKEGLOSS) $(MAINBASE)) || true"                && \
+		$(SPIN) "Second LaTeX pass" "$(LOGFILE)" "$(LATEX) $(MAIN)"                "$(MAINBASE).log" && \
+		$(SPIN) "Third LaTeX pass"  "$(LOGFILE)" "$(LATEX) $(MAIN)"                "$(MAINBASE).log" && \
+		$(SPIN) "Final LaTeX pass"  "$(LOGFILE)" "$(LATEX) $(MAIN)"                "$(MAINBASE).log"; \
+	fi
 	$(call post_compile)
+
 
 fast: $(TEX) clean-log
 	@$(call log_echo,">>> Fast compilation of $(MAIN)...")
