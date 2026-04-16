@@ -11,6 +11,9 @@ LOGFILE="${2:?logfile required}"
 CMD="${3:?command required}"
 TEXLOG="${4:-}"
 
+# Remember where the log ends so on failure we can isolate this command's output
+LOG_START=$(wc -c < "${LOGFILE}" 2>/dev/null || echo 0)
+
 # ── spinner ────────────────────────────────────────────────────────────────
 printf "  \033[36m◉\033[0m  %-48s" "${LABEL}..."
 
@@ -36,6 +39,18 @@ if [ "${STATUS}" -eq 0 ]; then
 fi
 
 printf "\b \033[31m✗\033[0m\n"
+
+# ── bibtex-specific failure ────────────────────────────────────────────────
+if echo "${CMD}" | grep -qE '\bbibtex\b'; then
+  printf "\n  \033[31m>>> BibTeX failed — 'Error' lines:\033[0m\n\n"
+  tail -c "+$((LOG_START + 1))" "${LOGFILE}" | grep --color=always -iE \
+    'article|book|misc|phdthesis|unpublished|incollection|bibl|bib|error|$' \
+    || tail -c "+$((LOG_START + 1))" "${LOGFILE}"
+  printf "\n"
+  exit 1
+fi
+
+# ── LaTeX / generic failure ────────────────────────────────────────────────
 printf "\n  \033[31m>>> Compilation failed — last 20 log lines:\033[0m\n\n"
 tail -n 20 "${LOGFILE}" | grep --color=always -E '[^ )]+\.tex|l\.[0-9]+|$'
 

@@ -30,12 +30,16 @@ FLAGS      := -interaction=nonstopmode -halt-on-error
 PYPLOT     := $(wildcard methodology/mlearning/img/*py methodology/foundations/plt/*py results/qtaim/img/memory.py)
 SVGFIG     := $(wildcard appendix/img/*svg methodology/dft/img/*svg methodology/comp_details/img/*svg methodology/solvation/img/*svg methodology/solvation/img/*svg results/nucleophilicity/diagramas/*svg)
 TEX        := $(wildcard *.tex */*.tex bibl/*.bib)
-KEEP_LOGS  ?= false
+KEEP_LOGS  ?= true
 chapter    ?= intro
 bib        ?= false
 
 AUX_EXTS   := aux bbl blg glg glo gls ist not ntt out sbl sym tld toc alg acn acr err listing log
 
+# Auxiliary files are kept by default so that cross-refs, bbl, gls, and
+# random-state-dependent packages (e.g. coffeestains) can settle across runs.
+# To force a clean rebuild use:  make clean tex
+# To wipe aux files after the build use:  make tex KEEP_LOGS=false
 ifneq ($(filter keep-logs,$(MAKECMDGOALS)),)
 KEEP_LOGS := true
 endif
@@ -95,8 +99,9 @@ help:
 	@echo "  config-install - Check and install missing Python packages"
 	@echo "  "
 	@echo " Flags:"
-	@echo "  make tex KEEP_LOGS=true"
-	@echo "  make tex keep-logs"
+	@echo "  make tex                  - Keeps auxiliary files (default)"
+	@echo "  make tex KEEP_LOGS=false  - Wipe aux files after build"
+	@echo "  make clean tex            - Force fresh build (clean before)"
 	@echo ""
 	@echo "                                                  ~ Happy writing! "
 	@echo "==================================================================="
@@ -137,15 +142,14 @@ svg:
 # LaTeX compilation
 
 tex: $(TEX) clean-log
-	@$(call log_echo,">>> Full compilation of $(MAIN)...")
+	$(call log_echo,">>> Full compilation of $(MAIN)...")
 	$(call spin_tex,First LaTeX pass,$(LATEX) $(FLAGS) $(MAIN),$(MAINBASE).log)
-	$(call spin_cmd_soft,BibTeX,$(BIBTEX) $(MAINBASE))
+	$(call spin_cmd,BibTeX,$(BIBTEX) $(MAINBASE).aux)
 	$(call spin_cmd_soft,Make glossaries,$(MAKEGLOSS) $(MAINBASE))
-	$(call spin_tex,Second LaTeX pass,$(LATEX) $(FLAGS) $(MAIN),$(MAINBASE).log)
-	@$(call spin_tex,Final LaTeX pass,$(LATEX) $(FLAGS) $(MAIN),$(MAINBASE).log)
+	$(call spin_tex,Second LaTeX pass,$(LATEX) $(MAIN),$(MAINBASE).log)
+	$(call spin_tex,Final LaTeX pass,$(LATEX) $(MAIN),$(MAINBASE).log)
 	$(call post_compile)
 
-# $(call spin_tex,Fast LaTeX pass,$(LATEX) $(FLAGS) $(MAIN),$(LOGFILE))
 fast: $(TEX) clean-log
 	@$(call log_echo,">>> Fast compilation of $(MAIN)...")
 	$(call spin_tex,Fast LaTeX pass,$(LATEX) $(FLAGS) $(MAIN),$(MAINBASE).log)
@@ -172,7 +176,7 @@ test_private: clean-log
 # Standalone tools
 
 bib:
-	$(BIBTEX) $(MAINBASE)
+	$(BIBTEX) $(MAINBASE).aux
 gloss:
 	$(MAKEGLOSS) $(MAINBASE)
 
